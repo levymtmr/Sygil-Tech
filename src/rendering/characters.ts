@@ -3,8 +3,15 @@ import { currentClass } from '../features/character/classes';
 import { items } from '../data/items';
 import { ctx } from '../ui/dom';
 import type { Enemy } from '../types';
+import { drawClassSprite, drawMonsterSprite } from './sprites';
+import { drawPlayerSprite } from './playerSprites';
 
 export function drawHero(cx: number, cy: number, s: number) {
+    const motion = state.mode === 'battle' ? state.battlePlayerMotion : state.worldMotion;
+    const facing = state.mode === 'battle' ? state.battleFacing : state.worldFacing;
+    if (drawPlayerSprite(ctx, state.classId, facing, motion, cx, cy + s * .48, s * 1.55)) return;
+    const moving = Boolean(state.mode === 'battle' ? state.battlePlayerMotion : state.worldMotion);
+    if (drawClassSprite(ctx, state.classId, cx, cy + s * .48, s * 1.8, moving)) return;
     const heroClass = currentClass(), armor = items[state.equipment.armor ?? ''], weapon = items[state.equipment.weapon ?? ''];
     const skin = '#e3bc91', cloth = heroClass.color, accent = heroClass.accent;
     ctx.save();
@@ -22,8 +29,8 @@ export function drawHero(cx: number, cy: number, s: number) {
     ctx.fillRect(cx - s * .19, cy + s * .36, s * .16, s * .08);
     ctx.fillRect(cx + s * .03, cy + s * .36, s * .16, s * .08);
     // Class-specific cloak, tunic, or plate silhouette
-    if (state.classId === 'archer' || state.classId === 'duelist') {
-        ctx.fillStyle = state.classId === 'archer' ? '#304536' : '#512f35';
+    if (state.classId === 'archer') {
+        ctx.fillStyle = '#304536';
         ctx.beginPath();
         ctx.moveTo(cx - s * .16, cy - s * .03);
         ctx.lineTo(cx - s * .27, cy + s * .34);
@@ -108,29 +115,6 @@ export function drawHero(cx: number, cy: number, s: number) {
         ctx.lineTo(cx + s * .17, cy - s * .12);
         ctx.stroke();
     }
-    else if (state.classId === 'healer') {
-        ctx.strokeStyle = accent;
-        ctx.lineWidth = s * .045;
-        ctx.beginPath();
-        ctx.arc(cx, cy - s * .21, s * .23, Math.PI * 1.08, Math.PI * 1.92);
-        ctx.stroke();
-        ctx.fillStyle = accent;
-        ctx.beginPath();
-        ctx.arc(cx, cy - s * .45, s * .04, 0, Math.PI * 2);
-        ctx.fill();
-    }
-    else {
-        ctx.fillStyle = '#362d32';
-        ctx.beginPath();
-        ctx.moveTo(cx - s * .16, cy - s * .18);
-        ctx.lineTo(cx - s * .12, cy - s * .32);
-        ctx.lineTo(cx + s * .12, cy - s * .32);
-        ctx.lineTo(cx + s * .16, cy - s * .18);
-        ctx.closePath();
-        ctx.fill();
-        ctx.fillStyle = accent;
-        ctx.fillRect(cx - s * .13, cy - s * .18, s * .26, s * .035);
-    }
     // Equipped main-hand weapon changes the silhouette.
     ctx.strokeStyle = weapon?.visualColor ?? heroClass.accent;
     ctx.lineWidth = s * .045;
@@ -196,6 +180,16 @@ export function drawHero(cx: number, cy: number, s: number) {
 }
 
 export function drawCreature(cx: number, cy: number, s: number, e: Enemy) {
+    if (drawMonsterSprite(ctx, e, cx, cy + s * .5, s * 2.5, state.enemyMotions.has(e.id))) {
+        if (state.mode === 'battle' && state.battleEnemies.includes(e)) {
+            const width = s * 1.4;
+            ctx.fillStyle = '#342f2d';
+            ctx.fillRect(cx - width / 2, cy - s * 1.7, width, s * .12);
+            ctx.fillStyle = '#dd8172';
+            ctx.fillRect(cx - width / 2, cy - s * 1.7, width * e.hp / e.maxHp, s * .12);
+        }
+        return;
+    }
     ctx.fillStyle = '#18231d';
     ctx.globalAlpha = .45;
     ctx.beginPath();

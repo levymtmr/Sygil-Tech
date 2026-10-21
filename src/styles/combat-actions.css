@@ -6,7 +6,7 @@
   min-width: 75px;
   flex: 1 1 28%;
 }
-.gear-board.class-look-knight .gear-figure::after,.gear-board.class-look-arcanist .gear-figure::after,.gear-board.class-look-archer .gear-figure::after,.gear-board.class-look-healer .gear-figure::after,.gear-board.class-look-duelist .gear-figure::after {
+.gear-board.class-look-knight .gear-figure::after,.gear-board.class-look-arcanist .gear-figure::after,.gear-board.class-look-archer .gear-figure::after {
   position: absolute;
   top: 25px;
   left: 50%;
@@ -26,12 +26,5 @@
   border-radius: 45% 45% 20% 20%;
   border-style: dashed;
 }
-.gear-board.class-look-healer .gear-figure::after {
-  border-radius: 50%;
-  border-color: #fff0b340;
-  box-shadow: 0 0 22px #fff0b31a;
-}
-.gear-board.class-look-duelist .gear-figure::after {
-  border-radius: 50% 50% 25% 25%;
-  border-color: #f0c2a233;
-}
+
+

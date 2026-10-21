@@ -18,9 +18,8 @@ export function calculateSkillDamage(options: {
 }): number {
   const { power, level, classId, equipmentAttack, skill, distance } = options;
   const classMultiplier = classId === 'arcanist' && skill ? 1.2 : 1;
-  const duelistMultiplier = classId === 'duelist' && distance === 1 ? 1.15 : 1;
   const levelBonus = (level - 1) * (classId === 'arcanist' ? 5 : 4);
-  return Math.round((power + equipmentAttack) * classMultiplier * duelistMultiplier + levelBonus);
+  return Math.round((power + equipmentAttack) * classMultiplier + levelBonus);
 }
 
 export function calculateIncomingDamage(enemyDamage: number, defense: number, guardReduction = 0): number {

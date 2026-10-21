@@ -209,12 +209,8 @@
 .gear-board.class-look-archer {
   --gear-accent: #d2e7a4;
 }
-.gear-board.class-look-healer {
-  --gear-accent: #fff0b3;
-}
-.gear-board.class-look-duelist {
-  --gear-accent: #f0c2a2;
-}
+
+
 .gear-figure,.gear-aura,.character-silhouette,.gear-item-icon {
   color: var(--gear-accent);
 }

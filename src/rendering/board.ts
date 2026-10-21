@@ -7,6 +7,7 @@ import { drawWorldMap } from '../features/world/map';
 import { reachable, occupied } from '../features/combat/combat';
 import { skillById } from '../features/character/classes';
 import { drawCombatEffects } from './effects';
+import { drawPropSprite } from './sprites';
 
 export function resize() {
     const rect = canvas.getBoundingClientRect(), dpr = Math.min(devicePixelRatio || 1, 2);
@@ -65,6 +66,7 @@ export function draw() {
     ctx.arc(bx, by, cell * .56, 0, Math.PI * 2);
     ctx.fill();
     ctx.globalAlpha = 1;
+    if (!drawPropSprite(ctx, 'shop', bx, by + cell * .35, cell * 1.35)) {
     ctx.fillStyle = '#5a3d29';
     ctx.fillRect(bx - cell * .22, by - cell * .12, cell * .44, cell * .29);
     ctx.fillStyle = '#d6b778';
@@ -78,9 +80,11 @@ export function draw() {
     ctx.beginPath();
     ctx.arc(bx, by - cell * .22, cell * .065, 0, Math.PI * 2);
     ctx.fill();
+    }
     ctx.restore();
     for (const [nodeKey, resourceId] of state.resourceNodes) {
         const [x, y] = nodeKey.split(',').map(Number), px = ox + (x + .5) * cell, py = oy + (y + .55) * cell;
+        if (drawPropSprite(ctx, resourceId, px, py + cell * .2, cell * .55)) continue;
         ctx.save();
         ctx.fillStyle = resourceId === 'green_gel' ? '#c9df88' : resourceId === 'wolf_pelt' ? '#c5d3c5' : '#d9ace9';
         ctx.shadowColor = ctx.fillStyle;
@@ -97,8 +101,7 @@ export function draw() {
         if (e.hp > 0)
             drawCreature(ox + (e.x + .5) * cell, oy + (e.y + .55) * cell, cell * .35, e);
     const worldPos = interpolate(state.worldMotion, state.player);
-    const walkBob = state.worldMotion ? Math.sin(Math.min(1, (performance.now() - state.worldMotion.startedAt) / state.worldMotion.duration) * Math.PI * 4) * cell * .025 : 0;
-    drawHero(ox + (worldPos.x + .5) * cell, oy + (worldPos.y + .52) * cell + walkBob, cell * .6);
+    drawHero(ox + (worldPos.x + .5) * cell, oy + (worldPos.y + .52) * cell, cell * .6);
     canvas.dataset.ox = String(ox);
     canvas.dataset.oy = String(oy);
     canvas.dataset.cell = String(cell);
@@ -126,6 +129,7 @@ export function updateBattleMenuPosition(ox: number, oy: number, cell: number) {
 }
 
 export function drawTree(cx: number, cy: number, s: number, theme: typeof regions[number]) {
+    if (drawPropSprite(ctx, state.hash(cx, cy) > .5 ? 'oak' : 'pine', cx, cy + s * .35, s * 1.12)) return;
     ctx.fillStyle = '#3e3526';
     ctx.fillRect(cx - s * .055, cy, s * .11, s * .27);
     ctx.fillStyle = theme.dark;

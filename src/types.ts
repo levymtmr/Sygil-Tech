@@ -1,7 +1,7 @@
 export type Point = { x: number; y: number };
 export type Enemy = { id: number; name: string; kind: 'slime' | 'wolf' | 'wisp'; x: number; y: number; hp: number; maxHp: number; damage: number; color: string; xp: number };
 export type Mode = 'explore' | 'battle';
-export type ClassId = 'knight' | 'arcanist' | 'archer' | 'healer' | 'duelist';
+export type ClassId = 'knight' | 'arcanist' | 'archer';
 export type SkillId = string;
 export type Action = 'move' | 'strike' | SkillId;
 export type ClassSkill = { id: SkillId; name: string; icon: string; description: string; mode: 'damage' | 'heal' | 'guard'; range: number; power: number; unlockLevel: number; color: string };

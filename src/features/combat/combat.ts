@@ -10,6 +10,7 @@ import { equipmentBonus, attackPower, defensePower, addItem, recalculateEquipmen
 import { monsterCatalog } from '../../data/monsters';
 import { resolveLevelUps } from '../../game/progression';
 import { items } from '../../data/items';
+import { movementFacing } from '../../game/playerMovement';
 
 export function reachable(from: Point, max: number): Point[] {
     const out: Point[] = [];
@@ -43,6 +44,7 @@ export function startBattle(target?: Enemy) {
     state.action = 'move';
     state.battleMenuOpen = true;
     state.battlePlayer = { x: 1, y: 4 };
+    state.battleFacing = 'right';
     state.selectedEnemyId = state.battleEnemies[0].id;
     $('battle-tip').textContent = `Turno de ${currentClass().name}: escolha uma ação.`;
     log(`${source.name} bloqueou seu caminho.`);
@@ -86,6 +88,7 @@ export function battleClick(x: number, y: number) {
         return;
     }
     if (state.action === 'move' && reachable(state.battlePlayer, 3).some(p => p.x === x && p.y === y) && !occupied(x, y)) {
+        state.battleFacing = movementFacing(state.battlePlayer, { x, y }, state.battleFacing);
         const from = interpolate(state.battlePlayerMotion, state.battlePlayer);
         state.battlePlayer = { x, y };
         state.battlePlayerMotion = { from, to: state.battlePlayer, startedAt: performance.now(), duration: 260 };
@@ -110,12 +113,12 @@ export function attackEnemy(enemy: Enemy) {
         return;
     }
     const classDamageBonus = state.classId === 'arcanist' && skill ? 1.2 : 1;
-    const duelistBonus = state.classId === 'duelist' && distance === 1 ? 1.15 : 1;
-    const dmg = Math.round((skill ? skill.power + equipmentBonus('attack') : attackPower()) * classDamageBonus * duelistBonus + (state.level - 1) * (state.classId === 'arcanist' ? 5 : 4));
+    const dmg = Math.round((skill ? skill.power + equipmentBonus('attack') : attackPower()) * classDamageBonus + (state.level - 1) * (state.classId === 'arcanist' ? 5 : 4));
     const target = { x: enemy.x, y: enemy.y };
+    state.battleFacing = movementFacing(state.battlePlayer, target, state.battleFacing);
     const now = performance.now();
     const variant = skill?.id ?? `basic-${state.classId}`;
-    const lungeAmount = skill?.id === 'shield-bash' ? .38 : state.classId === 'duelist' && distance === 1 ? .42 : state.classId === 'knight' && distance === 1 ? .25 : .08;
+    const lungeAmount = skill?.id === 'shield-bash' ? .38 : state.classId === 'knight' && distance === 1 ? .25 : .08;
     if (distance === 1 && skill?.id !== 'arcane-bolt' && skill?.id !== 'frost-lance' && skill?.id !== 'aimed-shot' && skill?.id !== 'rapid-volley' && skill?.id !== 'piercing-arrow' && skill?.id !== 'shadow-knife' && skill?.id !== 'radiant-bolt') {
         const from = { ...state.battlePlayer }, lunge = { x: state.battlePlayer.x + (enemy.x - state.battlePlayer.x) * lungeAmount, y: state.battlePlayer.y + (enemy.y - state.battlePlayer.y) * lungeAmount };
         state.battlePlayerMotion = { from, to: lunge, startedAt: now, duration: 145 };
@@ -139,8 +142,7 @@ export function attackEnemy(enemy: Enemy) {
 
 export function performSelfSkill(skill: ClassSkill) {
     if (skill.mode === 'heal') {
-        const multiplier = state.classId === 'healer' ? 1.35 : 1;
-        const healed = Math.min(state.maxHp - state.playerHp, Math.round(skill.power * multiplier));
+        const healed = Math.min(state.maxHp - state.playerHp, Math.round(skill.power));
         if (healed <= 0) {
             notify('Sua vitalidade já está cheia.');
             return;

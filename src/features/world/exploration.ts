@@ -10,6 +10,7 @@ import { addItem } from '../inventory/inventory';
 import { items } from '../../data/items';
 import { regions } from '../../data/regions';
 import { startBattle } from '../combat/combat';
+import { movementFacing } from '../../game/playerMovement';
 
 export function createWorld() {
     for (let y = 0; y < state.GRID_H; y++)
@@ -42,6 +43,7 @@ export function moveExplore(dx: number, dy: number) {
         return;
     const { x, y } = clampPosition(state.player, { x: dx, y: dy }, state.GRID_W, state.GRID_H);
     if ((x !== state.player.x || y !== state.player.y) && !state.trees.has(state.key(x, y))) {
+        state.worldFacing = movementFacing(state.player, { x, y }, state.worldFacing);
         const from = interpolate(state.worldMotion, state.player);
         state.player = { x, y };
         state.worldMotion = { from, to: state.player, startedAt: performance.now(), duration: 230 };

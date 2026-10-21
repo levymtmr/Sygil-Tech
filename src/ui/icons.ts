@@ -22,8 +22,6 @@ export const iconPaths: Record<string, string> = {
     knight: '<path d="M10 10 24 4l14 6v12c0 10-6 17-14 22C16 39 10 32 10 22z"/><path d="M17 19h14M24 12v17m-7 0h14"/>',
     arcanist: '<path d="m24 4 4 12 12 4-12 4-4 12-4-12-12-4 12-4z"/><circle cx="24" cy="24" r="18"/><path d="M24 15v18m-6-9h12"/>',
     archer: '<path d="M8 5c19 5 19 33 0 38M8 5l32 19L8 43M21 24h20m-7-7 7 7-7 7"/>',
-    healer: '<path d="M24 4v40M4 24h40"/><circle cx="24" cy="24" r="19"/><path d="m14 25 7 7 14-16"/>',
-    duelist: '<path d="m16 5 8 8 8-8M10 16l8 8-8 8m28-16-8 8 8 8M24 16v26M19 37h10"/><circle cx="24" cy="11" r="5"/>',
     staff: '<path d="M15 43 31 9M26 8l8-4 5 8-8 5zM12 41l7 3"/><path d="m34 4 2-3m3 8 4-1"/>',
     bow: '<path d="M10 5c24 3 24 35 0 38M10 5l28 19-28 19M20 24h19m-7-7 7 7-7 7"/>',
     mace: '<path d="M23 18v27m-5-2h10M14 7l5-4 5 6 6-6 5 5-5 6 5 5-6 5-5-5-6 5-5-6 5-5z"/>',

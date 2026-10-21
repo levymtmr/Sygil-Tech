@@ -1,8 +1,11 @@
 # Lendas de Astera
 
-Protótipo original de RPG tático para navegador, feito com TypeScript, Vite e Canvas. Funciona em telas de computador e celular; não usa imagens externas.
+Protótipo original de RPG tático para navegador, feito com TypeScript, Vite e Canvas. Funciona em telas de computador e celular; usa spritesheets próprias de pixel art.
 
 ## Jogar
+
+[Jogar online no GitHub Pages](https://levymtmr.github.io/Sygil-Tech/)
+
 
 1. Instale uma versão recente do Node.js.
 2. No diretório do projeto, instale as dependências com `npm install`.
@@ -16,7 +19,7 @@ Protótipo original de RPG tático para navegador, feito com TypeScript, Vite e 
 - **Batalha:** o menu de ações flutua sobre Kael durante o turno dele. Ao escolher uma ação, o menu se recolhe; toque no tile do personagem para reabri-lo. Clique/toque em casas para mover ou escolher um alvo no alcance; cada classe tem animações próprias de ataque.
 - **Mapa:** a miniatura no canto do mapa abre a cartografia; pressione **M** para abrir/fechar. As áreas exploradas são reveladas gradualmente; áreas desconhecidas permanecem sob névoa.
 - **HUD:** pressione **I** para mochila, **Q** para equipamentos e ficha do personagem, **L** para o registro de eventos; **Escape** fecha o painel aberto. Também é possível abrir os painéis pelo dock discreto na tela.
-- **Início e classes:** ao abrir o jogo, escolha Cavaleiro, Arcanista, Arqueiro, Curandeiro ou Duelista no menu inicial; o botão **Iniciar jornada** só é liberado após uma escolha explícita. Cada caminho tem atributos, equipamento inicial, aparência e habilidades diferentes. Durante a partida, o botão **Classe** permite trocar antes da primeira vitória.
+- **Início e classes:** ao abrir o jogo, escolha Cavaleiro, Arqueiro ou Mago no menu inicial; o botão **Iniciar jornada** só é liberado após uma escolha explícita. Cada caminho tem atributos, equipamento inicial, aparência e habilidades diferentes. Durante a partida, o botão **Classe** permite trocar antes da primeira vitória.
 - **Árvore de habilidades:** suba de nível para receber pontos e desbloquear habilidades na ficha de equipamentos (**Q**). No combate, selecione a habilidade no menu sobre o personagem; habilidades de cura/defesa são usadas clicando no tile do personagem.
 - **Equipamentos e mochila:** a mochila é uma grade de slots; arraste itens para reorganizar ou toque em dois espaços para movê-los. Equipe ou remova arma, armadura e amuleto. Os bônus de ataque, defesa e vitalidade máxima afetam o combate; poções podem ser usadas na mochila.
 - **Bestiário:** abra pelo botão no topo. Monstros avistados ou enfrentados revelam seus atributos base e chances de saque.

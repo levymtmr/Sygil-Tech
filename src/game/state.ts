@@ -17,7 +17,7 @@ let selectedInventorySlot: number | null = null;
 const slotNames: Record<EquipSlot, string> = { weapon: 'Arma', armor: 'Armadura', charm: 'Amuleto' };
 
 const unlockedSkills: Record<ClassId, Set<SkillId>> = {
-    knight: new Set(['shield-bash']), arcanist: new Set(['arcane-bolt']), archer: new Set(['aimed-shot']), healer: new Set(['healing-light']), duelist: new Set(['quick-cut'])
+    knight: new Set(['shield-bash']), arcanist: new Set(['arcane-bolt']), archer: new Set(['aimed-shot'])
 };
 
 const mapRegionOrder = [1, 0, 2];
@@ -81,6 +81,8 @@ const isTouch = matchMedia('(pointer: coarse)').matches;
 const recentEvents: string[] = [];
 
 export interface GameState {
+    worldFacing: import('./playerMovement').Facing;
+    battleFacing: import('./playerMovement').Facing;
   GRID_W: typeof GRID_W;
   GRID_H: typeof GRID_H;
   equipment: Record<EquipSlot, string | null>;
@@ -155,6 +157,8 @@ export interface GameState {
 }
 
 export const state: GameState = {
+    worldFacing: 'down',
+    battleFacing: 'right',
 GRID_W,
 GRID_H,
 equipment,

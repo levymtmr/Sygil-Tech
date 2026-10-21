@@ -87,7 +87,7 @@ export function renderClassPicker(hostId = 'class-list') {
     $(hostId).innerHTML = (Object.values(classes) as CharacterClass[]).map(characterClass => {
         const selected = (state.started || state.classChosen) && characterClass.id === state.classId;
         const locked = (state.level > 1 || state.victories > 0) && !selected;
-        const style = characterClass.id === 'knight' ? 'CORPO A CORPO · RESISTÊNCIA' : characterClass.id === 'arcanist' ? 'LONGO ALCANCE · MAGIA' : characterClass.id === 'archer' ? 'LONGO ALCANCE · CONTROLE' : characterClass.id === 'healer' ? 'SUPORTE · CURA' : 'CORPO A CORPO · MOBILIDADE';
+        const style = characterClass.id === 'knight' ? 'CORPO A CORPO · RESISTÊNCIA' : characterClass.id === 'arcanist' ? 'LONGO ALCANCE · MAGIA' : 'LONGO ALCANCE · CONTROLE';
         return `<button class="class-card class-card-${characterClass.id} ${selected ? 'class-current' : ''}" data-class="${characterClass.id}" ${locked ? 'disabled' : ''} style="--class-color:${characterClass.color};--class-accent:${characterClass.accent}"><span class="class-art">${iconSvg(characterClass.id)}</span><span class="class-card-copy"><b>${characterClass.name}</b><small>${characterClass.title}</small><em>${characterClass.description}</em><span class="class-role">${style}</span><span class="class-card-stats">♥ ${characterClass.hp}　⚔ ${characterClass.attack}　⬡ ${characterClass.defense}</span></span>${selected ? '<span class="class-selected">EM USO</span>' : locked ? '<span class="class-selected">JORNADA INICIADA</span>' : '<span class="class-arrow">→</span>'}</button>`;
     }).join('');
 }
