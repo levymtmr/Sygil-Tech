@@ -10,6 +10,7 @@ export function renderCompany() {
       <a href="#inicio" class="brand-lockup" aria-label="Sygil Tech — início">${brandMark()}<span>SYGIL<small>TECH</small></span></a>
       <button id="menu-toggle" class="menu-toggle" aria-label="Abrir menu" aria-expanded="false" aria-controls="primary-navigation"><span></span><span></span></button>
       <nav id="primary-navigation" aria-label="Navegação principal"><a href="#servicos">O que fazemos</a><a href="#sobre">Experiência</a><a href="#projetos">Projetos</a><a href="#contato" class="nav-contact">Vamos conversar ${symbol('diagonal')}</a></nav>
+      <div class="language-switch" role="group" aria-label="Language / Idioma"><button type="button" data-language="en" lang="en" aria-label="English">EN</button><button type="button" data-language="pt" lang="pt-BR" aria-label="Português">PT</button></div>
     </div></header>
     <main id="conteudo">
       <section class="hero container" id="inicio">

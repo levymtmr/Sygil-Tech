@@ -259,3 +259,9 @@ h2 { margin: 0; font: 58px/1.02 var(--serif); letter-spacing: -1.5px; font-weigh
   .experience-outcomes h3 { font-size: 19px; }
   .about-copy .experience-attribution { font-size: 9px; }
 }
+
+.language-switch { display:flex;gap:3px;flex-shrink:0;margin-left:18px;border:1px solid #244b4233;border-radius:6px;padding:3px; }
+.language-switch button { border:0;background:transparent;color:#35534a;font:inherit;font-size:11px;padding:7px 9px;cursor:pointer;border-radius:3px; }
+.language-switch button[aria-pressed="true"] { background:#193e35;color:#fff; }
+.language-switch button:focus-visible { outline:2px solid #5e805b;outline-offset:3px; }
+@media(max-width:760px) { .language-switch { margin-left:auto;margin-right:16px; } .menu-toggle { order:3; } }
