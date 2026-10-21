@@ -1,0 +1,367 @@
+.game-icon {
+  display: inline-block;
+  width: 1.25em;
+  height: 1.25em;
+  flex: none;
+  vertical-align: middle;
+  overflow: visible;
+}
+.header-icon {
+  width: 15px;
+  height: 15px;
+  margin-right: 4px;
+}
+.dock-icon {
+  display: inline-grid;
+  place-items: center;
+  width: 20px;
+  height: 20px;
+  color: #ddc37d;
+}
+.dock-icon .game-icon {
+  width: 19px;
+  height: 19px;
+}
+.quick-hud button {
+  gap: 7px;
+}
+.stat-icon {
+  display: grid;
+  place-items: center;
+}
+.stat-icon .game-icon {
+  width: 15px;
+  height: 15px;
+}
+.combat-stats {
+  grid-template-columns: repeat(4,minmax(0,1fr));
+  align-items: center;
+}
+.combat-stats span {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+.combat-stats .game-icon {
+  width: 14px;
+  height: 14px;
+}
+.potion-use {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+.potion-use .game-icon {
+  width: 17px;
+  height: 17px;
+  color: #a9cfad;
+}
+.item-icon {
+  display: grid;
+  place-items: center;
+  width: 42px;
+  height: 42px;
+  border: 1px solid rgba(218,190,126,.24);
+  background: radial-gradient(circle at 50% 34%,#414438,#242d28 75%);
+  color: #dfc783;
+}
+.item-icon .game-icon {
+  width: 28px;
+  height: 28px;
+  filter: drop-shadow(0 2px 4px #080a08);
+}
+.item-icon-healing_potion {
+  color: #91c99d;
+  background: radial-gradient(circle at 50% 34%,#345344,#202c27 75%);
+}
+.item-icon-training_blade,.item-icon-wolf_fang_blade {
+  color: #e3cb8d;
+  background: radial-gradient(circle at 50% 34%,#57503a,#292e28 75%);
+}
+.item-icon-travel_coat {
+  color: #b9cbb1;
+  background: radial-gradient(circle at 50% 34%,#3c5547,#252e29 75%);
+}
+.item-icon-carapace_brooch,.item-icon-ember_charm {
+  color: #d1a9d2;
+  background: radial-gradient(circle at 50% 34%,#49384b,#292c2b 75%);
+}
+.item-icon-green_gel {
+  color: #c4d982;
+}
+.item-icon-wolf_pelt {
+  color: #c3d2cb;
+}
+.item-icon-wisp_shard {
+  color: #c3a3ed;
+}
+.codex-drop i {
+  display: inline-flex;
+  align-items: center;
+  font-style: normal;
+  color: #d4bc7e;
+}
+.codex-drop .game-icon {
+  width: 16px;
+  height: 16px;
+}
+.codex-stats span {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+.codex-stats .game-icon {
+  width: 13px;
+  height: 13px;
+}
+.reward-gains>div>span {
+  display: grid;
+  place-items: center;
+  color: #d8bd80;
+}
+.reward-gains .game-icon {
+  width: 20px;
+  height: 20px;
+}
+.reward-item-icon {
+  display: grid;
+  place-items: center;
+  width: 30px;
+  height: 30px;
+  border: 1px solid rgba(218,190,126,.23);
+  background: #26322c;
+  color: #d9c27e;
+}
+.reward-item-icon .game-icon {
+  width: 20px;
+  height: 20px;
+}
+.equipment-window .gear-board {
+  position: relative;
+  min-height: 346px;
+  margin: 4px 0 0;
+  overflow: hidden;
+  border: 1px solid rgba(217,201,161,.14);
+  background: radial-gradient(ellipse at 50% 48%,rgba(103,119,80,.2),transparent 44%),linear-gradient(145deg,#18211f,#202b26);
+}
+.gear-figure {
+  position: absolute;
+  left: 50%;
+  top: 38px;
+  transform: translateX(-50%);
+  width: 150px;
+  height: 222px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: #cdb77b;
+}
+.gear-aura {
+  position: absolute;
+  width: 150px;
+  height: 150px;
+  top: 14px;
+  border-radius: 50%;
+  border: 1px solid rgba(217,190,125,.21);
+  background: radial-gradient(circle,rgba(210,187,122,.11),transparent 70%);
+  box-shadow: 0 0 36px rgba(219,192,121,.09);
+}
+.character-silhouette {
+  position: relative;
+  width: 105px;
+  height: 145px;
+  color: #b99e65;
+  filter: drop-shadow(0 0 10px #d3b77533);
+}
+.gear-figure>span:last-child {
+  position: absolute;
+  bottom: 0;
+  color: #938e75;
+  font: 7px var(--mono);
+  letter-spacing: 2px;
+}
+.gear-slot {
+  position: absolute;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 190px;
+  min-height: 79px;
+  padding: 9px;
+  text-align: left;
+  border: 1px solid rgba(217,201,161,.2);
+  background: linear-gradient(130deg,#252f2b,#1b2422);
+  color: #e6ddc8;
+  cursor: pointer;
+  transition: border-color .15s,background .15s,transform .15s;
+}
+.gear-slot:hover:not(:disabled) {
+  border-color: #d6b778;
+  background: #30382e;
+  transform: translateY(-2px);
+}
+.gear-slot:disabled {
+  cursor: default;
+  opacity: .64;
+}
+.gear-weapon {
+  left: 12px;
+  top: 94px;
+}
+.gear-armor {
+  right: 12px;
+  top: 94px;
+}
+.gear-charm {
+  left: 50%;
+  bottom: 11px;
+  transform: translateX(-50%);
+  width: 224px;
+  min-height: 72px;
+}
+.gear-charm:hover:not(:disabled) {
+  transform: translate(-50%,-2px);
+}
+.gear-item-icon {
+  display: grid;
+  place-items: center;
+  width: 42px;
+  height: 42px;
+  flex: none;
+  border: 1px solid rgba(218,190,126,.27);
+  background: #31372c;
+  color: #e0c781;
+}
+.gear-item-icon .game-icon {
+  width: 27px;
+  height: 27px;
+}
+.gear-slot-copy {
+  display: flex;
+  min-width: 0;
+  flex: 1;
+  flex-direction: column;
+  gap: 4px;
+}
+.gear-slot-copy small {
+  color: #c5a96e;
+  font: 7px var(--mono);
+  letter-spacing: .65px;
+}
+.gear-slot-copy b {
+  overflow: hidden;
+  color: #e7dfcd;
+  font: 11px var(--serif);
+  font-weight: 400;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.gear-slot-copy em {
+  overflow: hidden;
+  color: #999c8e;
+  font-size: 8px;
+  font-style: normal;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.gear-remove {
+  color: #c88c77;
+  font-size: 17px;
+}
+.gear-empty-mark {
+  color: #aaa087;
+  font-size: 17px;
+}
+.gear-weapon::after,.gear-armor::after {
+  position: absolute;
+  top: 50%;
+  width: 23px;
+  border-top: 1px dashed #baa46a77;
+  content: "";
+}
+.gear-weapon::after {
+  right: -24px;
+}
+.gear-armor::after {
+  left: -24px;
+}
+.gear-charm::before {
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  height: 20px;
+  border-left: 1px dashed #baa46a77;
+  content: "";
+}
+@media(max-width:650px) {
+  .equipment-window .combat-stats {
+    grid-template-columns: repeat(2,minmax(0,1fr));
+    gap: 8px;
+  }
+  .equipment-window .gear-board {
+    min-height: 330px;
+  }
+  .gear-figure {
+    top: 38px;
+    width: 124px;
+    height: 205px;
+  }
+  .gear-aura {
+    width: 125px;
+    height: 125px;
+  }
+  .character-silhouette {
+    width: 90px;
+    height: 126px;
+  }
+  .gear-slot {
+    width: calc(50% - 23px);
+    min-height: 72px;
+    padding: 6px;
+    gap: 6px;
+  }
+  .gear-weapon {
+    left: 6px;
+    top: 85px;
+  }
+  .gear-armor {
+    right: 6px;
+    top: 85px;
+  }
+  .gear-charm {
+    width: 205px;
+    min-height: 67px;
+    bottom: 8px;
+  }
+  .gear-item-icon {
+    width: 32px;
+    height: 32px;
+  }
+  .gear-item-icon .game-icon {
+    width: 22px;
+    height: 22px;
+  }
+  .gear-slot-copy small {
+    font-size: 6px;
+  }
+  .gear-slot-copy b {
+    font-size: 9px;
+  }
+  .gear-slot-copy em {
+    font-size: 7px;
+  }
+  .gear-remove {
+    font-size: 14px;
+  }
+  .gear-weapon::after,.gear-armor::after {
+    width: 11px;
+  }
+  .gear-weapon::after {
+    right: -12px;
+  }
+  .gear-armor::after {
+    left: -12px;
+  }
+}

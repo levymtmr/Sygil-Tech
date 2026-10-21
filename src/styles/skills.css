@@ -1,0 +1,274 @@
+.skill-tree {
+  margin-top: 20px;
+  padding-top: 15px;
+  border-top: 1px solid var(--line);
+}
+.skill-tree-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+.skill-tree-heading small {
+  color: #c5a96e;
+  font: 7px var(--mono);
+  letter-spacing: 1px;
+}
+.skill-tree-heading h3 {
+  margin: 4px 0 0;
+  color: #e5dbc4;
+  font: 17px var(--serif);
+  font-weight: 400;
+}
+.skill-points {
+  padding: 6px 8px;
+  border: 1px solid #c1a76c66;
+  background: #38372c;
+  color: #e1c780;
+  font: 8px var(--mono);
+}
+.skill-tree-list {
+  display: grid;
+  gap: 7px;
+}
+.skill-node {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 9px;
+  border: 1px solid rgba(217,201,161,.12);
+  background: #18211f;
+}
+.skill-node.skill-unlocked {
+  border-color: #9cb78355;
+  background: linear-gradient(100deg,#26342b,#1b2422);
+}
+.skill-node.skill-available {
+  border-color: #d3b77888;
+  background: linear-gradient(100deg,#373629,#202923);
+}
+.skill-node.skill-locked {
+  opacity: .64;
+}
+.skill-node-icon {
+  display: grid;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  flex: none;
+  border: 1px solid rgba(217,201,161,.2);
+  background: #28312b;
+  color: #cdb77b;
+}
+.skill-unlocked .skill-node-icon {
+  color: #c9e0aa;
+  border-color: #abc38e77;
+}
+.skill-node-icon .game-icon {
+  width: 23px;
+  height: 23px;
+}
+.skill-node-copy {
+  display: flex;
+  min-width: 0;
+  flex: 1;
+  flex-direction: column;
+  gap: 3px;
+}
+.skill-node-copy b {
+  color: #e3ddcd;
+  font: 12px var(--serif);
+  font-weight: 400;
+}
+.skill-node-copy small {
+  color: #c5a96e;
+  font: 7px var(--mono);
+  letter-spacing: .45px;
+}
+.skill-node-copy em {
+  color: #999d8f;
+  font-size: 8px;
+  font-style: normal;
+}
+.skill-state {
+  color: #b8ce9d;
+  font: 7px var(--mono);
+  letter-spacing: .6px;
+}
+.skill-learn:disabled {
+  opacity: .55;
+  cursor: not-allowed;
+}
+.class-summary {
+  margin: -9px 0 15px;
+  color: #aeb5a1;
+  font-size: 9px;
+  line-height: 1.5;
+}
+.class-intro {
+  margin: 0 0 15px;
+  color: #aeb0a2;
+  font-size: 10px;
+  line-height: 1.6;
+}
+.class-list {
+  display: grid;
+  grid-template-columns: repeat(2,minmax(0,1fr));
+  gap: 9px;
+}
+.class-card {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  min-height: 122px;
+  padding: 11px;
+  border: 1px solid color-mix(in srgb,var(--class-color),transparent 50%);
+  background: linear-gradient(135deg,color-mix(in srgb,var(--class-color),#151d1b 86%),#19211f);
+  color: #e5decc;
+  text-align: left;
+  cursor: pointer;
+  transition: transform .16s,border-color .16s,background .16s;
+}
+.class-card:hover:not(:disabled) {
+  transform: translateY(-2px);
+  border-color: var(--class-accent);
+  background: linear-gradient(135deg,color-mix(in srgb,var(--class-color),#151d1b 72%),#202a26);
+}
+.class-card:disabled:not(.class-current) {
+  opacity: .42;
+  cursor: not-allowed;
+}
+.class-current {
+  border-color: var(--class-accent);
+  box-shadow: inset 0 0 0 1px color-mix(in srgb,var(--class-accent),transparent 55%);
+}
+.class-art {
+  display: grid;
+  place-items: center;
+  width: 55px;
+  height: 65px;
+  flex: none;
+  border: 1px solid color-mix(in srgb,var(--class-accent),transparent 56%);
+  background: radial-gradient(circle,color-mix(in srgb,var(--class-color),transparent 55%),transparent);
+  color: var(--class-accent);
+}
+.class-art .game-icon {
+  width: 39px;
+  height: 39px;
+  filter: drop-shadow(0 2px 5px color-mix(in srgb,var(--class-color),transparent 20%));
+}
+.class-card-copy {
+  display: flex;
+  min-width: 0;
+  flex: 1;
+  flex-direction: column;
+  gap: 3px;
+}
+.class-card-copy>b {
+  color: #eee5d0;
+  font: 15px var(--serif);
+  font-weight: 400;
+}
+.class-card-copy>small {
+  color: var(--class-accent);
+  font: 7px var(--mono);
+  letter-spacing: .65px;
+}
+.class-card-copy>em {
+  min-height: 27px;
+  color: #a9ad9e;
+  font-size: 8px;
+  font-style: normal;
+  line-height: 1.35;
+}
+.class-card-stats {
+  color: #d8c792;
+  font: 7px var(--mono);
+}
+.class-selected,.class-arrow {
+  position: absolute;
+  right: 7px;
+  top: 7px;
+  color: var(--class-accent);
+  font: 6px var(--mono);
+  letter-spacing: .4px;
+}
+.class-arrow {
+  font-size: 14px;
+}
+.gear-board {
+  --gear-accent: #cdb77b;
+}
+.gear-board.class-look-knight {
+  --gear-accent: #c7d4df;
+}
+.gear-board.class-look-arcanist {
+  --gear-accent: #e0c6ff;
+}
+.gear-board.class-look-archer {
+  --gear-accent: #d2e7a4;
+}
+.gear-board.class-look-healer {
+  --gear-accent: #fff0b3;
+}
+.gear-board.class-look-duelist {
+  --gear-accent: #f0c2a2;
+}
+.gear-figure,.gear-aura,.character-silhouette,.gear-item-icon {
+  color: var(--gear-accent);
+}
+.gear-aura {
+  border-color: color-mix(in srgb,var(--gear-accent),transparent 75%);
+  box-shadow: 0 0 36px color-mix(in srgb,var(--gear-accent),transparent 88%);
+}
+.gear-slot.equipped .gear-item-icon {
+  border-color: color-mix(in srgb,var(--gear-accent),transparent 65%);
+  background: color-mix(in srgb,var(--gear-accent),#1b2422 86%);
+}
+.action-button>span .game-icon {
+  width: 18px;
+  height: 18px;
+}
+.action-button.action-violet>span {
+  color: #d8b7ff;
+}
+.action-button.action-green>span {
+  color: #b6dc9e;
+}
+.action-button.action-blue>span {
+  color: #9bd9f1;
+}
+.action-button.action-gold>span {
+  color: #f2d17c;
+}
+@media(max-width:650px) {
+  .class-list {
+    grid-template-columns: 1fr;
+  }
+  .class-card {
+    min-height: 98px;
+  }
+  .class-art {
+    width: 46px;
+    height: 54px;
+  }
+  .class-art .game-icon {
+    width: 32px;
+    height: 32px;
+  }
+  .skill-node {
+    gap: 7px;
+    padding: 7px;
+  }
+  .skill-node-copy em {
+    font-size: 7px;
+  }
+  .skill-state {
+    font-size: 6px;
+  }
+  .skill-learn {
+    font-size: 7px;
+    padding: 5px;
+  }
+}

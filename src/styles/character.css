@@ -1,0 +1,446 @@
+.top-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.combat-stats {
+  display: grid;
+  grid-template-columns: repeat(3,1fr);
+  gap: 5px;
+  padding: 8px 0 10px;
+  border-bottom: 1px solid var(--line);
+  font: 8px var(--mono);
+  letter-spacing: .45px;
+  color: #9da091;
+}
+.combat-stats span {
+  white-space: nowrap;
+}
+.combat-stats span:nth-child(1) {
+  color: #d9bd7f;
+}
+.combat-stats span:nth-child(2) {
+  color: #b9c9ac;
+}
+.combat-stats span:nth-child(3) {
+  color: #d2bd8c;
+}
+.combat-stats b {
+  color: #eee5ce;
+  font-weight: 500;
+}
+.inventory-panel {
+  padding-bottom: 12px;
+}
+.inventory-panel .panel-title {
+  margin-bottom: 10px;
+}
+.inventory-panel .panel-title h2 {
+  font-size: 13px;
+}
+.equipment-grid {
+  display: grid;
+  grid-template-columns: repeat(3,minmax(0,1fr));
+  gap: 6px;
+}
+.equipment-slot {
+  min-width: 0;
+  min-height: 83px;
+  padding: 7px;
+  border: 1px solid rgba(217,201,161,.12);
+  background: #151e1c;
+}
+.equipment-slot-title {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 5px;
+  color: #c6ad75;
+  font: 7px var(--mono);
+  text-transform: uppercase;
+  letter-spacing: .45px;
+}
+.equipment-slot-title small {
+  font-size: 13px;
+}
+.equipment-slot>b {
+  display: block;
+  min-height: 24px;
+  color: #e0d8c5;
+  font-size: 9px;
+  line-height: 1.3;
+  font-weight: 500;
+}
+.equipment-bonus {
+  display: block;
+  min-height: 21px;
+  margin: 3px 0;
+  color: #989d8e;
+  font-size: 7px;
+  line-height: 1.35;
+}
+.tiny-button {
+  border: 1px solid #8b795355;
+  background: #252e29;
+  color: #d6c28f;
+  padding: 4px 6px;
+  font: 7px var(--mono);
+  cursor: pointer;
+  white-space: nowrap;
+}
+.tiny-button:hover {
+  border-color: #d3b878;
+  background: #36382b;
+}
+.inventory-divider {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 11px 0 3px;
+  padding-top: 9px;
+  border-top: 1px solid var(--line);
+  color: #d5bd81;
+  font: 8px var(--mono);
+  letter-spacing: .8px;
+}
+.inventory-divider small {
+  color: #818778;
+  font-size: 7px;
+}
+.inventory-items {
+  display: flex;
+  flex-direction: column;
+  max-height: 225px;
+  overflow: auto;
+}
+.inventory-item {
+  display: grid;
+  grid-template-columns: 23px minmax(0,1fr) auto auto;
+  align-items: center;
+  gap: 6px;
+  padding: 7px 1px;
+  border-bottom: 1px solid rgba(217,201,161,.07);
+}
+.item-icon {
+  width: 21px;
+  height: 21px;
+  display: grid;
+  place-items: center;
+  background: #343d30;
+  color: #d3bf85;
+  font-size: 12px;
+}
+.item-name {
+  min-width: 0;
+}
+.item-name b,.item-name small {
+  display: block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.item-name b {
+  color: #ded7c7;
+  font-size: 9px;
+  font-weight: 500;
+}
+.item-name small {
+  margin-top: 3px;
+  color: #929688;
+  font-size: 7px;
+}
+.item-quantity {
+  color: #d6c18b;
+  font: 9px var(--mono);
+}
+.inventory-empty {
+  font-size: 9px;
+  color: #989c8d;
+  line-height: 1.5;
+}
+.modal-backdrop {
+  overflow-y: auto;
+}
+.codex-card,.reward-card {
+  position: relative;
+  width: min(710px,100%);
+  max-height: min(88vh,900px);
+  overflow: auto;
+  padding: 29px;
+  background: #1c2623;
+  border: 1px solid #b99d6570;
+  box-shadow: 0 24px 100px #0009;
+}
+.codex-card .eyebrow,.reward-card .eyebrow {
+  color: #c5a96e;
+}
+.codex-card h2,.reward-card h2 {
+  font: 28px var(--serif);
+  font-weight: 400;
+  margin: 0 0 9px;
+}
+.codex-intro,.reward-subtitle {
+  margin: 0 0 15px;
+  color: #afb0a0;
+  font-size: 11px;
+  line-height: 1.6;
+}
+.codex-summary {
+  margin: 10px 0;
+  padding: 8px 10px;
+  border: 1px solid var(--line);
+  background: #202c27;
+  color: #d4bd84;
+  font: 8px var(--mono);
+  letter-spacing: 1px;
+}
+.codex-list {
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+}
+.codex-entry {
+  display: grid;
+  grid-template-columns: 48px minmax(0,1fr);
+  gap: 12px;
+  padding: 12px;
+  border: 1px solid rgba(217,201,161,.12);
+  background: #18211f;
+}
+.codex-monster-icon {
+  width: 42px;
+  height: 42px;
+  display: grid;
+  place-items: center;
+  border: 1px solid #c8b77a55;
+  background: #303c30;
+  color: #cbd68c;
+  font-size: 21px;
+}
+.codex-monster-icon.wolf {
+  color: #b7c8bf;
+  background: #2c3837;
+}
+.codex-monster-icon.wisp {
+  color: #d5a6d2;
+  background: #392d3d;
+}
+.codex-main {
+  min-width: 0;
+}
+.codex-main h3 {
+  margin: 0;
+  color: #e5dbc4;
+  font: 16px var(--serif);
+  font-weight: 400;
+}
+.codex-main>p {
+  margin: 5px 0 9px;
+  color: #9fa294;
+  font-size: 9px;
+  line-height: 1.5;
+}
+.codex-stats {
+  display: flex;
+  gap: 15px;
+  flex-wrap: wrap;
+  color: #aead99;
+  font: 8px var(--mono);
+}
+.codex-stats span:first-child {
+  color: #d78a79;
+}
+.codex-stats span:nth-child(2) {
+  color: #e0bf7e;
+}
+.codex-stats span:nth-child(3) {
+  color: #c5a7d3;
+}
+.codex-stats b {
+  color: #e7dfce;
+}
+.codex-drop-list {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-wrap: wrap;
+  margin-top: 10px;
+}
+.codex-drop-list>small {
+  width: 100%;
+  margin-bottom: 1px;
+  color: #c4ae77;
+  font: 7px var(--mono);
+  letter-spacing: .7px;
+}
+.codex-drop {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 6px;
+  border: 1px solid rgba(217,201,161,.1);
+  background: #202a26;
+  color: #bcbcae;
+  font-size: 8px;
+}
+.codex-drop i {
+  font-style: normal;
+  color: #d4bc7e;
+}
+.codex-drop b {
+  color: #a9b78c;
+  font: 7px var(--mono);
+}
+.codex-locked {
+  opacity: .57;
+}
+.codex-locked .codex-monster-icon {
+  color: #777b70;
+  background: #232b28;
+}
+.codex-lock {
+  align-self: center;
+  justify-self: end;
+  color: #83887d;
+  font: 7px var(--mono);
+  letter-spacing: .5px;
+}
+.reward-card {
+  width: min(430px,100%);
+  text-align: center;
+  padding: 32px;
+}
+.reward-spark {
+  color: #e1c47f;
+  font-size: 29px;
+  text-shadow: 0 0 18px #e1c47f88;
+}
+.reward-card h2 {
+  font-size: 31px;
+  color: #ead8aa;
+}
+.reward-gains {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  margin: 18px 0;
+}
+.reward-gains>div {
+  display: grid;
+  justify-items: center;
+  gap: 5px;
+  padding: 13px;
+  border: 1px solid var(--line);
+  background: #202b27;
+}
+.reward-gains span {
+  color: #d8bd80;
+  font-size: 17px;
+}
+.reward-gains small {
+  color: #989a8b;
+  font: 7px var(--mono);
+  letter-spacing: .9px;
+}
+.reward-gains b {
+  color: #e7dfcc;
+  font: 14px var(--mono);
+}
+.reward-level {
+  padding: 9px;
+  margin-bottom: 12px;
+  background: #41412d;
+  color: #e6d28f;
+  font-size: 10px;
+}
+.reward-drops {
+  text-align: left;
+  border-top: 1px solid var(--line);
+  padding-top: 12px;
+}
+.reward-drops h3 {
+  margin: 0 0 7px;
+  color: #c7b27a;
+  font: 8px var(--mono);
+  letter-spacing: .9px;
+}
+.reward-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 7px 0;
+  border-bottom: 1px solid rgba(217,201,161,.07);
+  font-size: 10px;
+}
+.reward-item>span {
+  color: #d9c27e;
+}
+.reward-item b {
+  flex: 1;
+  color: #e2dac7;
+  font-weight: 500;
+}
+.reward-item small {
+  color: #d5c18b;
+  font: 9px var(--mono);
+}
+.no-drops {
+  margin: 8px 0;
+  color: #969a8d;
+  font-size: 9px;
+  line-height: 1.5;
+}
+.reward-card .help-start {
+  margin-top: 17px;
+}
+.close-button {
+  z-index: 1;
+}
+@media(max-width:650px) {
+  .top-actions {
+    gap: 5px;
+  }
+  .top-actions .sound-button {
+    padding: 7px 8px;
+  }
+  .combat-stats {
+    font-size: 7px;
+    letter-spacing: 0;
+  }
+  .combat-stats span {
+    text-align: center;
+  }
+  .inventory-panel {
+    grid-column: 1/-1;
+  }
+  .equipment-slot {
+    padding: 7px 5px;
+  }
+  .equipment-slot>b {
+    font-size: 8px;
+  }
+  .codex-card,.reward-card {
+    padding: 23px 15px;
+  }
+  .codex-entry {
+    grid-template-columns: 36px minmax(0,1fr);
+    gap: 9px;
+    padding: 9px;
+  }
+  .codex-monster-icon {
+    width: 34px;
+    height: 34px;
+  }
+  .codex-drop {
+    font-size: 7px;
+  }
+  .codex-lock {
+    grid-column: 2;
+  }
+  .reward-card {
+    max-height: 88svh;
+  }
+  .reward-gains {
+    margin: 13px 0;
+  }
+}

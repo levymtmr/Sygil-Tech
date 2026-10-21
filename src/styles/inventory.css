@@ -1,0 +1,166 @@
+.inventory-window .inventory-items {
+  max-height: 64svh;
+  overflow: auto;
+}
+.inventory-grid {
+  display: grid;
+  grid-template-columns: repeat(5,minmax(0,1fr));
+  gap: 8px;
+  padding: 3px 2px 8px;
+}
+.inventory-cell {
+  position: relative;
+  display: flex;
+  min-width: 0;
+  min-height: 98px;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 4px;
+  overflow: hidden;
+  padding: 9px 5px 24px;
+  border: 1px solid rgba(217,201,161,.16);
+  background: linear-gradient(145deg,#202a26,#171f1d);
+  color: #d8d2c0;
+  cursor: default;
+  user-select: none;
+  transition: border-color .12s,background .12s,transform .12s,opacity .12s;
+}
+.inventory-cell.filled {
+  cursor: grab;
+}
+.inventory-cell.filled:active {
+  cursor: grabbing;
+}
+.inventory-cell:hover {
+  border-color: #b99d6570;
+  background: #28332c;
+}
+.inventory-cell.empty {
+  border-style: dashed;
+  background: rgba(17,24,23,.56);
+  color: #778074;
+}
+.inventory-cell-number {
+  position: absolute;
+  top: 5px;
+  left: 6px;
+  color: #778075;
+  font: 7px var(--mono);
+}
+.inventory-cell-empty-mark {
+  display: grid;
+  place-items: center;
+  flex: 1;
+  color: #747f70;
+  font: 22px var(--serif);
+}
+.inventory-cell-icon {
+  display: grid;
+  place-items: center;
+  width: 43px;
+  height: 43px;
+  margin-top: 2px;
+  border: 1px solid rgba(218,190,126,.25);
+  background: radial-gradient(circle at 50% 35%,#414438,#222c27 75%);
+  color: #dfc783;
+}
+.inventory-cell-icon .game-icon {
+  width: 31px;
+  height: 31px;
+  filter: drop-shadow(0 2px 5px #080a08);
+}
+.inventory-cell-name {
+  width: 100%;
+  overflow: hidden;
+  color: #ddd6c4;
+  font: 8px var(--serif);
+  text-align: center;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.inventory-cell-quantity {
+  position: absolute;
+  top: 4px;
+  right: 5px;
+  padding: 2px 4px;
+  border: 1px solid #d8bd7770;
+  background: #171d1b;
+  color: #e8d394;
+  font: 8px var(--mono);
+}
+.inventory-cell-action {
+  position: absolute;
+  right: 4px;
+  bottom: 4px;
+  left: 4px;
+  min-height: 18px;
+  padding: 2px;
+  border: 1px solid rgba(214,183,120,.3);
+  background: #34382a;
+  color: #e4cf91;
+  font: 6px var(--mono);
+  letter-spacing: .6px;
+  cursor: pointer;
+}
+.inventory-cell-action:hover {
+  border-color: #e2c581;
+  background: #49442e;
+}
+.inventory-cell-selected {
+  transform: translateY(-2px);
+  border-color: #efd58c!important;
+  box-shadow: 0 0 0 2px #e8ca7944,0 0 17px #e5c56b3d;
+}
+.inventory-cell-dragging {
+  opacity: .35;
+  transform: scale(.94);
+}
+.inventory-drop-target {
+  outline: 2px dashed #e7cf8d;
+  outline-offset: 1px;
+  background: #3d4431!important;
+}
+.inventory-grid-note {
+  margin: 7px 0 0;
+  color: #8c9484;
+  font: 8px var(--mono);
+  text-align: center;
+  letter-spacing: .25px;
+}
+.canvas-wrap>.battle-actions .action-button[data-action^="aimed"],.canvas-wrap>.battle-actions .action-button[data-action^="rapid"],.canvas-wrap>.battle-actions .action-button[data-action^="piercing"] {
+  border-color: #879f5570;
+}
+.canvas-wrap>.battle-actions .action-button[data-action^="frost"],.canvas-wrap>.battle-actions .action-button[data-action^="mana"] {
+  border-color: #8bbad270;
+}
+.canvas-wrap>.battle-actions .action-button[data-action^="radiant"],.canvas-wrap>.battle-actions .action-button[data-action^="healing"],.canvas-wrap>.battle-actions .action-button[data-action^="sanctuary"] {
+  border-color: #dfc97670;
+}
+@media(max-width:650px) {
+  .inventory-grid {
+    grid-template-columns: repeat(4,minmax(0,1fr));
+    gap: 6px;
+  }
+  .inventory-cell {
+    min-height: 88px;
+    padding: 7px 4px 22px;
+  }
+  .inventory-cell-icon {
+    width: 38px;
+    height: 38px;
+  }
+  .inventory-cell-icon .game-icon {
+    width: 27px;
+    height: 27px;
+  }
+  .inventory-cell-name {
+    font-size: 7px;
+  }
+  .inventory-cell-action {
+    font-size: 5px;
+  }
+  .inventory-grid-note {
+    font-size: 7px;
+  }
+}

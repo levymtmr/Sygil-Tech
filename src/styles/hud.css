@@ -1,0 +1,171 @@
+/* Hierarquia de jogo e legibilidade */
+.journey-objective {
+  position: absolute;
+  z-index: 2;
+  left: 16px;
+  bottom: 15px;
+  max-width: min(430px,calc(100% - 220px));
+  padding: 8px 11px;
+  border-left: 2px solid #e0bd71;
+  background: rgba(15,24,21,.83);
+  box-shadow: 0 4px 16px #07100e66;
+  backdrop-filter: blur(5px);
+}
+.journey-objective span {
+  display: block;
+  margin-bottom: 3px;
+  color: #d8b978;
+  font: 7px var(--mono);
+  letter-spacing: 1px;
+}
+.journey-objective b {
+  color: #f0e4c7;
+  font: 11px var(--serif);
+  font-weight: 400;
+  line-height: 1.25;
+}
+.status-hud {
+  position: absolute;
+  z-index: 2;
+  top: 43px;
+  right: 15px;
+  display: flex;
+  min-width: 212px;
+  border: 1px solid rgba(225,198,133,.47);
+  background: rgba(15,24,21,.88);
+  box-shadow: 0 5px 18px #07100e75;
+  backdrop-filter: blur(5px);
+}
+.status-hud>div {
+  min-width: 57px;
+  padding: 7px 8px;
+  border-right: 1px solid rgba(217,201,161,.17);
+}
+.status-hud>div:first-child {
+  min-width: 96px;
+}
+.status-hud>div:last-child {
+  border: 0;
+}
+.status-hud span,.status-hud b {
+  display: block;
+}
+.status-hud span {
+  color: #bfb69c;
+  font: 6px var(--mono);
+  letter-spacing: .75px;
+}
+.status-hud b {
+  margin-top: 3px;
+  color: #efe2c2;
+  font: 9px var(--mono);
+  font-weight: 400;
+}
+.status-hud i {
+  display: block;
+  height: 3px;
+  margin-top: 5px;
+  background: #29362e;
+}
+.status-hud em {
+  display: block;
+  height: 100%;
+  background: #d77d70;
+  transition: width .25s;
+}
+.battle-actions-reopen {
+  position: absolute;
+  z-index: 4;
+  left: 50%;
+  bottom: 17px;
+  transform: translateX(-50%);
+  padding: 8px 11px;
+  border: 1px solid #d6b778;
+  background: #1c2824ef;
+  color: #ecd595;
+  font: 9px var(--mono);
+  letter-spacing: .8px;
+  box-shadow: 0 4px 15px #07100e99;
+  cursor: pointer;
+}
+.battle-actions-reopen:hover {
+  background: #354034;
+}
+.class-role {
+  display: block;
+  color: #d8ca9d;
+  font: 6px var(--mono);
+  letter-spacing: .45px;
+}
+.class-card-copy>em {
+  min-height: 0;
+}
+.class-card {
+  min-height: 132px;
+}
+.start-class-list .class-card {
+  min-height: 119px;
+}
+.inventory-grid-note {
+  line-height: 1.45;
+}
+.inventory-cell-selected::after {
+  position: absolute;
+  right: 4px;
+  bottom: 4px;
+  left: 4px;
+  content: 'AGORA ESCOLHA O DESTINO';
+  color: #201d14;
+  background: #ead38e;
+  font: 6px var(--mono);
+  letter-spacing: .35px;
+  text-align: center;
+}
+@media(max-width:650px) {
+  .journey-objective {
+    left: 10px;
+    bottom: 11px;
+    max-width: calc(100% - 20px);
+    padding: 7px 9px;
+  }
+  .journey-objective b {
+    font-size: 10px;
+  }
+  .status-hud {
+    top: 37px;
+    right: 8px;
+    min-width: 177px;
+  }
+  .status-hud>div {
+    min-width: 48px;
+    padding: 6px;
+  }
+  .status-hud>div:first-child {
+    min-width: 82px;
+  }
+  .status-hud span {
+    font-size: 5px;
+  }
+  .status-hud b {
+    font-size: 8px;
+  }
+  .battle-actions-reopen {
+    bottom: 11px;
+    font-size: 8px;
+  }
+  .class-card {
+    min-height: 108px;
+  }
+  .start-class-list .class-card {
+    min-height: 101px;
+  }
+  .class-role {
+    font-size: 5px;
+  }
+  .class-card-copy>em {
+    font-size: 8px;
+  }
+  .inventory-grid-note {
+    font-size: 8px;
+  }
+}

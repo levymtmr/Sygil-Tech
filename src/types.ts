@@ -1,0 +1,13 @@
+export type Point = { x: number; y: number };
+export type Enemy = { id: number; name: string; kind: 'slime' | 'wolf' | 'wisp'; x: number; y: number; hp: number; maxHp: number; damage: number; color: string; xp: number };
+export type Mode = 'explore' | 'battle';
+export type ClassId = 'knight' | 'arcanist' | 'archer' | 'healer' | 'duelist';
+export type SkillId = string;
+export type Action = 'move' | 'strike' | SkillId;
+export type ClassSkill = { id: SkillId; name: string; icon: string; description: string; mode: 'damage' | 'heal' | 'guard'; range: number; power: number; unlockLevel: number; color: string };
+export type CharacterClass = { id: ClassId; name: string; title: string; description: string; passive: string; hp: number; attack: number; defense: number; color: string; accent: string; weapon: string; armor: string; skills: ClassSkill[] };
+export type EquipSlot = 'weapon' | 'armor' | 'charm';
+export type ItemDefinition = { name: string; icon: string; description: string; slot?: EquipSlot; visualColor?: string; bonus?: Partial<Record<'attack' | 'defense' | 'maxHp', number>> };
+export type MonsterDrop = { itemId: string; chance: number; min: number; max: number };
+export type Motion = { from: Point; to: Point; startedAt: number; duration: number };
+export type CombatEffect = { kind: 'slash' | 'bolt' | 'classAttack' | 'enemyStrike' | 'impact' | 'damage' | 'heal' | 'guard'; from: Point; to: Point; startedAt: number; duration: number; damage?: number; variant?: string; tint?: string };

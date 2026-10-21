@@ -1,0 +1,156 @@
+#game.hit-shake {
+  animation: board-shake .28s ease-in-out;
+}
+@keyframes board-shake {
+  0%,100% {
+    transform: translateX(0);
+  }
+  20% {
+    transform: translateX(-4px);
+  }
+  40% {
+    transform: translateX(3px);
+  }
+  60% {
+    transform: translateX(-2px);
+  }
+  80% {
+    transform: translateX(1px);
+  }
+}
+@media(prefers-reduced-motion:reduce) {
+  #game.hit-shake {
+    animation: none;
+  }
+}
+.canvas-wrap>.battle-actions {
+  position: absolute;
+  z-index: 4;
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  width: max-content;
+  max-width: calc(100% - 16px);
+  margin: 0;
+  padding: 8px;
+  border: 1px solid rgba(219,193,133,.78);
+  background: rgba(20,29,27,.96);
+  box-shadow: 0 8px 26px #07100ed9;
+  backdrop-filter: blur(8px);
+  transform: translate(-50%,-100%);
+  transition: left .11s ease-out,top .11s ease-out;
+}
+.canvas-wrap>.battle-actions::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: var(--arrow-offset,50%);
+  transform: translateX(-50%);
+  border: 7px solid transparent;
+  border-top-color: #d4b878;
+}
+.battle-menu-heading {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  min-width: 0;
+}
+.battle-menu-copy {
+  flex: 1;
+  min-width: 0;
+}
+.canvas-wrap>.battle-actions .turn-indicator {
+  display: block;
+  border: 0;
+  padding: 0;
+  margin: 0 0 3px;
+  color: #e2c47e;
+  font-size: 8px;
+}
+.canvas-wrap>.battle-actions .battle-tip {
+  display: block;
+  flex: none;
+  max-width: 225px;
+  color: #b6b7a8;
+  font-size: 8px;
+  line-height: 1.35;
+}
+.canvas-wrap>.battle-actions .action-buttons {
+  display: flex;
+  width: auto;
+  gap: 5px;
+}
+.canvas-wrap>.battle-actions .action-button {
+  min-width: 82px;
+  flex: 1;
+  padding: 6px 7px;
+  background: #202b27;
+}
+.canvas-wrap>.battle-actions .action-button.selected {
+  background: #383a2c;
+  border-color: #d3b374;
+}
+.canvas-wrap>.battle-actions .retreat-button,.menu-hide-button {
+  display: grid;
+  place-items: center;
+  flex: none;
+  width: 25px;
+  height: 25px;
+  margin: 0;
+  padding: 0;
+  border: 1px solid rgba(209,148,123,.3);
+  background: #302b27;
+  color: #dda58e;
+  text-decoration: none;
+  font-size: 14px;
+  cursor: pointer;
+}
+.menu-hide-button {
+  border-color: rgba(217,201,161,.2);
+  background: #202a26;
+  color: #c4c0ad;
+  font-size: 17px;
+}
+.canvas-wrap>.battle-actions .retreat-button:hover {
+  background: #49362f;
+}
+.menu-hide-button:hover {
+  border-color: #d6b778;
+  color: #f0d58f;
+}
+@media(max-width:650px) {
+  .canvas-wrap>.battle-actions {
+    gap: 6px;
+    padding: 6px;
+    max-width: calc(100% - 12px);
+  }
+  .canvas-wrap>.battle-actions .battle-tip {
+    max-width: 190px;
+    font-size: 7px;
+  }
+  .canvas-wrap>.battle-actions .turn-indicator {
+    font-size: 7px;
+  }
+  .canvas-wrap>.battle-actions .action-buttons {
+    width: auto;
+    gap: 3px;
+  }
+  .canvas-wrap>.battle-actions .action-button {
+    min-width: 0;
+    padding: 6px 4px;
+    grid-template-columns: 16px 1fr;
+  }
+  .canvas-wrap>.battle-actions .action-button>span {
+    font-size: 14px;
+  }
+  .canvas-wrap>.battle-actions .action-button b {
+    font-size: 8px;
+  }
+  .canvas-wrap>.battle-actions .action-button small {
+    font-size: 5px;
+  }
+  .canvas-wrap>.battle-actions .retreat-button,.menu-hide-button {
+    width: 22px;
+    height: 22px;
+  }
+}

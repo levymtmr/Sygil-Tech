@@ -1,0 +1,268 @@
+@media(min-width:1350px) {
+  .layout {
+    padding-top: 43px;
+  }
+  .canvas-wrap {
+    height: 535px;
+  }
+}
+@media(max-width:850px) {
+  .layout {
+    grid-template-columns: minmax(0,1fr) 265px;
+    gap: 17px;
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+  .canvas-wrap {
+    height: clamp(340px,51vw,475px);
+  }
+  .panel {
+    padding-left: 12px;
+    padding-right: 12px;
+  }
+  .topbar {
+    padding: 0 22px;
+  }
+  .footer {
+    margin-left: 20px;
+    margin-right: 20px;
+  }
+}
+@media(max-width:650px) {
+  .topbar {
+    height: 56px;
+    padding: 0 15px;
+  }
+  .brand {
+    font-size: 14px;
+  }
+  .top-links {
+    font-size: 7px;
+    gap: 6px;
+    letter-spacing: .8px;
+  }
+  .sound-button {
+    padding: 7px 8px;
+    font-size: 10px;
+  }
+  .sound-button span {
+    display: none;
+  }
+  .layout {
+    display: flex;
+    flex-direction: column;
+    padding: 20px 13px 15px;
+    gap: 13px;
+  }
+  .game-heading {
+    height: 70px;
+  }
+  h1 {
+    font-size: 24px;
+  }
+  .eyebrow {
+    font-size: 8px;
+  }
+  .region-badge {
+    padding: 7px 8px;
+    margin-top: 5px;
+    gap: 6px;
+  }
+  .region-badge>span {
+    font-size: 17px;
+  }
+  .region-badge small {
+    font-size: 7px;
+  }
+  .region-badge b {
+    font-size: 10px;
+  }
+  .canvas-wrap {
+    height: min(68svh,440px);
+    min-height: 310px;
+  }
+  .game-controls {
+    min-height: 47px;
+  }
+  .hint {
+    font-size: 9px;
+    gap: 5px;
+  }
+  .key-hint {
+    font-size: 8px;
+    padding: 4px;
+  }
+  .dpad {
+    display: grid;
+  }
+  .primary-button {
+    padding: 9px 10px;
+    font-size: 10px;
+  }
+  .side-column {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+  .character-panel {
+    grid-row: span 2;
+  }
+  .panel {
+    padding: 12px;
+  }
+  .panel-title {
+    margin-bottom: 9px;
+  }
+  .character-card {
+    height: 80px;
+    padding: 7px;
+  }
+  .avatar-frame {
+    height: 61px;
+    width: 49px;
+  }
+  .avatar {
+    font-size: 35px;
+  }
+  .character-info {
+    padding-left: 11px;
+  }
+  .class-name {
+    font-size: 7px;
+  }
+  .character-info h3 {
+    font-size: 18px;
+  }
+  .stats {
+    padding: 12px 0 9px;
+    gap: 10px;
+  }
+  .stat-label {
+    font-size: 7px;
+  }
+  .character-footer {
+    font-size: 7px;
+    gap: 5px;
+  }
+  .nearby-info b {
+    font-size: 10px;
+  }
+  .nearby-info small {
+    font-size: 6px;
+  }
+  .creature-mark {
+    width: 23px;
+    height: 23px;
+  }
+  .nearby-row {
+    gap: 6px;
+    padding: 6px 0;
+  }
+  .encounter-note {
+    font-size: 8px;
+    line-height: 1.5;
+  }
+  .journal-panel {
+    min-height: auto;
+  }
+  .journal-entry {
+    padding: 5px 0;
+  }
+  .journal-entry p {
+    font-size: 8px;
+  }
+  .footer {
+    margin: 3px 13px 0;
+    padding: 11px 0 17px;
+    font-size: 7px;
+    gap: 8px;
+  }
+  .footer span:last-child {
+    text-align: right;
+  }
+  .battle-actions {
+    margin: 0 13px 14px;
+    padding: 10px;
+    gap: 8px;
+  }
+  .turn-indicator {
+    font-size: 7px;
+  }
+  .battle-tip {
+    font-size: 9px;
+  }
+  .action-buttons {
+    width: 100%;
+    gap: 5px;
+  }
+  .action-button {
+    min-width: 0;
+    flex: 1;
+    padding: 6px 5px;
+    grid-template-columns: 18px 1fr;
+  }
+  .action-button b {
+    font-size: 9px;
+  }
+  .action-button small {
+    font-size: 6px;
+  }
+  .retreat-button {
+    font-size: 9px;
+    margin-left: 2px;
+  }
+}
+@media(max-width:390px) {
+  .top-links {
+    display: none;
+  }
+  .game-heading {
+    height: 67px;
+  }
+  h1 {
+    font-size: 22px;
+  }
+  .region-badge b {
+    max-width: 105px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .hint-divider,.hint-divider+span {
+    display: none;
+  }
+  .canvas-wrap {
+    height: 60svh;
+  }
+  .dpad {
+    grid-template-columns: repeat(3,32px);
+    grid-template-rows: repeat(2,30px);
+  }
+  .side-column {
+    gap: 7px;
+  }
+  .panel {
+    padding: 9px;
+  }
+  .character-card {
+    padding: 5px;
+  }
+  .character-footer {
+    font-size: 6px;
+  }
+  .action-button {
+    grid-template-columns: 15px 1fr;
+  }
+  .action-button>span {
+    font-size: 14px;
+  }
+  .action-button small {
+    font-size: 5px;
+  }
+}
+@media(prefers-reduced-motion:reduce) {
+  *,*::before,*::after {
+    scroll-behavior: auto!important;
+    transition: none!important;
+  }
+}
