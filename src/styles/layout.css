@@ -238,3 +238,6 @@
     height: 72svh;
   }
 }
+
+.portfolio-return { color: #c8ba8c; text-decoration: none; font: 8px var(--mono); letter-spacing: 1px; }
+.portfolio-return:hover, .portfolio-return:focus-visible { color: #f0d38a; text-decoration: underline; }

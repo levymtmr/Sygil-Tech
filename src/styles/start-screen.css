@@ -341,3 +341,6 @@
     min-height: 136px;
   }
 }
+
+.start-company-link { margin-top: 14px; color: #b7b697; font: 9px var(--mono); text-decoration: none; }
+.start-company-link:hover, .start-company-link:focus-visible { color: #e7d292; text-decoration: underline; }

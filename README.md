@@ -1,10 +1,10 @@
-# Lendas de Astera
+# Sygil Tech
 
-Protótipo original de RPG tático para navegador, feito com TypeScript, Vite e Canvas. Funciona em telas de computador e celular; usa spritesheets próprias de pixel art.
+Página institucional da Sygil Tech e portfólio de projetos. O projeto Lendas de Astera é um RPG tático para navegador, feito com TypeScript, Vite e Canvas, com spritesheets de pixel art.
 
 ## Jogar
 
-[Jogar online no GitHub Pages](https://levymtmr.github.io/Sygil-Tech/)
+[Site da Sygil Tech](https://levymtmr.github.io/Sygil-Tech/) · [Jogar Lendas de Astera](https://levymtmr.github.io/Sygil-Tech/projetos/astera/)
 
 
 1. Instale uma versão recente do Node.js.
@@ -60,3 +60,7 @@ O progresso continua apenas na memória da página: trocar de dispositivo ou rec
 ## Loja e oficina
 
 Os interiores usam as mesmas spritesheets de pixel art do mapa: balcões, prateleiras, bancadas, plantas, tapetes, lamparinas, produtos e personagens. Os recortes do atlas ficam em `src/data/spriteAtlas.ts` e são compartilhados entre Canvas e interface HTML. As telas e a decoração mantêm seleção por toque e suporte a arrastar produtos e móveis.
+
+## Site da empresa e projetos
+
+A raiz (`index.html`) apresenta a Sygil Tech, seus serviços e projetos. O código institucional fica em `src/company/`, e os textos e contatos ficam em `src/company/content.ts`. O jogo mantém sua entrada em `src/main.ts` e passa a ser acessado por `projetos/astera/index.html`. O Vite gera as duas páginas no mesmo build, sem carregar os recursos do jogo na página institucional.

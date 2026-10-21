@@ -30,6 +30,8 @@ jobs:
         run: npm test
       - name: Build game
         run: npm run build
+      - name: Check company and game pages
+        run: npm run check:pages
       - name: Configure Pages
         if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
         uses: actions/configure-pages@45bfe0192ca1faeb007ade9deae92b16b8254a0d # v6
