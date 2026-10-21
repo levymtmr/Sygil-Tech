@@ -1,4 +1,6 @@
 export const english: Record<string, string> = {
+  "Contato": "Contact",
+  "Links do rodapé": "Footer links",
   "Pular para o conteúdo": "Skip to content",
   "Sygil Tech — início": "Sygil Tech — home",
   "Abrir menu": "Open menu",
@@ -89,7 +91,7 @@ export const english: Record<string, string> = {
   "Definir o escopo e a combinação de sistemas, dados e tecnologia para o projeto.": "Define the scope and the combination of systems, data and technology for the project.",
   "Construir": "Build",
   "Desenvolver, validar e acompanhar indicadores de qualidade, uso e impacto no negócio.": "Develop, validate and track indicators of quality, usage and business impact.",
-  "04 / VAMOS CONVERSAR": "04 / LET'S TALK",
+  "03 / VAMOS CONVERSAR": "03 / LET'S TALK",
   "Onde a IA pode": "Where can AI",
   "fazer diferença": "make a difference",
   "na sua empresa?": "in your business?",
