@@ -2,7 +2,6 @@ export const company = {
   name: 'Sygil Tech',
   tagline: 'Inteligência artificial aplicada ao negócio.',
   description: 'Integração das APIs da OpenAI e da Anthropic, desenvolvimento de produtos, análise de dados e eficiência operacional. Conheça a experiência por trás da Sygil Tech.',
-  github: 'https://github.com/levymtmr',
   contact: null as { label: string; href: string; description: string } | null,
 };
 
