@@ -1,19 +1,14 @@
 import charactersUrl from '../assets/sprites/characters-v1.png';
-import environmentUrl from '../assets/sprites/environment-v1.png';
+import { environmentAtlas, propPositions } from '../data/spriteAtlas';
+import type { PropSprite } from '../data/spriteAtlas';
 import type { ClassId, Enemy } from '../types';
 
 type Atlas = { image: HTMLImageElement; columns: number; rows: number[]; ready: boolean };
 const characters: Atlas = { image: new Image(), columns: 4, rows: [0, 235, 455, 680, 900, 1120, 1320, 1540, 1774], ready: false };
-const environment: Atlas = { image: new Image(), columns: 4, rows: [0, 300, 572, 805, 1024], ready: false };
+const environment: Atlas = { image: new Image(), columns: environmentAtlas.columns, rows: environmentAtlas.rows, ready: false };
 const classRows: Record<ClassId, number> = { knight: 0, arcanist: 1, archer: 2 };
 const creatureRows: Record<Enemy['kind'], number> = { slime: 5, wolf: 6, wisp: 7 };
-const props = {
-  oak: [0, 0], pine: [1, 0], rock: [2, 0], shrub: [3, 0],
-  shop: [0, 1], shelf: [1, 1], counter: [2, 1], workbench: [3, 1],
-  plant: [0, 2], rug: [1, 2], lamp: [2, 2], barrel: [3, 2],
-  green_gel: [0, 3], wolf_pelt: [1, 3], wisp_shard: [2, 3], healing_potion: [3, 3],
-} as const;
-export type PropSprite = keyof typeof props;
+export type { PropSprite } from '../data/spriteAtlas';
 
 function load(atlas: Atlas, url: string): Promise<void> {
   return new Promise(resolve => {
@@ -25,7 +20,7 @@ function load(atlas: Atlas, url: string): Promise<void> {
 }
 
 export async function initializeSpriteRendering(redraw: () => void) {
-  await Promise.all([load(characters, charactersUrl), load(environment, environmentUrl)]);
+  await Promise.all([load(characters, charactersUrl), load(environment, environmentAtlas.url)]);
   redraw();
   if (characters.ready && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
     window.setInterval(() => { if (!document.hidden) redraw(); }, 140);
@@ -56,6 +51,6 @@ export function drawMonsterSprite(ctx: CanvasRenderingContext2D, enemy: Enemy, c
 }
 
 export function drawPropSprite(ctx: CanvasRenderingContext2D, id: PropSprite, cx: number, bottom: number, height: number) {
-  const [column, row] = props[id];
+  const [column, row] = propPositions[id];
   return drawFrame(ctx, environment, column, row, cx, bottom, height);
 }

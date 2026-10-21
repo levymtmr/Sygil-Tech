@@ -6,7 +6,7 @@ import { renderWorkshop, selectFurniture, buyFurniture, removeFurniture, placeFu
 export function bindStoreEvents() {
     $('store-screen').addEventListener('click', event => {
         const target = event.target;
-        if (!(target instanceof HTMLElement))
+        if (!(target instanceof Element))
             return;
         if (target.closest<HTMLButtonElement>('[data-leave-store]')) {
             leaveStore();
@@ -56,7 +56,7 @@ export function bindStoreEvents() {
     });
     $('store-screen').addEventListener('dragstart', event => {
         const target = event.target;
-        if (!(target instanceof HTMLElement) || !event.dataTransfer)
+        if (!(target instanceof Element) || !event.dataTransfer)
             return;
         const itemId = target.closest<HTMLButtonElement>('[data-select-product]')?.dataset.selectProduct;
         if (!itemId || state.storeOpen)
@@ -66,13 +66,13 @@ export function bindStoreEvents() {
     });
     $('store-screen').addEventListener('dragover', event => {
         const target = event.target;
-        if (target instanceof HTMLElement && target.closest('[data-shelf]'))
+        if (target instanceof Element && target.closest('[data-shelf]'))
             event.preventDefault();
     });
     $('store-screen').addEventListener('drop', event => {
         event.preventDefault();
         const target = event.target;
-        if (!(target instanceof HTMLElement))
+        if (!(target instanceof Element))
             return;
         const shelf = target.closest<HTMLButtonElement>('[data-shelf]')?.dataset.shelf;
         const itemId = event.dataTransfer?.getData('text/plain');
@@ -81,7 +81,7 @@ export function bindStoreEvents() {
     });
     $('workshop-screen').addEventListener('click', event => {
         const target = event.target;
-        if (!(target instanceof HTMLElement))
+        if (!(target instanceof Element))
             return;
         if (target.closest('[data-leave-workshop]')) {
             $('workshop-screen').classList.add('hidden');
@@ -111,7 +111,7 @@ export function bindStoreEvents() {
     for (const screenId of ['store-screen', 'workshop-screen']) {
         $(screenId).addEventListener('dragstart', event => {
             const target = event.target;
-            if (!(target instanceof HTMLElement) || !event.dataTransfer)
+            if (!(target instanceof Element) || !event.dataTransfer)
                 return;
             const id = target.closest<HTMLElement>('[data-furniture]')?.dataset.furniture;
             if (!id)
@@ -121,12 +121,12 @@ export function bindStoreEvents() {
         });
         $(screenId).addEventListener('dragover', event => {
             const target = event.target;
-            if (target instanceof HTMLElement && target.closest('[data-decor-cell]'))
+            if (target instanceof Element && target.closest('[data-decor-cell]'))
                 event.preventDefault();
         });
         $(screenId).addEventListener('drop', event => {
             const target = event.target;
-            if (!(target instanceof HTMLElement))
+            if (!(target instanceof Element))
                 return;
             const cell = target.closest<HTMLElement>('[data-decor-cell]'), id = event.dataTransfer?.getData('application/x-furniture') as FurnitureId;
             if (cell && id) {

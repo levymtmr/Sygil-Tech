@@ -4,13 +4,21 @@ import type { FurnitureId } from '../../types/game';
 import { notify, updateUI } from '../../ui/panels';
 import { renderStore } from './store';
 import { $ } from '../../ui/dom';
+import { propArt } from '../../ui/spriteArt';
+import { workshopMarkup } from './workshopView';
 
 export function renderFurnitureGrid(area: 'store' | 'workshop') {
-    return `<div class="decor-grid" data-decor-area="${area}">${state.furnitureLayouts[area].map((furnitureId, index) => `<button class="decor-cell ${furnitureId ? 'decor-filled' : ''} ${state.selectedFurniture ? 'decor-ready' : ''}" data-decor-cell="${index}" data-decor-area="${area}">${furnitureId ? `<span>${furnitureCatalog[furnitureId].icon}</span><small>${furnitureCatalog[furnitureId].name}</small>` : '<span>＋</span>'}</button>`).join('')}</div>`;
+    return `<div class="decor-grid ${state.selectedFurniture ? 'is-placing' : ''}" role="group" aria-label="Piso para decorar ${area === 'store' ? 'a loja' : 'a oficina'}">${state.furnitureLayouts[area].map((id, index) => {
+        const label = id ? `${furnitureCatalog[id].name}: guardar mobília` : state.selectedFurniture ? `Posicionar ${furnitureCatalog[state.selectedFurniture].name} no espaço ${index + 1}` : `Espaço livre ${index + 1}`;
+        return `<button class="decor-cell ${id ? 'decor-filled' : ''}" data-decor-cell="${index}" data-decor-area="${area}" aria-label="${label}" title="${label}">${id ? propArt(id) : '<span class="decor-add">＋</span>'}</button>`;
+    }).join('')}</div>`;
 }
 
 export function furniturePalette(area: 'store' | 'workshop') {
-    return `<section class="furniture-panel"><div><p class="eyebrow">CATÁLOGO DE MOBÍLIA</p><h3>Personalize ${area === 'store' ? 'a loja' : 'a oficina'}</h3><small>Compre com moedas e arraste a peça para uma casa livre.</small></div><div class="furniture-list">${(Object.keys(furnitureCatalog) as FurnitureId[]).map(id => { const furniture = furnitureCatalog[id], owned = state.furnitureStock[id]; return `<article class="furniture-card ${state.selectedFurniture === id ? 'selected' : ''}" draggable="${owned > 0}" data-furniture="${id}"><span>${furniture.icon}</span><div><b>${furniture.name}</b><small>${furniture.description} · ${owned} disponível</small></div>${owned > 0 ? `<button class="tiny-button" data-select-furniture="${id}">Posicionar</button>` : `<button class="tiny-button" data-buy-furniture="${id}" ${state.gold >= furniture.price ? '' : 'disabled'}>${furniture.price} ◉</button>`}</article>`; }).join('')}</div></section>`;
+    return `<section class="furniture-panel"><div class="furniture-heading"><div><p class="eyebrow">DETALHES QUE FAZEM UM LAR</p><h2>Decore ${area === 'store' ? 'sua loja' : 'sua oficina'}</h2><p>Plantas, luz e madeira para dar vida ao seu refúgio.</p></div><span class="furniture-hint">${state.selectedFurniture ? `Posicione: ${furnitureCatalog[state.selectedFurniture].name}` : 'Compre uma peça e escolha um espaço no piso.'}</span></div><div class="furniture-list">${(Object.keys(furnitureCatalog) as FurnitureId[]).map(id => {
+        const furniture = furnitureCatalog[id], owned = state.furnitureStock[id];
+        return `<article class="furniture-card ${state.selectedFurniture === id ? 'selected' : ''}" draggable="${owned > 0}" data-furniture="${id}"><div class="furniture-art">${propArt(id)}</div><div class="furniture-copy"><h3>${furniture.name}</h3><p>${furniture.description}</p><small>${owned > 0 ? `${owned} disponível para posicionar` : 'Uma nova peça para o refúgio'}</small></div>${owned > 0 ? `<button class="tiny-button" data-select-furniture="${id}" aria-pressed="${state.selectedFurniture === id}">${state.selectedFurniture === id ? 'Cancelar' : 'Posicionar'}</button>` : `<button class="tiny-button" data-buy-furniture="${id}" aria-label="Comprar ${furniture.name} por ${furniture.price} moedas" ${state.gold >= furniture.price ? '' : 'disabled'}>Comprar <span>${furniture.price} ◉</span></button>`}</article>`;
+    }).join('')}</div></section>`;
 }
 
 export function buyFurniture(id: FurnitureId) {
@@ -56,5 +64,5 @@ export function removeFurniture(area: 'store' | 'workshop', index: number) {
 }
 
 export function renderWorkshop() {
-    $('workshop-screen-panel').innerHTML = `<header class="store-topbar"><button class="store-leave" data-leave-workshop>← Voltar à loja</button><div><small>SUA BASE · OFICINA</small><b class="store-status is-closed">MODO DE EDIÇÃO</b></div><div class="store-balance">CAIXA <b>${state.gold} ◉</b></div></header><main class="store-interior"><section class="store-header"><div><p class="eyebrow">CONSTRUÇÃO E CUSTOMIZAÇÃO</p><h1>Oficina de Astera</h1><small>Arraste uma peça do catálogo para a grade. Clique numa peça posicionada para guardá-la.</small></div></section><section class="workshop-scene"><div class="workbench-mark">⚒ OFICINA</div>${renderFurnitureGrid('workshop')}</section>${furniturePalette('workshop')}</main>`;
+    $('workshop-screen-panel').innerHTML = workshopMarkup();
 }

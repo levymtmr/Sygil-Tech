@@ -49,10 +49,14 @@ Validação: `npm run build` verifica os tipos e gera a versão de produção. P
 
 ## Publicação no GitHub Pages
 
-O workflow `.github/workflows/deploy-pages.yml` instala as dependências, verifica os tipos e publica o conteúdo de `dist/` a cada push na branch `main`. Também pode ser executado manualmente pela aba **Actions**.
+O workflow `.github/workflows/deploy-pages.yml` roda em todo push e nos pull requests para `main`. Ele instala as dependências com `npm ci`, executa `npm test` e verifica os tipos e o build com `npm run build`. Quando o push é na branch `main`, publica automaticamente `dist/` no GitHub Pages. Outras branches e pull requests fazem somente a validação. Também é possível publicar a `main` manualmente pela aba **Actions**.
 
 No repositório do GitHub, selecione **Settings → Pages → Source → GitHub Actions** antes da primeira publicação. A URL definitiva aparece no ambiente `github-pages` após a execução do workflow.
 
 O Vite gera caminhos relativos para que os arquivos do jogo carreguem dentro do endereço do repositório. Apenas o build estático é publicado; não é necessário manter um servidor local ligado.
 
 O progresso continua apenas na memória da página: trocar de dispositivo ou recarregar inicia uma nova jornada.
+
+## Loja e oficina
+
+Os interiores usam as mesmas spritesheets de pixel art do mapa: balcões, prateleiras, bancadas, plantas, tapetes, lamparinas, produtos e personagens. Os recortes do atlas ficam em `src/data/spriteAtlas.ts` e são compartilhados entre Canvas e interface HTML. As telas e a decoração mantêm seleção por toque e suporte a arrastar produtos e móveis.
