@@ -64,3 +64,13 @@ Os interiores usam as mesmas spritesheets de pixel art do mapa: balcões, pratel
 ## Site da empresa e projetos
 
 A raiz (`index.html`) apresenta a Sygil Tech, seus serviços e projetos. O código institucional fica em `src/company/`, e os textos e contatos ficam em `src/company/content.ts`. O jogo mantém sua entrada em `src/main.ts` e passa a ser acessado por `projetos/astera/index.html`. O Vite gera as duas páginas no mesmo build, sem carregar os recursos do jogo na página institucional.
+
+## Memória do Saber
+
+Jogo da memória educativo em `projetos/memoria/`, para celular e computador. Tem temas de animais, frutas e números, níveis de 4, 6 ou 8 pares, curiosidades a cada acerto e jogadas sem limite de tempo. Funciona com toque, mouse e teclado (Tab e Enter/espaço). O progresso dura enquanto a página está aberta.
+
+O mesmo workflow do GitHub Pages publica o jogo em https://levymtmr.github.io/Sygil-Tech/projetos/memoria/ após o push na `main`.
+
+## Retro Blocks
+
+Jogo de blocos com visual retrô de 16 bits em `projetos/retro-blocks/`. Complete linhas para marcar pontos; a velocidade aumenta a cada 10 linhas. Setas movem e giram, espaço solta, P pausa, Enter inicia ou pausa. No celular, use os botões na tela. Há prévia da próxima peça, efeitos sonoros opcionais e recorde salvo neste navegador. A partida pausa ao sair da janela; recarregar reinicia a partida. Publicação pelo mesmo workflow do GitHub Pages.

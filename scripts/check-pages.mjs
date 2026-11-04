@@ -5,7 +5,9 @@ import assert from 'node:assert/strict';
 const root = resolve('dist');
 const pages = [
   ['index.html', 'Sygil Tech'],
+  ['projetos/retro-blocks/index.html', 'Retro Blocks'],
   ['projetos/astera/index.html', 'Lendas de Astera'],
+  ['projetos/memoria/index.html', 'Memória do Saber'],
 ];
 
 for (const [path, title] of pages) {
