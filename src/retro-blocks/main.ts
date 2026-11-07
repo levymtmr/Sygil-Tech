@@ -4,7 +4,7 @@ import { WIDTH, HEIGHT, SHAPES, emptyBoard, rotated, collides, clearLines, shuff
 import type { Piece } from './engine';
 
 document.querySelector('#app')!.innerHTML = `
-<header><a href="../../" aria-label="Sygil Tech — início" class="brand">${brandMark()}<span>SYGIL<small>TECH</small></span></a><span class="cartridge">SYGIL ARCADE <i>●</i> 16-BIT COLLECTION</span><button id="sound" aria-pressed="false">SOM: OFF</button></header>
+<header><a href="../../" aria-label="Sygil Tech — início" class="brand">${brandMark()}<span>SYGIL<small>TECH</small></span></a><a class="cartridge play-return" href="../../play/">← ESCOLHER OUTRO JOGO</a><button id="sound" aria-pressed="false">SOM: OFF</button></header>
 <main><div class="title"><span class="edition">— THE FALLING BLOCK PUZZLE —</span><h1>RETRO<span>BLOCKS</span></h1><p>ENCAIXE. COMPLETE. SUPERE.</p></div>
 <section class="cabinet" aria-label="Jogo Retro Blocks"><div class="cabinet-top"><span>▰ SUPER PUZZLE SYSTEM</span><span class="power">● POWER</span></div>
 <div class="console"><aside class="left-panel"><div class="panel"><h2>RECORDE</h2><strong id="best">000000</strong></div><div class="panel"><h2>PONTOS</h2><strong id="score">000000</strong></div><div class="panel"><h2>NÍVEL</h2><strong id="level">01</strong></div><div class="panel"><h2>LINHAS</h2><strong id="lines">000</strong></div><div class="mini-art" aria-hidden="true">▟▙<br>▜▛<span>PLAY<br>FOREVER</span></div></aside>
@@ -12,7 +12,7 @@ document.querySelector('#app')!.innerHTML = `
 <aside class="right-panel"><div class="panel next"><h2>PRÓXIMA</h2><canvas id="next" width="120" height="120" aria-label="Próxima peça"></canvas></div><div class="panel instructions"><h2>CONTROLES</h2><p><kbd>←</kbd><kbd>→</kbd><span>MOVER</span></p><p><kbd>↑</kbd><span>GIRAR</span></p><p><kbd>↓</kbd><span>DESCER</span></p><p><kbd>ESPAÇO</kbd><span>SOLTAR</span></p><p><kbd>P</kbd><span>PAUSAR</span></p></div><button id="pause" class="pause" disabled>Ⅱ PAUSAR</button><p class="level-note">10 LINHAS<br><span>UM NOVO NÍVEL</span></p></aside></div>
 <div class="mobile-controls" aria-label="Controles por toque"><button data-action="left" aria-label="Mover para esquerda">◀</button><button data-action="down" aria-label="Descer">▼</button><button data-action="right" aria-label="Mover para direita">▶</button><button data-action="rotate" aria-label="Girar peça">↻</button><button data-action="drop" aria-label="Soltar peça">⤓<small>SOLTAR</small></button></div>
 <div class="cabinet-bottom"><span>● ●</span><p>ONE MORE GAME.</p><span>● ●</span></div></section><p class="footnote">SEM PRESSA PARA COMEÇAR. DIFÍCIL É PARAR.</p><p id="announcement" class="sr-only" role="status" aria-live="polite"></p></main>
-<footer><a href="../../">← VOLTAR À SYGIL TECH</a><span>UM CLÁSSICO EM CADA ENCAIXE.</span></footer>`;
+<footer><a href="../../play/">← ESCOLHER OUTRO JOGO</a><span>UM CLÁSSICO EM CADA ENCAIXE.</span></footer>`;
 const canvas = document.querySelector<HTMLCanvasElement>('#board')!;
 const ctx = canvas.getContext('2d')!;
 const nextCtx = document.querySelector<HTMLCanvasElement>('#next')!.getContext('2d')!;

@@ -74,3 +74,11 @@ O mesmo workflow do GitHub Pages publica o jogo em https://levymtmr.github.io/Sy
 ## Retro Blocks
 
 Jogo de blocos com visual retrô de 16 bits em `projetos/retro-blocks/`. Complete linhas para marcar pontos; a velocidade aumenta a cada 10 linhas. Setas movem e giram, espaço solta, P pausa, Enter inicia ou pausa. No celular, use os botões na tela. Há prévia da próxima peça, efeitos sonoros opcionais e recorde salvo neste navegador. A partida pausa ao sair da janela; recarregar reinicia a partida. Publicação pelo mesmo workflow do GitHub Pages.
+
+## Sygil Play
+
+Acesse `/play/` para escolher entre Lendas de Astera, Memória do Saber, Retro Blocks, Dots e Quebra-cabeça. O rodapé institucional tem um único link Play e todos os jogos permitem voltar à seleção.
+
+Dots: conecte pontos vizinhos da mesma cor com arraste ou toques e confirme a conexão. Circuitos de 4 ou mais pontos removem toda a cor; desfaça o último ponto voltando um passo. Partidas de 30 jogadas ou modo livre, recorde local, símbolos para distinguir cores.
+
+Quebra-cabeça: troque duas peças por toque/clique para montar uma das três ilustrações originais. Dificuldades de 9, 16 e 25 peças, prévia e números opcionais, sem limite de tempo. Tab e Enter/espaço também selecionam peças e pontos. Recarregar reinicia as partidas.

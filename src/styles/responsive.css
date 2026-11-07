@@ -214,7 +214,11 @@
 }
 @media(max-width:390px) {
   .top-links {
-    display: none;
+    display: flex;
+  }
+  .portfolio-return {
+    font-size: 7px;
+    white-space: nowrap;
   }
   .game-heading {
     height: 67px;

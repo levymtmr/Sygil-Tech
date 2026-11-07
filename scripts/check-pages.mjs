@@ -5,6 +5,9 @@ import assert from 'node:assert/strict';
 const root = resolve('dist');
 const pages = [
   ['index.html', 'Sygil Tech'],
+  ['play/index.html', 'Play'],
+  ['projetos/dots/index.html', 'Dots'],
+  ['projetos/quebra-cabeca/index.html', 'Quebra-cabeça'],
   ['projetos/retro-blocks/index.html', 'Retro Blocks'],
   ['projetos/astera/index.html', 'Lendas de Astera'],
   ['projetos/memoria/index.html', 'Memória do Saber'],
@@ -23,3 +26,12 @@ for (const [path, title] of pages) {
   }
   console.log(`Página e recursos OK: ${path}`);
 }
+
+// Navigation is rendered by entry modules, so also check the source contract.
+const companySource = readFileSync('src/company/page.ts', 'utf8');
+assert.ok(companySource.includes('href="./play/">Play</a>'));
+assert.ok(!companySource.includes('href="./projetos/'));
+for (const source of ['src/ui/layout.ts', 'src/memory/main.ts', 'src/retro-blocks/main.ts', 'src/play/common.ts']) {
+  assert.ok(readFileSync(source, 'utf8').includes('../../play/'), `Retorno à seleção ausente: ${source}`);
+}
+console.log('Navegação Play e retorno dos jogos OK');

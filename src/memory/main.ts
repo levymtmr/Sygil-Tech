@@ -27,7 +27,7 @@ const themes: Record<string, Item[]> = {
 };
 const app = document.querySelector<HTMLDivElement>('#app')!;
 app.innerHTML = `
-<header><a href="../../" class="brand" aria-label="Sygil Tech — início">${brandMark()}<span>SYGIL<small>TECH</small></span></a><span class="header-note">Feito para aprender brincando</span></header>
+<header><a href="../../" class="brand" aria-label="Sygil Tech — início">${brandMark()}<span>SYGIL<small>TECH</small></span></a><a class="header-note play-return" href="../../play/">← Escolher outro jogo</a></header>
 <main>
 <section class="intro"><span class="eyebrow">UM PAR DE CADA VEZ, UMA NOVA DESCOBERTA</span><h1>Memória do <span>Saber<span class="spark">✦</span></span></h1><p>Vire as cartinhas, encontre os pares<br>e descubra um mundo de coisas legais!</p></section>
 <section class="game" aria-label="Jogo da memória">
