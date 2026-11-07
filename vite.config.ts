@@ -7,6 +7,7 @@ export default defineConfig({
   build: {
     rollupOptions: {
       input: {
+        arena: fileURLToPath(new URL('./projetos/arena/index.html', import.meta.url)),
         play: fileURLToPath(new URL('./play/index.html', import.meta.url)),
         dots: fileURLToPath(new URL('./projetos/dots/index.html', import.meta.url)),
         puzzle: fileURLToPath(new URL('./projetos/quebra-cabeca/index.html', import.meta.url)),

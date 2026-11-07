@@ -82,3 +82,11 @@ Acesse `/play/` para escolher entre Lendas de Astera, Memória do Saber, Retro B
 Dots: conecte pontos vizinhos da mesma cor com arraste ou toques e confirme a conexão. Circuitos de 4 ou mais pontos removem toda a cor; desfaça o último ponto voltando um passo. Partidas de 30 jogadas ou modo livre, recorde local, símbolos para distinguir cores.
 
 Quebra-cabeça: troque duas peças por toque/clique para montar uma das três ilustrações originais. Dificuldades de 9, 16 e 25 peças, prévia e números opcionais, sem limite de tempo. Tab e Enter/espaço também selecionam peças e pontos. Recarregar reinicia as partidas.
+
+## Arena dos Quatro
+
+Protótipo local para quatro pessoas no mesmo dispositivo, disponível em `/projetos/arena/` e na seleção Sygil Play. Inicie com `npm run dev`. Cada jogador controla uma classe fixa: Guerreiro, Arqueiro, Mago ou Ladino.
+
+Cada turno tem 20 segundos, um movimento de até três casas e uma ação, em qualquer ordem. Selecione a ação e uma casa destacada. Habilidades possuem recarga de dois turnos próprios após o uso. Derrotar um adversário rende um ponto; ocupar sozinho as quatro casas centrais ao fim de uma rodada também. O primeiro a cinco pontos vence. Heróis derrotados renascem com vida cheia no próprio turno. A partida pode ser pausada e reiniciada; recarregar a página apaga o progresso.
+
+As regras ficam em `src/arena/engine.ts`, a interface em `src/arena/main.ts` e os testes em `tests/arena.test.mjs`. Não há conexão online nem adversários controlados pelo computador nesta versão. A duração de 10–15 minutos é uma meta a validar em partidas reais.

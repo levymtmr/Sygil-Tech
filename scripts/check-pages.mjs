@@ -4,6 +4,7 @@ import assert from 'node:assert/strict';
 
 const root = resolve('dist');
 const pages = [
+  ['projetos/arena/index.html', 'Arena dos Quatro'],
   ['index.html', 'Sygil Tech'],
   ['play/index.html', 'Play'],
   ['projetos/dots/index.html', 'Dots'],
