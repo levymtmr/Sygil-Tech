@@ -1,5 +1,17 @@
 # Sygil Tech
 
+## Em destaque · Good Bila
+
+[![Good Bila — cartas na mão, caos no campo](docs/good-bila/images/capa.svg)](docs/good-bila/README.md)
+
+Piloto mobile em pixel art: mire, estoure bilas e use cartas para mudar cada jogada. **Destruction · 11 cartas · 9 efeitos · Android / Godot.**
+
+[**Conhecer o jogo e ver os prints →**](docs/good-bila/README.md) · [**Jogar o piloto Android →**](https://github.com/levymtmr/Sygil-Tech/releases/tag/good-bila-v0.21.0) · [**♥ Apoiar / propor investimento →**](docs/good-bila/APOIE.md)
+
+[Como jogar](docs/good-bila/README.md#como-jogar) · [Estado do desenvolvimento](docs/good-bila/DESENVOLVIMENTO.md) · [Código do jogo](projetos/bila-mobile/)
+
+---
+
 Página institucional da Sygil Tech e portfólio de projetos. O projeto Lendas de Astera é um RPG tático para navegador, feito com TypeScript, Vite e Canvas, com spritesheets de pixel art.
 
 ## Jogar

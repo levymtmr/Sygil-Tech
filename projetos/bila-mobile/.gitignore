@@ -1,0 +1,14 @@
+.godot/
+.tools/
+build/*
+!build/.gitkeep
+!build/.gdignore
+*.keystore
+__pycache__/
+*.pyc
+
+# Editor-generated imports and publication-only design references
+*.import
+assets/conceito.png
+assets/interface.ttf
+assets/interface-bold.ttf

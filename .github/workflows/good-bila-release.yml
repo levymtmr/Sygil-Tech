@@ -1,0 +1,58 @@
+name: Good Bila · piloto Android
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'projetos/bila-mobile/**'
+      - '.github/workflows/good-bila-release.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: good-bila-android
+  cancel-in-progress: false
+
+jobs:
+  android-pilot:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 35
+    permissions:
+      contents: write
+    env:
+      GH_TOKEN: ${{ github.token }}
+      GH_REPO: ${{ github.repository }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+      - name: Prepare local Android tools
+        run: python3 projetos/bila-mobile/tools/setup_android.py
+      - name: Run Good Bila tests
+        run: bash projetos/bila-mobile/tools/testar.sh
+      - name: Export and verify test APK
+        run: bash projetos/bila-mobile/tools/export_apk.sh
+      - name: Publish pilot release
+        shell: bash
+        run: |
+          version="$(python3 -c 'import re,pathlib; print(re.search(r"config/version=\"([^\"]+)\"", pathlib.Path("projetos/bila-mobile/project.godot").read_text()).group(1))')"
+          tag="good-bila-v${version}"
+          apk="projetos/bila-mobile/build/good-bila-${version}.apk"
+          checksum="projetos/bila-mobile/build/SHA256SUMS.txt"
+          cp projetos/bila-mobile/build/bila-piloto.apk "$apk"
+          sha256sum "$apk" > "$checksum"
+          notes="projetos/bila-mobile/build/release-notes.md"
+          cat > "$notes" <<NOTES
+          Good Bila ${version} — piloto jogável para Android ARM32/ARM64.
+
+          [Apresentação, prints e como jogar](https://github.com/${GH_REPO}/blob/main/docs/good-bila/README.md)
+          [Apoiar / conversar sobre parceria](https://github.com/${GH_REPO}/blob/main/docs/good-bila/APOIE.md)
+
+          APK de desenvolvimento, fora da Play Store. Se a assinatura de um piloto anterior for diferente, remova a instalação anterior antes de instalar este arquivo. Perfil e recorde são locais.
+          NOTES
+          if gh release view "$tag" >/dev/null 2>&1; then
+            echo "A versão $tag já está publicada; o APK existente será preservado."
+          else
+            gh release create "$tag" "$apk" "$checksum" --target "$GITHUB_SHA" --title "Good Bila ${version} · piloto Android" --prerelease --notes-file "$notes"
+          fi

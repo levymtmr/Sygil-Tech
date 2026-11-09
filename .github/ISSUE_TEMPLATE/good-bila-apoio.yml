@@ -1,0 +1,31 @@
+name: "Good Bila · apoio, parceria ou investimento"
+description: "Converse com o autor sobre colaboração, produção, publicação ou investimento no jogo."
+title: "[Good Bila / apoio] "
+body:
+  - type: markdown
+    attributes:
+      value: "Obrigado pelo interesse! Para uma conversa reservada, escreva para levymmoreira@icloud.com. Esta issue é pública."
+  - type: dropdown
+    id: interesse
+    attributes:
+      label: Como você gostaria de participar?
+      options:
+        - Colaboração técnica ou criativa
+        - Testes e feedback de jogadores
+        - Divulgação ou comunidade
+        - Produção ou publicação
+        - Investimento ou patrocínio
+    validations:
+      required: true
+  - type: textarea
+    id: proposta
+    attributes:
+      label: Conte sua ideia
+      description: "O que chamou sua atenção e que tipo de apoio ou parceria gostaria de propor?"
+    validations:
+      required: true
+  - type: textarea
+    id: conversa
+    attributes:
+      label: Próximo passo
+      description: "Conte como gostaria de continuar a conversa; se preferir manter dados comerciais em privado, use o e-mail do autor."
