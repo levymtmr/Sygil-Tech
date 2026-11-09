@@ -67,7 +67,7 @@ func _run() -> void:
     var clear_terrain: Array[Dictionary] = []
     game.shooter.terrain = clear_terrain
     target.terrain = clear_terrain
-    game._set_quest(0, "TESTE")
+    game._set_quest(0, "TEST")
     teleport(target, Vector2(360, 700))
     teleport(game.shooter, Vector2(360, 800))
     await steps(2)

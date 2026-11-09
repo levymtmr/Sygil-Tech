@@ -1,94 +1,92 @@
-<p align="center"><img src="images/capa.svg" alt="Good Bila — cartas na mão, caos no campo" width="100%"></p>
+<p align="center"><img src="images/cover.svg" alt="Good Bila — cards in hand, chaos on the field" width="100%"></p>
 
 # Good Bila
 
-**Uma brincadeira de quintal transformada em um jogo de física, cartas e decisões difíceis.**
+**A backyard marble game reimagined through physics, cards, and tough decisions.**
 
-Em Good Bila, você não controla apenas a mira: cada carta muda o objetivo e o comportamento da sua bila. Acerte, rache e estoure os alvos, improvise com a mão que recebeu e alcance a próxima meta antes de acabar suas jogadas.
+In Good Bila, aiming is only part of the challenge. Every card changes both your objective and the way your marble behaves. Hit, crack, and burst your targets, adapt to the hand you draw, and reach the next score target before your shots run out.
 
-[**Jogar o piloto**](#jogue-o-piloto) · [**Como jogar**](#como-jogar) · [**Coleção e efeitos**](#cartas-que-mudam-o-jogo) · [**Apoiar / investir**](APOIE.md) · [**Desenvolvimento**](DESENVOLVIMENTO.md)
+[**Play the prototype**](#play-the-prototype) · [**How to play**](#how-to-play) · [**Cards and effects**](#cards-that-change-the-game) · [**Support / invest**](SUPPORT.md) · [**Development**](DEVELOPMENT.md)
 
-> **Status:** piloto jogável **0.21.0**, em desenvolvimento ativo. Android em orientação vertical e execução no computador pelo Godot. As imagens abaixo são capturas reais do piloto; os cenários variam a cada nível.
+> **Status:** playable prototype **0.22.0**, in active development. Portrait Android gameplay and desktop execution through Godot. The screenshots below show the actual English-language prototype; field layouts change each level.
 
-<table>
-<tr><td align="center"><img src="images/partida.png" alt="Partida de Good Bila, com bilas espalhadas e obstáculos de areia e buraco" width="235"><br><strong>Um campo de possibilidades</strong></td><td align="center"><img src="images/grande.png" alt="Carta Grande ativa, bila do jogador maior e medidor de força junto da trajetória" width="235"><br><strong>Uma carta muda a jogada</strong></td><td align="center"><img src="images/game-over.png" alt="Game over com pontuação, meta e resumo da partida" width="235"><br><strong>Sempre dá vontade de tentar de novo</strong></td></tr>
-</table>
+<table><tr><td align="center"><img src="images/gameplay.png" alt="Good Bila gameplay with scattered marbles and sand and pit obstacles" width="235"><br><strong>A field of possibilities</strong></td><td align="center"><img src="images/giant.png" alt="The Giant card increases the player marble's size, with a power gauge near the trajectory" width="235"><br><strong>One card changes the shot</strong></td><td align="center"><img src="images/game-over.png" alt="Game over screen showing score, target, and run statistics" width="235"><br><strong>One more run?</strong></td></tr></table>
 
-## Por que jogar?
+## Why play?
 
-- **Física com intenção.** Direção, força, posicionamento e colisões criam oportunidades de reações em cadeia.
-- **Sorte que pede estratégia.** As três cartas vêm viradas para baixo, sorteadas da coleção inteira. Você decide quando conservar o efeito atual e quando arriscar outra carta.
-- **Efeitos que aparecem na bila.** Tamanho, cor e animação mudam junto com o comportamento: gigante, magnética, explosiva e outras possibilidades.
-- **Metas crescentes.** O modo Destruction acumula pontos entre níveis. Missões concluídas em sequência aumentam o multiplicador da próxima pontuação.
-- **Identidade de quintal.** Bilas, areia, buracos, pixel art e música original formam o cenário do piloto.
+- **Physics with purpose.** Direction, power, positioning, and collisions create opportunities for chain reactions.
+- **Luck that rewards strategy.** Your three face-down cards come from the entire collection. Decide when to keep your current effect and when to risk another draw.
+- **Effects you can see.** Your marble changes size, color, and animation alongside its behavior: giant, magnetic, explosive, and more.
+- **Rising targets.** Destruction carries your score across levels. Completing objectives in sequence increases the multiplier for your next points.
+- **Backyard character.** Marbles, sand, pits, pixel art, and original music give the prototype its identity.
 
-A inspiração vem do jogo de bila e do prazer de buscar uma combinação melhor a cada tentativa. O piloto atual tem identidade e regras próprias; não é uma reprodução das regras tradicionais do triângulo.
+The inspiration comes from traditional backyard marble games and the joy of finding a better combination on each attempt. The current prototype has its own identity and rules; it does not reproduce traditional triangle-marble rules.
 
-## Jogue o piloto
+## Play the prototype
 
 ### Android
 
-[**Baixar o APK 0.21.0 para Android**](https://github.com/levymtmr/Sygil-Tech/releases/download/good-bila-v0.21.0/good-bila-0.21.0.apk) · [Página da versão e notas de instalação](https://github.com/levymtmr/Sygil-Tech/releases/tag/good-bila-v0.21.0)
+[**Download Good Bila 0.22.0 for Android**](https://github.com/levymtmr/Sygil-Tech/releases/download/good-bila-v0.22.0/good-bila-0.22.0.apk) · [Release page and installation notes](https://github.com/levymtmr/Sygil-Tech/releases/tag/good-bila-v0.22.0)
 
-1. Baixe o APK e abra o arquivo no Android.
-2. Autorize a instalação por essa origem quando o sistema solicitar.
-3. Crie um apelido local, toque em **Iniciar** e puxe sua primeira carta.
+1. Download the APK and open it on your Android device.
+2. Allow installation from that source when Android asks.
+3. Create a local nickname, tap **Start**, and draw your first card.
 
-É uma distribuição de teste, fora da Play Store. O APK público usa assinatura de desenvolvimento: se o Android rejeitar a instalação sobre um piloto anterior com assinatura diferente, desinstale o anterior antes. O registro e o recorde são locais.
+This is a test distribution outside Google Play. The public APK uses a development signing key: if Android rejects an update over an earlier prototype with a different signature, uninstall the earlier version first. Your profile and best score are stored locally.
 
-### Computador / Godot
+### Desktop / Godot
 
-Clone este repositório, abra [`projetos/bila-mobile/project.godot`](../../projetos/bila-mobile/project.godot) no **Godot 4.4.1** e pressione **F5**. Arraste com o mouse como faria com o dedo. Não é uma versão de navegador.
+Clone this repository, open [`projetos/bila-mobile/project.godot`](../../projetos/bila-mobile/project.godot) in **Godot 4.4.1**, and press **F5**. Drag with your mouse as you would with your finger. This is not a browser build.
 
-[Instruções técnicas e exportação de APK](../../projetos/bila-mobile/README.md)
+[Technical setup and APK export](../../projetos/bila-mobile/README.md)
 
-## Como jogar
+## How to play
 
-1. **Receba três cartas às cegas.** Qualquer uma das 11 cartas da coleção pode aparecer. Não há montagem de deck.
-2. **Puxe uma carta para cima** e confirme. Ela revela uma cor de objetivo e um efeito para a sua bila.
-3. **Espere a chuva de bilas.** Os alvos caem no campo, espalham-se e deixam uma configuração diferente a cada nível.
-4. **Pressione sua bila, puxe para trás e solte.** O gauge mostra a força; no máximo, fica vermelho e treme.
-5. **Acerte duas vezes para estourar.** O primeiro impacto racha o alvo; o segundo destrói e pontua. Colisões entre bilas também podem causar dano.
-6. **Priorize a missão.** A cor pedida rende **60 pontos base**; as outras, **5**, antes do multiplicador. Escolha bem o que atingir.
-7. **Decida se vale gastar outra carta.** O objetivo e o efeito atuais continuam nas próximas tacadas até você trocar. Só é possível revelar uma carta por tacada.
-8. **Bata a meta.** Os pontos acumulam: 180, 480, 900, 1440… O próximo nível traz uma nova mão e outro campo. Se as jogadas ou os alvos acabarem antes da meta, é game over.
+1. **Receive three face-down cards.** Any of the 11 collection cards can appear. There is no deck building.
+2. **Pull a card upward** and confirm. It reveals a target color and an effect for your marble.
+3. **Wait for the marble rain.** Targets fall onto the field, scatter, and create a different layout each level.
+4. **Press your marble, pull back, and release.** The gauge shows shot power; at maximum power, it turns red and shakes.
+5. **Hit twice to burst a target.** The first impact cracks a marble; the second destroys it and awards points. Marble-to-marble collisions can also cause damage.
+6. **Prioritize your objective.** The requested color is worth **60 base points**; other colors are worth **5**, before the multiplier.
+7. **Decide whether another card is worth spending.** Your current objective and effect remain active until replaced. You may reveal only one card per shot.
+8. **Reach the target.** Scores accumulate: 180, 480, 900, 1440… The next level brings a new hand and field. If shots or targets run out before the required score, the run ends.
 
-O primeiro nível tem **32 bilas e oito jogadas**. A quantidade de bilas cresce até 56, e as tentativas chegam a 12. Areia desacelera; buracos prendem a bila até a próxima tacada. Cada rodada sorteia de um a três obstáculos, com três aparecendo raramente.
+The first level has **32 marbles and eight shots**. Target counts rise to 56, and the shot allowance rises to 12. Sand slows your marble; pits trap it until the next shot. Each level draws one to three obstacles, with three-obstacle layouts appearing rarely.
 
-## Cartas que mudam o jogo
+## Cards that change the game
 
-A coleção tem **11 cartas e nove efeitos**. Algumas cartas compartilham um efeito, mas pedem cores diferentes.
+The collection has **11 cards and nine effects**. Some cards share an effect but request different colors.
 
-| Efeito | O que muda na jogada |
+| Effect | What changes |
 |---|---|
-| Linha reta | Segue a direção da mira. |
-| Em curva | Desvia para a direita durante o lançamento. |
-| Quicando | Dá três saltos; enquanto está no ar, passa sobre bilas e obstáculos. |
-| Pesada | Mais massa e impacto, com menor alcance. |
-| Grande | Aumenta o tamanho, a colisão e a massa da bila. |
-| Perfurante | Atravessa vários alvos e causa um impacto em cada um por tacada. |
-| Magnética | Atrai bilas próximas enquanto se move. |
-| Explosiva | O primeiro impacto causa dano e impulso nos alvos próximos. |
-| Ricochete | Aproveita as paredes com rebotes fortes e menor desaceleração. |
+| Straight | Follows your aiming direction. |
+| Curve | Bends to the right during the shot. |
+| Bouncing | Makes three hops; while airborne, passes over marbles and obstacles. |
+| Heavy | More mass and impact, with shorter range. |
+| Giant | Increases the marble's size, collision area, and mass. |
+| Piercing | Passes through multiple targets and deals one hit to each per shot. |
+| Magnetic | Pulls nearby marbles while moving. |
+| Explosive | The first impact damages and pushes nearby targets. |
+| Ricochet | Makes better use of walls through stronger rebounds and lower drag. |
 
-Os ícones ajudam a ler o estado, mas a própria bila também muda de cor e animação. A coleção é para conhecer as possibilidades; consultá-la não altera a mão sorteada.
+Icons help identify the current state, and the marble itself changes color and animation. The collection lets you learn the possibilities; browsing it does not change your randomly drawn hand.
 
-<table><tr><td align="center"><img src="images/colecao.png" alt="Coleção com as cartas e seus efeitos, sem seleção de deck" width="235"><br><strong>Conheça todas as cartas</strong></td><td align="center"><img src="images/chuva.png" alt="Animação de bilas caindo no campo após confirmar uma carta" width="235"><br><strong>Uma nova distribuição a cada nível</strong></td></tr></table>
+<table><tr><td align="center"><img src="images/collection.png" alt="Read-only card collection showing objectives and effects" width="235"><br><strong>Explore every card</strong></td><td align="center"><img src="images/rain.png" alt="Marbles falling onto the field after the opening card is confirmed" width="235"><br><strong>A new layout every level</strong></td></tr></table>
 
-## Onde o projeto está
+## Where the project stands
 
-**Já jogável:** ciclo completo de partida, cartas aleatórias, nove efeitos físicos, obstáculos, multiplicadores, coleção, game over, perfil e recorde locais, música e controles de toque/mouse.
+**Playable now:** a complete run loop, random cards, nine physics effects, obstacles, multipliers, collection browser, game over summary, local profile and best score, original music, and touch/mouse controls.
 
-**Próximas prioridades:** balancear dificuldade e combinações; ampliar testes em aparelhos Android; melhorar leitura visual, acessibilidade e apresentação; explorar mais conteúdo a partir dos testes com jogadores.
+**Next priorities:** balance difficulty and effect combinations; test on more Android devices; improve readability, accessibility, and presentation; explore additional content based on player feedback.
 
-O piloto ainda precisa de validação de retenção, dificuldade e desempenho em uma amostra maior de celulares. Não há números públicos de público, receita ou investimento captado. O foco atual é tornar a experiência consistente e divertida.
+The prototype still needs broader validation of difficulty, retention, and device performance. There are no published audience, revenue, or funding figures. The current focus is a consistent, enjoyable core experience.
 
-[Ver estado técnico, limites e prioridades](DESENVOLVIMENTO.md) · [Histórico recente](../../projetos/bila-mobile/CHANGELOG.md)
+[Technical status, limitations, and priorities](DEVELOPMENT.md) · [Recent changes](../../projetos/bila-mobile/CHANGELOG.md)
 
-## Faça parte do próximo passo
+## Help shape the next step
 
-Você pode ajudar testando, divulgando, colaborando com arte, áudio, desenvolvimento ou conversando sobre produção, publicação e investimento.
+You can help by playing, sharing feedback, spreading the word, contributing art, audio or development work, or discussing production, publishing, and investment.
 
-### [♥ Apoie o desenvolvimento do Good Bila](APOIE.md)
+### [♥ Support Good Bila's development](SUPPORT.md)
 
-**Interessado em parceria ou investimento?** [Apresente sua proposta no GitHub](https://github.com/levymtmr/Sygil-Tech/issues/new?template=good-bila-apoio.yml) ou fale diretamente com **Levy Mota Moreira**: [e-mail](mailto:levymmoreira@icloud.com?subject=Good%20Bila%20-%20Parceria%20e%20apoio) · [perfil no GitHub](https://github.com/levymtmr).
+**Interested in a partnership or investment?** [Send a proposal on GitHub](https://github.com/levymtmr/Sygil-Tech/issues/new?template=good-bila-support.yml), or contact **Levy Mota Moreira** directly: [email](mailto:levymmoreira@icloud.com?subject=Good%20Bila%20-%20Partnership%20and%20support) · [GitHub profile](https://github.com/levymtmr).

@@ -22,9 +22,9 @@ func reset_stage(number: int = 1) -> void:
     game._confirm_roll()
 
 func shot(color: int, indices: Array[int]) -> void:
-    game._set_quest(color, "TESTE")
+    game._set_quest(color, "TEST")
     game.current_action = game.Action.STRAIGHT
-    if not game.quest_active: game._set_quest(0, "TESTE")
+    if not game.quest_active: game._set_quest(0, "TEST")
     game._launch(Vector2(0, -30))
     for index in indices: game._capture(game.balls[index])
     game._finish_shot()
@@ -58,7 +58,7 @@ func _run() -> void:
     game._confirm_roll()
     check(game.score == 360 and game.goal == 600, "Final stage retains points against cumulative 600 target")
     var before: int = game.score
-    if not game.quest_active: game._set_quest(0, "TESTE")
+    if not game.quest_active: game._set_quest(0, "TEST")
     game._launch(Vector2(0, -30))
     game._finish_shot()
     game._advance_feedback(1.0)
@@ -84,9 +84,9 @@ func _run() -> void:
         reset_stage()
         game.mission_streak = 2
         game.score_multiplier = 3
-        game._set_quest(0, "TESTE")
+        game._set_quest(0, "TEST")
         game.current_action = game.Action.STRAIGHT
-        if not game.quest_active: game._set_quest(0, "TESTE")
+        if not game.quest_active: game._set_quest(0, "TEST")
         game._launch(Vector2(0, -30))
         if correct_first:
             game._capture(game.balls[0])
@@ -119,7 +119,7 @@ func _run() -> void:
     check(game.phase == game.Phase.WON and game.score == 750, "Carried surplus can finish final target without extra scoring")
     reset_stage()
     check(game.score == 0 and game.score_multiplier == 1 and game.mission_streak == 0 and game.completed_missions == 0, "New run clears cumulative balance and streak")
-    game._set_quest(0, "TESTE")
+    game._set_quest(0, "TEST")
     game._capture(game.balls[0])
     check(game.floaters.any(func(f): return f.points and f.text == "+60") and game.score_motes.size() == 5, "Mission award creates readable popup and five score particles")
     game._physics_process(2.0)

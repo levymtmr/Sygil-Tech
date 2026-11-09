@@ -39,8 +39,8 @@ var camera: Camera2D
 const EffectIcons = preload("res://scripts/effect_icons.gd")
 const CARD_COLORS = EffectIcons.COLORS
 const HandCard = preload("res://scripts/hand_card.gd")
-const CARD_NAMES = ["LINHA RETA", "EM CURVA", "QUICANDO", "PESADA", "GRANDE", "PERFURANTE", "MAGNÉTICA", "EXPLOSIVA", "RICOCHETE"]
-const CARD_HELP = ["Segue a direção da mira", "Desvia para a direita", "Salta sobre bilas no ar", "Mais impacto, menor alcance", "Maior tamanho e impacto", "Atravessa e fere cada alvo", "Atrai bilas próximas", "Dano em área no primeiro impacto", "Rebates fortes e maior alcance"]
+const CARD_NAMES = ["STRAIGHT", "CURVE", "BOUNCING", "HEAVY", "GIANT", "PIERCING", "MAGNETIC", "EXPLOSIVE", "RICOCHET"]
+const CARD_HELP = ["Follows your aim", "Curves to the right", "Jumps over marbles while airborne", "More impact, shorter range", "Larger size and stronger impact", "Passes through and hits each target", "Pulls nearby marbles", "Area damage on the first impact", "Stronger rebounds and longer range"]
 enum Action { STRAIGHT, CURVE, BOUNCE, HEAVY, GIANT, PIERCING, MAGNET, EXPLOSIVE, RICOCHET }
 const CARD_ACTIONS = [Action.STRAIGHT, Action.CURVE, Action.BOUNCE, Action.HEAVY, Action.CURVE, Action.HEAVY, Action.GIANT, Action.PIERCING, Action.MAGNET, Action.EXPLOSIVE, Action.RICOCHET]
 const CARD_TARGETS = [0, 1, 2, 3, 4, 5, 0, 2, 1, 3, 4]
@@ -110,7 +110,7 @@ var impact_rings: Array[Dictionary] = []
 var trail_clock: float = 0.0
 var card_tween: Tween
 var fx_rng := RandomNumberGenerator.new()
-const COLOR_NAMES = ["VERMELHA", "VERDE", "AZUL", "AMARELA", "ROXA", "TURQUESA"]
+const COLOR_NAMES = ["RED", "GREEN", "BLUE", "YELLOW", "PURPLE", "TURQUOISE"]
 const COLOR_TINTS = [Color("ff8580"), Color("a1e87a"), Color("89bdff"), Color("ffe184"), Color("dba0ff"), Color("7ce6db")]
 const BASE_POINTS = 5
 const QUEST_BONUS = 55
@@ -121,7 +121,7 @@ var quest_color: int = 0
 var quest_progress: int = 0
 var quest_target: int = 1
 var quest_points: int = 0
-var quest_origin: String = "MISSÃO INICIAL"
+var quest_origin: String = "INITIAL OBJECTIVE"
 var quest_switch_count: int = 0
 var current_action: int = Action.STRAIGHT
 var active_action: int = Action.STRAIGHT
@@ -196,7 +196,7 @@ func _build_ui() -> void:
 	hud_view.game = self
 	hud_view.hud = true
 	root.add_child(hud_view)
-	sound_button = _button("EFEITOS: ON", Rect2(40, 1218, 170, 44), Color("5e537a"), 18)
+	sound_button = _button("SOUND: ON", Rect2(40, 1218, 170, 44), Color("5e537a"), 18)
 	sound_button.pressed.connect(func():
 		front_end.set_sound(not sound_enabled))
 	root.add_child(sound_button)
@@ -216,7 +216,7 @@ func _build_ui() -> void:
 	hand_floor.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	hand_floor.z_index = 30
 	root.add_child(hand_floor)
-	hand_toggle = _button("CARTAS", Rect2(250, 1080, 220, 38), Color("65577b"), 17)
+	hand_toggle = _button("CARDS", Rect2(250, 1080, 220, 38), Color("65577b"), 17)
 	hand_toggle.z_index = 40
 	hand_toggle.pressed.connect(func():
 		hand_expanded = not hand_expanded
@@ -233,7 +233,7 @@ func _build_ui() -> void:
 	status_label.add_theme_font_size_override("font_size", 15)
 	status_label.add_theme_color_override("font_color", CREAM)
 	root.add_child(status_label)
-	roll_confirm_button = _button("CONTINUAR", Rect2(170, 600, 380, 56), Color("ffe18a"), 24)
+	roll_confirm_button = _button("CONTINUE", Rect2(170, 600, 380, 56), Color("ffe18a"), 24)
 	roll_confirm_button.z_index = 50
 	roll_confirm_button.visible = false
 	roll_confirm_button.pressed.connect(_confirm_roll)
@@ -434,7 +434,7 @@ func _advance_rain(delta: float) -> void:
 
 func _terrain_hit(kind: String, at: Vector2) -> void:
 	if kind == "hole":
-		_floating("PRESA!", at + Vector2(0, -40), Color("e4bd96"))
+		_floating("TRAPPED!", at + Vector2(0, -40), Color("e4bd96"))
 		_pulse(at, Color("a97754"), 0.4, 65)
 		_burst(at, Color("a97754"), 12)
 		_tone(110, 0.10)
@@ -535,7 +535,7 @@ func _refresh_ui(animate_hand: bool = false) -> void:
 	if animate_hand: hand_tween = create_tween().set_parallel(true)
 	hand_toggle.visible = not rain_active and quest_active and _hand_size() > 0 and phase == Phase.AIMING and not roll_confirm_pending
 	hand_toggle.disabled = aiming or card_drawn_this_shot
-	hand_toggle.text = ("RECOLHER" if hand_expanded else "↑ CARTAS %d" % _hand_size())
+	hand_toggle.text = ("HIDE CARDS" if hand_expanded else "↑ CARDS %d" % _hand_size())
 	var hand: Array[int] = []
 	for i in range(3):
 		card_buttons[i].visible = stock[i] > 0 or selected == i
@@ -545,7 +545,7 @@ func _refresh_ui(animate_hand: bool = false) -> void:
 		card_buttons[i].movement_name = CARD_NAMES[CARD_ACTIONS[hand_missions[i]]]
 		card_buttons[i].face_down = selected != i
 		card_buttons[i].chosen = selected == i
-		card_buttons[i].selection_caption = "REVELADA"
+		card_buttons[i].selection_caption = "REVEALED"
 		card_buttons[i].queue_redraw()
 		if stock[i] > 0 or selected == i: hand.append(i)
 	for slot in range(hand.size()):
@@ -573,21 +573,21 @@ func _refresh_ui(animate_hand: bool = false) -> void:
 	roll_confirm_button.visible = roll_confirm_pending and phase == Phase.AIMING
 	roll_confirm_button.disabled = roll_remaining > 0
 	if roll_confirm_pending and roll_remaining <= 0 and phase == Phase.AIMING:
-		status_label.text = "Confirme o movimento sorteado para preparar sua tacada."
+		status_label.text = "Confirm the revealed card to prepare your shot."
 	elif roll_remaining > 0 and phase == Phase.AIMING:
-		status_label.text = "Sorteando movimento…"
+		status_label.text = "Revealing movement…"
 	elif phase == Phase.ROLLING:
-		status_label.text = "%s em movimento • aguarde as bilas pararem" % CARD_NAMES[active_action]
+		status_label.text = "%s in motion • wait for the marbles to stop" % CARD_NAMES[active_action]
 	elif selected >= 0:
-		status_label.text = "Nova missão: %s • vale até você trocar ou encerrar a rodada." % COLOR_NAMES[quest_color]
+		status_label.text = "New objective: %s • stays active until replaced or the level ends." % COLOR_NAMES[quest_color]
 	elif multiplier_flash > 0 and mission_streak > 0:
-		status_label.text = "SEQUÊNCIA %d • próximos pontos x%d • escolha sua missão." % [mission_streak, score_multiplier]
+		status_label.text = "STREAK %d • next points x%d • choose your objective." % [mission_streak, score_multiplier]
 	elif not quest_active:
-		status_label.text = "Vire uma carta para revelar seu objetivo."
+		status_label.text = "Draw a card to reveal your objective."
 	elif quest_progress >= quest_target:
-		status_label.text = "Missão concluída • vire outra carta para buscar mais pontos." if _hand_size() > 0 else "Missão concluída • outra cor quebra a sequência após pontuar."
+		status_label.text = "Objective complete • draw another card to score more points." if _hand_size() > 0 else "Objective complete • another color breaks your streak after scoring."
 	else:
-		status_label.text = "Mantenha a missão ou vire uma carta para tentar outra cor."
+		status_label.text = "Keep this objective or draw a card to try another color."
 
 func _effective_action() -> int:
 	return current_action
@@ -708,8 +708,8 @@ func _use_card(index: int) -> void:
 	hand_expanded = false
 	quest_switch_count += 1
 	if quest_progress > 0 and quest_progress < quest_target:
-		_break_streak("MISSÃO INTERROMPIDA")
-	_set_quest(color, "MISSÃO DA CARTA")
+		_break_streak("OBJECTIVE ABANDONED")
+	_set_quest(color, "CARD OBJECTIVE")
 	_roll_action(CARD_ACTIONS[card_id])
 	shooter.set_size(40.0 if current_action == Action.GIANT else (18.0 if current_action == Action.PIERCING else 25.0))
 	_tone(500 + color * 70, 0.07)
@@ -951,7 +951,7 @@ func _capture(ball: BilaMarble) -> void:
 	shot_captures += 1
 	var color: Color = COLOR_TINTS[quest_color] if matched else Color("cebdad")
 	_floating("+%d" % value, ball.position, color, matched)
-	floaters.back()["detail"] = "%d × %d" % [base_value, factor] if matched else "OUTRA COR"
+	floaters.back()["detail"] = "%d × %d" % [base_value, factor] if matched else "OTHER COLOR"
 	floaters.back()["points"] = true
 	var origin: Vector2 = hud_view.get_global_transform_with_canvas().affine_inverse() * world_view.get_global_transform_with_canvas() * ball.position
 	for i in range(5 if matched else 2):
@@ -962,7 +962,7 @@ func _capture(ball: BilaMarble) -> void:
 	score_flash = 0.32
 	if matched: mission_flash = 0.5
 	if shot_captures == 2 or shot_captures == 3:
-		_floating("%d BILAS NA TACADA!" % shot_captures, shooter.position + Vector2(0, -75), Color("ffdd8c"))
+		_floating("%d MARBLES IN ONE SHOT!" % shot_captures, shooter.position + Vector2(0, -75), Color("ffdd8c"))
 	_tone(650 + shot_captures * 110, 0.07)
 
 func _break_streak(reason: String) -> void:
@@ -974,13 +974,13 @@ func _break_streak(reason: String) -> void:
 
 func _resolve_mission_streak() -> void:
 	if shot_wrong_color:
-		_break_streak("SEQUÊNCIA QUEBRADA")
+		_break_streak("STREAK BROKEN")
 	elif quest_completion_pending:
 		mission_streak += 1
 		score_multiplier = 1 + mission_streak
 		multiplier_flash = 0.8
 		mission_flash = 0.7
-		_floating("SEQUÊNCIA %d! PRÓXIMA x%d" % [mission_streak, score_multiplier], shooter.position + Vector2(0, -75), Color("ffe18a"), true)
+		_floating("STREAK %d! NEXT x%d" % [mission_streak, score_multiplier], shooter.position + Vector2(0, -75), Color("ffe18a"), true)
 		_pulse(shooter.position, Color("ffe18a"), 0.6, 170)
 		_tone(820, 0.08)
 	quest_completion_pending = false
@@ -1071,12 +1071,12 @@ func _overlay_label(caption: String, y: float, size_px: int, color: Color) -> vo
 
 func _show_reward() -> void:
 	_clear_overlay()
-	_overlay_label("NÍVEL DESTRUCTION %d!" % stage if _is_destruction() else "RODADA CONCLUÍDA!", 360, 36, MINT)
-	_overlay_label("TOTAL %d • meta %d • fase +%d" % [score, goal, score - round_start_score], 440, 23, CREAM)
-	_overlay_label("MISSÕES: +%d PONTOS\nÚltima cor: %s (%d/%d)" % [quest_points, COLOR_NAMES[quest_color], quest_progress, quest_target], 510, 22, COLOR_TINTS[quest_color])
-	_overlay_label("Três novas cartas serão sorteadas da coleção.", 590, 24, CREAM)
-	_overlay_label("SEQUÊNCIA %d • PRÓXIMOS PONTOS x%d" % [mission_streak, score_multiplier], 650, 23, Color("ffe18a"))
-	var next := _button("PRÓXIMO NÍVEL" if _is_destruction() else "PRÓXIMA RODADA", Rect2(140, 740 + (layout_height - 1280) / 2, 440, 84), MINT, 25)
+	_overlay_label("DESTRUCTION LEVEL %d!" % stage if _is_destruction() else "ROUND COMPLETE!", 360, 36, MINT)
+	_overlay_label("TOTAL %d • target %d • level +%d" % [score, goal, score - round_start_score], 440, 23, CREAM)
+	_overlay_label("OBJECTIVES: +%d POINTS\nLast color: %s (%d/%d)" % [quest_points, COLOR_NAMES[quest_color], quest_progress, quest_target], 510, 22, COLOR_TINTS[quest_color])
+	_overlay_label("Three new cards will be drawn from the collection.", 590, 24, CREAM)
+	_overlay_label("STREAK %d • NEXT POINTS x%d" % [mission_streak, score_multiplier], 650, 23, Color("ffe18a"))
+	var next := _button("NEXT LEVEL" if _is_destruction() else "NEXT ROUND", Rect2(140, 740 + (layout_height - 1280) / 2, 440, 84), MINT, 25)
 	next.pressed.connect(_next_round)
 	overlay.add_child(next)
 
@@ -1094,10 +1094,10 @@ func _show_result() -> void:
 	var top := maxf(110, (layout_height - 1000) / 2)
 	art.position = Vector2(60, top)
 	overlay.add_child(art)
-	var retry := _button("TENTAR NOVAMENTE", Rect2(120, top + 650, 480, 76), Color("ff797c"), 27)
+	var retry := _button("TRY AGAIN", Rect2(120, top + 650, 480, 76), Color("ff797c"), 27)
 	retry.pressed.connect(_restart)
 	overlay.add_child(retry)
-	var menu := _button("VOLTAR AO MENU", Rect2(120, top + 742, 480, 58), Color("79688e"), 21)
+	var menu := _button("BACK TO MENU", Rect2(120, top + 742, 480, 58), Color("79688e"), 21)
 	menu.pressed.connect(func(): front_end.show_main())
 	overlay.add_child(menu)
 
@@ -1248,7 +1248,7 @@ func _take_screenshot() -> void:
 	elif "--preview-options" in args:
 		front_end.show_options()
 	if "--preview-game" in args or "--preview-used" in args or "--preview-reward" in args or "--preview-aim" in args or "--preview-roll" in args or "--preview-impact" in args or "--preview-combo" in args or "--preview-result" in args or "--preview-hop" in args or "--preview-obstacles" in args or "--preview-destruction" in args or "--preview-game-over" in args:
-		if front_end.player_name == "": front_end.player_name = "Piloto"
+		if front_end.player_name == "": front_end.player_name = "Player"
 		front_end.start_game(GameMode.DESTRUCTION if "--preview-destruction" in args else GameMode.CLASSIC)
 		if "--preview-effect" in args:
 			var index := args.find("--preview-effect")

@@ -17,7 +17,7 @@ func setup() -> void:
     game._restart()
     game.rain_pending = false
     game.opening_focus = false
-    game._set_quest(0, "TESTE")
+    game._set_quest(0, "TEST")
     var empty: Array[Dictionary] = []
     game.shooter.terrain = empty
     for ball in game.balls:
@@ -100,7 +100,7 @@ func _run() -> void:
     game.goal = 100000
     var expected := 0
     for color in range(2):
-        game._set_quest(color, "TESTE")
+        game._set_quest(color, "TEST")
         var factor: int = game.score_multiplier
         for ball in game.balls:
             if ball.color_index == color:
@@ -108,7 +108,7 @@ func _run() -> void:
                 expected += 60 * factor
         game._finish_shot()
         check(game.score == expected and game.score_multiplier == color + 2, "Consecutive complete missions preserve cumulative score and next-shot multiplier")
-    game._set_quest(3, "TESTE")
+    game._set_quest(3, "TEST")
     game._capture(game.balls[2])
     game._finish_shot()
     check(game.score_multiplier == 1 and game.score == expected + 15, "Off-objective payout stays low and breaks streak")

@@ -1,32 +1,32 @@
-# Good Bila · código do piloto 0.21.0
+# Good Bila · prototype source 0.22.0
 
-Jogo 2D de bilas, física e cartas para Android, escrito em GDScript para **Godot 4.4.1**. O modo atual é Destruction: o primeiro impacto racha uma bila, o segundo destrói e pontua.
+A 2D physics-and-cards marble game for Android, written in GDScript for **Godot 4.4.1**. The only game mode is Destruction: the first impact cracks a target and the second destroys it to award points. The interface and documentation are in English.
 
-[**Apresentação, prints e como jogar**](../../docs/good-bila/README.md) · [**Apoiar / investir**](../../docs/good-bila/APOIE.md) · [**Desenvolvimento**](../../docs/good-bila/DESENVOLVIMENTO.md) · [**Histórico**](CHANGELOG.md)
+[**Presentation, screenshots, and how to play**](../../docs/good-bila/README.md) · [**Support / invest**](../../docs/good-bila/SUPPORT.md) · [**Development**](../../docs/good-bila/DEVELOPMENT.md) · [**Changes**](CHANGELOG.md)
 
-## Executar no computador
+## Run on desktop
 
-Abra `project.godot` no Godot 4.4.1 e pressione F5. Godot 3 não é compatível. A edição .NET também executa os scripts GDScript.
+Open `project.godot` in Godot 4.4.1 and press F5. Godot 3 is not supported. The .NET edition can also execute GDScript.
 
-No Linux/macOS, com Godot 4 no PATH:
+On Linux/macOS with Godot 4 in PATH:
 
 ```bash
 cd projetos/bila-mobile
 bash jogar.sh
 ```
 
-Para informar o executável explicitamente:
+To choose the executable explicitly:
 
 ```bash
-GODOT_BIN=/caminho/para/godot4 bash jogar.sh
-GODOT_BIN=/caminho/para/godot4 bash tools/testar.sh
+GODOT_BIN=/path/to/godot4 bash jogar.sh
+GODOT_BIN=/path/to/godot4 bash tools/testar.sh
 ```
 
-A resolução lógica base é 720 × 1280, com expansão para telas mais altas e respeito às margens seguras do Android. No computador, use o mouse para pressionar a bila, puxar para trás e soltar. As cartas aceitam arraste para cima ou toque.
+The base logical resolution is 720 × 1280, expanding for taller screens and respecting Android safe areas. Use the mouse to press the player marble, pull back, and release. Cards support an upward drag or a tap.
 
-## Exportar APK de teste
+## Export a test APK
 
-O exportador atual usa engine e template Android **4.4.1**, JDK 17 e Android SDK 34. No Linux x86_64:
+The exporter uses **Godot engine and Android template 4.4.1**, JDK 17, and Android SDK 34. On Linux x86_64:
 
 ```bash
 cd projetos/bila-mobile
@@ -34,40 +34,42 @@ python3 tools/setup_android.py
 bash tools/export_apk.sh
 ```
 
-A preparação baixa ferramentas oficiais para `.tools/`, sem alterar o Godot instalado no sistema. O APK sai em `build/bila-piloto.apk`. Para instalar em um aparelho conectado com depuração USB habilitada:
+Setup downloads official tools into `.tools/`, without changing the system's Godot installation. Output is `build/bila-piloto.apk`. To install on a connected device with USB debugging enabled:
 
 ```bash
 bash tools/instalar_celular.sh
 ```
 
-As ferramentas e a chave de desenvolvimento são locais e não devem ser versionadas. Compilações geradas com chaves de teste diferentes não se atualizam uma sobre a outra: pode ser necessário remover uma instalação anterior. Essa é uma distribuição piloto, não uma publicação de loja.
+Tools and the development signing key stay local and must not be committed. Builds signed with different test keys cannot update one another: removing an earlier installation may be necessary. This is a prototype distribution rather than a store release.
 
-## Verificar
+## Verify
 
 ```bash
 bash tools/testar.sh
 ```
 
-A suíte atual cobre coleção aleatória, física, chuva, terreno, efeitos, pontuação e toque nativo. Usa dados de teste próprios. Os arquivos de testes históricos do clássico não fazem parte da suíte atual.
+The current suite covers random collection hands, physics, marble rain, terrain, effects, scoring, and native touch events. It uses dedicated test data. Historical classic-mode tests are not part of the current suite.
 
-## Estrutura
+## Source layout
 
-| Caminho | Função |
+| Path | Responsibility |
 |---|---|
-| `scripts/game.gd` | Partida, cartas, física dos efeitos, pontos, terreno e áudio. |
-| `scripts/marble.gd` | Corpo físico, salto, dano e animações das bilas. |
-| `scripts/presentation.gd` | Arena, HUD, trajetória e gauge. |
-| `scripts/front_end.gd` | Menu, coleção, detalhes, registro e opções. |
-| `scripts/hand_card.gd` | Cartas, versos e gesto de puxar. |
-| `scripts/effect_icons.gd` | Ícones e paleta compartilhada dos efeitos. |
-| `scripts/game_over.gd` | Apresentação e contagem animada do game over. |
-| `tests/` | Suíte atual e testes históricos. |
-| `tools/` | Preparação local, teste e exportação Android. |
+| `scripts/game.gd` | Runs, cards, effect physics, scoring, terrain, and audio. |
+| `scripts/marble.gd` | Rigid body, jumping, damage, and marble animations. |
+| `scripts/presentation.gd` | Field, HUD, trajectory, and power gauge. |
+| `scripts/front_end.gd` | Menus, collection, details, profile, and settings. |
+| `scripts/hand_card.gd` | Cards, backs, and draw gestures. |
+| `scripts/effect_icons.gd` | Shared effect icons and palette. |
+| `scripts/game_over.gd` | Game over presentation and score animation. |
+| `tests/` | Current suite and historical tests. |
+| `tools/` | Local setup, testing, and Android export. |
 
-## Recursos e licenças de terceiros
+Legacy local profile and save-directory names are retained internally to preserve existing player data.
 
-A Pixelify Sans é acompanhada por `assets/PIXELIFY-LICENSE.txt`. A música original e sua atribuição estão em `assets/MUSIC-LICENSE.txt`. O atlas das bilas faz parte dos recursos do projeto. As condições de publicação comercial e colaboração podem ser discutidas com o autor pelos contatos da [página de apoio](../../docs/good-bila/APOIE.md).
+## Resources and third-party licenses
 
-## Publicação
+Pixelify Sans is accompanied by `assets/PIXELIFY-LICENSE.txt`. Original music credits are in `assets/MUSIC-LICENSE.txt`. The marble atlas is a project resource. Commercial publishing and collaboration terms can be discussed through the [support page](../../docs/good-bila/SUPPORT.md).
 
-A apresentação fica em `docs/good-bila/`. O workflow `good-bila-release.yml` prepara as ferramentas, executa a suíte, exporta o piloto e publica o APK em uma Release marcada como prévia. Segredos, cache, chaves, dados locais e builds anteriores ficam fora do Git.
+## Publication
+
+The showcase lives in `docs/good-bila/`. The `good-bila-release.yml` workflow prepares tools, runs the suite, exports the prototype, and publishes the APK as a prerelease. Secrets, caches, keys, local data, and previous builds stay outside Git.

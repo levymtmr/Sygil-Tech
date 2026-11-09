@@ -40,16 +40,16 @@ func _draw_hud() -> void:
 	var boxes := [Rect2(40, 20, 180, 80), Rect2(232, 20, 256, 80), Rect2(500, 20, 180, 80)]
 	for i in range(boxes.size()):
 		_panel(boxes[i], INK, MINT if i == 1 and game.score_flash > 0 else Color("51455f"), 3 if i == 1 and game.score_flash > 0 else 2)
-	_center("DESTRUCTION" if game._is_destruction() else "RODADA", Vector2(130, 44), 14, MUTED, true)
+	_center("DESTRUCTION" if game._is_destruction() else "ROUND", Vector2(130, 44), 14, MUTED, true)
 	_center(str(game.stage) if game._is_destruction() else "%d / 3" % game.stage, Vector2(130, 79), 27, CREAM, true)
-	_center("TOTAL / META", Vector2(334, 44), 13, MUTED, true)
+	_center("TOTAL / TARGET", Vector2(334, 44), 13, MUTED, true)
 	var mult_color := Color("ffe18a") if game.score_multiplier > 1 else MUTED
 	_panel(Rect2(420, 25, 58, 28), mult_color.darkened(0.78), mult_color, 2)
 	_center("x%d" % game.score_multiplier, Vector2(449, 46), 19 + int(game.multiplier_flash * 3), mult_color, true)
 	_center("%d / %d" % [int(round(game.displayed_score)), game.goal], Vector2(360, 79), 29 + int(game.score_flash * 12), MINT, true)
 	draw_rect(Rect2(250, 91, 220, 4), Color("40364c"))
 	draw_rect(Rect2(250, 91, 220 * clampf(game.displayed_score / game.goal, 0, 1), 4), MINT)
-	_center("JOGADAS", Vector2(590, 44), 14, MUTED, true)
+	_center("SHOTS", Vector2(590, 44), 14, MUTED, true)
 	_center(str(game.shots), Vector2(590, 79), 30, Color("ffd795"), true)
 	var tint: Color = game.COLOR_TINTS[game.quest_color] if game.quest_active else MUTED
 	var complete: bool = game.quest_active and game.quest_target > 0 and game.quest_progress >= game.quest_target
@@ -58,10 +58,10 @@ func _draw_hud() -> void:
 	draw_rect(Rect2(40, 121, 4, 46), tint)
 	EffectIcons.draw_target(self, Vector2(67, 142), 24, tint)
 	if game.quest_active: EffectIcons.draw_icon(self, game.current_action, Vector2(453, 145), 24, game.CARD_COLORS[game.current_action])
-	_text("VIRE UMA CARTA" if not game.quest_active else ("MISSÃO" if not complete else "FEITA!"), Vector2(88, 136), 14, MUTED, true)
-	_text("REVELE SEU OBJETIVO" if not game.quest_active else ("%s • SEM ALVOS" % game.COLOR_NAMES[game.quest_color] if game.quest_target == 0 else "%s  %d/%d" % [game.COLOR_NAMES[game.quest_color], game.quest_progress, game.quest_target]), Vector2(88, 158), 22, tint, true)
+	_text("DRAW A CARD" if not game.quest_active else ("OBJECTIVE" if not complete else "DONE!"), Vector2(88, 136), 14, MUTED, true)
+	_text("REVEAL YOUR OBJECTIVE" if not game.quest_active else ("%s • NO TARGETS" % game.COLOR_NAMES[game.quest_color] if game.quest_target == 0 else "%s  %d/%d" % [game.COLOR_NAMES[game.quest_color], game.quest_progress, game.quest_target]), Vector2(88, 158), 22, tint, true)
 	var factor: int = game.shot_multiplier if game.phase == game.Phase.ROLLING else game.score_multiplier
-	_center("LINHA RETA" if not game.quest_active else "+%d / BILA" % (game.TARGET_POINTS * factor), Vector2(566, 151), 23, tint, true)
+	_center("STRAIGHT" if not game.quest_active else "+%d / MARBLE" % (game.TARGET_POINTS * factor), Vector2(566, 151), 23, tint, true)
 	var progress := clampf(float(game.quest_progress) / maxf(1, game.quest_target), 0, 1)
 	draw_rect(Rect2(48, 172, 624 * progress, 3), tint)
 	if game.aiming and game.quest_active and game.phase == game.Phase.AIMING and not game.roll_confirm_pending and not game.rain_active:
@@ -70,14 +70,14 @@ func _draw_hud() -> void:
 	var accent: Color = game.CARD_COLORS[action]
 	_panel(Rect2(40, height - 236, 640, 38), INK, accent)
 	EffectIcons.draw_icon(self, action, Vector2(200, height - 218), 24, accent)
-	_center("CHUVA DE BILAS…" if game.rain_active else ("REVELANDO…" if game.roll_remaining > 0 else game.CARD_NAMES[action]), Vector2(360, height - 210), 18, accent, true)
+	_center("MARBLE RAIN…" if game.rain_active else ("REVEALING…" if game.roll_remaining > 0 else game.CARD_NAMES[action]), Vector2(360, height - 210), 18, accent, true)
 	if game.roll_remaining > 0:
 		draw_rect(Rect2(52, height - 201, 616 * (1.0 - game.roll_remaining / game.ROLL_DURATION), 2), accent)
 	if game.empty_deck_notice > 0:
 		var alpha := minf(1, game.empty_deck_notice / 0.35)
 		var toast_y := 208.0 + maxf(0, 0.2 - (2.4 - game.empty_deck_notice)) * 40
 		_panel(Rect2(124, toast_y, 472, 40), Color(0.13, 0.11, 0.2, alpha * 0.94), Color(0.65, 0.55, 0.75, alpha), 1)
-		_center("CARTAS ESGOTADAS • voltam na próxima rodada", Vector2(360, toast_y + 26), 17, Color(0.92, 0.86, 0.78, alpha), true)
+		_center("NO CARDS LEFT • New hand next round", Vector2(360, toast_y + 26), 17, Color(0.92, 0.86, 0.78, alpha), true)
 	if game.roll_confirm_pending and game.phase == game.Phase.AIMING:
 		_draw_roll()
 	_draw_score_effects()
@@ -125,10 +125,10 @@ func _draw_roll() -> void:
 	var y: float = game.board_screen.get_center().y - game.safe_top
 	var wobble: float = sin(game.clock_time * 45) * 2 if rolling else 0
 	_panel(Rect2(96, y - 100 + wobble, 528, 244), Color("211b33"), tint, 4)
-	_center("REVELANDO CARTA…" if rolling else "CARTA REVELADA", Vector2(360, y - 48 + wobble), 18, MUTED, true)
+	_center("REVEALING CARD…" if rolling else "CARD REVEALED", Vector2(360, y - 48 + wobble), 18, MUTED, true)
 	EffectIcons.draw_icon(self, action, Vector2(172, y - 14 + wobble), 42, tint)
 	_center(game.CARD_NAMES[action], Vector2(360, y - 4 + wobble), 32, tint, true)
-	_center("%s • +%d/BILA" % [game.COLOR_NAMES[game.quest_color], game.TARGET_POINTS * game.score_multiplier] if not rolling else "…", Vector2(360, y + 35), 18, MUTED)
+	_center("%s • +%d/MARBLE" % [game.COLOR_NAMES[game.quest_color], game.TARGET_POINTS * game.score_multiplier] if not rolling else "…", Vector2(360, y + 35), 18, MUTED)
 
 func _draw_world() -> void:
 	_panel(game.world_board.grow(10), Color("6b3c2d"), Color("4f3541"))
@@ -190,7 +190,7 @@ func _draw_world() -> void:
 					draw_colored_polygon(arrow, Color("fff8dc"))
 			draw_line(origin, origin - game.aim_vector, Color("fff2d5"), 5, true)
 		elif game.clock_time < 5.0:
-			_center("↓ PUXE PARA TRÁS", origin + Vector2(0, -50), 22, CREAM, true)
+			_center("↓ PULL BACK", origin + Vector2(0, -50), 22, CREAM, true)
 	for effect in game.particles:
 		var color: Color = effect.color
 		color.a = clampf(effect.life * 3, 0, 1)

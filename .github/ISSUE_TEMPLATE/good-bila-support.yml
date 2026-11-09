@@ -1,0 +1,31 @@
+name: "Good Bila · support, partnerships or investment"
+description: "Contact the creator about collaboration, production, publishing, or investment."
+title: "[Good Bila / support] "
+body:
+  - type: markdown
+    attributes:
+      value: "Thanks for your interest! For a private conversation, email levymmoreira@icloud.com. This issue is public."
+  - type: dropdown
+    id: interest
+    attributes:
+      label: How would you like to get involved?
+      options:
+        - Technical or creative collaboration
+        - Playtesting and feedback
+        - Promotion or community
+        - Production or publishing
+        - Investment or sponsorship
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Tell us about your idea
+      description: "What caught your interest, and what kind of support or partnership would you like to propose?"
+    validations:
+      required: true
+  - type: textarea
+    id: next_step
+    attributes:
+      label: Next step
+      description: "How would you like to continue the conversation? Use the creator's email for private commercial details."

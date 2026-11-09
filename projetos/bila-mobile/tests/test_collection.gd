@@ -69,7 +69,7 @@ func _run() -> void:
     check(game.phase == game.Phase.LOST and game.overlay.visible, "Failed goal opens dedicated game-over overlay")
     var retry: Button
     for child in game.overlay.get_children():
-        if child is Button and child.text == "TENTAR NOVAMENTE": retry = child
+        if child is Button and child.text == "TRY AGAIN": retry = child
     check(retry != null, "Game over exposes prominent retry action")
     retry.pressed.emit()
     check(game.stage == 1 and game.score == 0 and game.run_destroyed == 0 and game.run_cards_used == 0 and not game.overlay.visible, "Retry creates fresh run and clears result statistics")

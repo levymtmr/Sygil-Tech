@@ -6,7 +6,7 @@ if [[ ! -f "$BILA_ROOT/build/bila-piloto.apk" ]]; then
 fi
 ADB="${ANDROID_HOME:-$BILA_ROOT/.tools/android-sdk}/platform-tools/adb"
 if [[ ! -x "$ADB" ]]; then
-    echo 'Execute tools/setup_android.py para instalar o adb.' >&2
+    echo 'Run tools/setup_android.py to install adb.' >&2
     exit 1
 fi
 "$ADB" devices

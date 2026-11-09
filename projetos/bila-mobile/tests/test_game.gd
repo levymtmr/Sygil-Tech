@@ -99,7 +99,7 @@ func _run() -> void:
     check(game.board_screen.position.y == game.safe_top + 188, "Compact mission ribbon adds 104 logical pixels to arena")
     var restart_found := false
     for child in game.ui_layer.get_child(0).get_children():
-        if child is Button and child.text == "REINICIAR": restart_found = true
+        if child is Button and child.text == "RESTART": restart_found = true
     check(not restart_found, "Restart button removed from game HUD")
     check(game.effect_roll_count == 0 and game.current_action == game.Action.STRAIGHT, "First shot has no automatic effect draw")
     var composition: Array = game.hand_missions.duplicate()
@@ -135,7 +135,7 @@ func _run() -> void:
     game._advance_feedback(1.0)
     game._confirm_roll()
     game.current_action = game.Action.STRAIGHT
-    if not game.quest_active: game._set_quest(0, "TESTE")
+    if not game.quest_active: game._set_quest(0, "TEST")
     game._launch(Vector2(0, -170))
     # This test isolates launch/pause physics from independently tested terrain.
     var clear_terrain: Array[Dictionary] = []
@@ -165,10 +165,10 @@ func _run() -> void:
             ball.visible = false
     target.position = Vector2(360, 650)
     game.shooter.position = Vector2(360, 590)
-    game._set_quest(target.color_index, "TESTE")
+    game._set_quest(target.color_index, "TEST")
     game.current_action = game.Action.STRAIGHT
     await physics_frame
-    if not game.quest_active: game._set_quest(0, "TESTE")
+    if not game.quest_active: game._set_quest(0, "TEST")
     game._launch(Vector2(0, 80))
     for i in range(1400):
         await physics_frame
@@ -184,7 +184,7 @@ func _run() -> void:
     check(game.mission_flash > 0, "Mission change produces visible feedback")
     game._advance_feedback(1.0)
     game._confirm_roll()
-    check(game.quest_color == card_color and game.quest_origin == "MISSÃO DA CARTA", "Revealed card changes active mission")
+    check(game.quest_color == card_color and game.quest_origin == "CARD OBJECTIVE", "Revealed card changes active mission")
     check(game.current_action == game.CARD_ACTIONS[card_color] and game.effect_roll_count == drawn + 1, "Card changes objective and movement together")
     check(game.stock[0] == 0 and game._hand_size() == 2 and not game.card_buttons[0].face_down, "Card is spent and revealed immediately")
     game._use_card(1)
@@ -201,7 +201,7 @@ func _run() -> void:
     check(game.deck_order == [4, 1, 2] and game.hand_missions == hand_before, "Deck edits change next refill, not current concealed cards")
     menu._reset_order()
     menu.resume_game()
-    if not game.quest_active: game._set_quest(0, "TESTE")
+    if not game.quest_active: game._set_quest(0, "TEST")
     game._launch(Vector2(0, -30))
     game._finish_shot()
     game._advance_feedback(1.0)
@@ -253,7 +253,7 @@ func _run() -> void:
     game._start_round()
     game._advance_feedback(1.0)
     game._confirm_roll()
-    game._set_quest(0, "TESTE")
+    game._set_quest(0, "TEST")
     game._capture(game.balls[1])
     game._capture(game.balls[0])
     game._capture(game.balls[6])
@@ -262,13 +262,13 @@ func _run() -> void:
     game._advance_feedback(1.0)
     game._confirm_roll()
     check(game.phase == game.Phase.AIMING and game.total_score == 125, "Cumulative second-stage goal requires more than 125 points")
-    game._set_quest(2, "TESTE")
+    game._set_quest(2, "TEST")
     game._capture(game.balls[2])
     game._finish_shot()
     game._advance_feedback(1.0)
     game._confirm_roll()
     check(game.score == 185 and game.score_multiplier == 2, "Clean mission enables multiplier for following points")
-    game._set_quest(3, "TESTE")
+    game._set_quest(3, "TEST")
     game._capture(game.balls[3])
     game._finish_shot()
     game._advance_feedback(1.0)
@@ -278,7 +278,7 @@ func _run() -> void:
     game._advance_feedback(1.0)
     game._confirm_roll()
     check(game.stage == 3 and game.goal == 600 and game.score == 305, "Final stage preserves score and uses higher cumulative goal")
-    game._set_quest(5, "TESTE")
+    game._set_quest(5, "TEST")
     for ball in game.balls: game._capture(ball)
     game._finish_shot()
     game._advance_feedback(1.0)
@@ -288,7 +288,7 @@ func _run() -> void:
     game._advance_feedback(1.0)
     game._confirm_roll()
     game.current_action = game.Action.CURVE
-    if not game.quest_active: game._set_quest(0, "TESTE")
+    if not game.quest_active: game._set_quest(0, "TEST")
     game._launch(Vector2(0, -120))
     await physics_frame
     for i in range(18): await physics_frame
@@ -309,7 +309,7 @@ func _run() -> void:
     await physics_frame
     await physics_frame
     game.current_action = game.Action.BOUNCE
-    if not game.quest_active: game._set_quest(0, "TESTE")
+    if not game.quest_active: game._set_quest(0, "TEST")
     game._launch(Vector2(0, -100))
     for i in range(28): await physics_frame
     check(game.shooter.airborne and game.shooter.hop_height > 12, "Hopping marble rises and disables target collisions while airborne")
@@ -325,7 +325,7 @@ func _run() -> void:
     game._advance_feedback(1.0)
     game._confirm_roll()
     game.current_action = game.Action.HEAVY
-    if not game.quest_active: game._set_quest(0, "TESTE")
+    if not game.quest_active: game._set_quest(0, "TEST")
     game._launch(Vector2(0, -100))
     check(is_equal_approx(game.shooter.mass, 2.8) and is_equal_approx(game.shooter.linear_damp, 2.3) and game.shooter.linear_velocity.y < 0, "Heavy shot has greater physical mass, stronger damping and follows aim")
     check(game._shot_velocity(Vector2(0, -170), game.Action.HEAVY).length() < 1836, "Heavy shot trades range for impact")

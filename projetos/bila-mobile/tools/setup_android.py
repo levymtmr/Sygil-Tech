@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Instala ferramentas locais para APK de teste, sem sudo/Android Studio."""
+"""Install project-local tools for a test APK without sudo or Android Studio."""
 from pathlib import Path
 import os, shutil, subprocess, sys, tarfile, urllib.request, zipfile, struct, zlib, time
 ROOT = Path(__file__).resolve().parents[1]
@@ -9,7 +9,7 @@ VERSION = '4.4.1'
 def download(url, dest):
     if dest.exists() and dest.stat().st_size > 10000:
         return
-    print('Baixando', dest.name, flush=True)
+    print('Downloading', dest.name, flush=True)
     partial=dest.with_name(dest.name+'.part')
     subprocess.run(['curl', '-fL', '-C', '-', '--retry', '5', '--retry-all-errors', '--connect-timeout', '30', url, '-o', str(partial)], check=True)
     partial.replace(dest)
@@ -31,14 +31,14 @@ def extract_template():
         for attempt in range(5):
             try:
                 with urllib.request.urlopen(req, timeout=180) as r:
-                    if r.status != 206: raise RuntimeError('Servidor não aceitou HTTP Range')
+                    if r.status != 206: raise RuntimeError('Server did not accept HTTP Range')
                     return r.read()
             except Exception:
                 if attempt==4: raise
                 time.sleep(2)
     tail=chunk(max(0,length-131072),length-1)
     eocd=tail.rfind(b'PK\x05\x06')
-    if eocd<0: raise RuntimeError('Diretório do ZIP não encontrado')
+    if eocd<0: raise RuntimeError('ZIP central directory not found')
     _,_,_,_,_,cdsize,cdoffset,_=struct.unpack_from('<4s4H2IH', tail,eocd)
     directory=chunk(cdoffset,cdoffset+cdsize-1)
     pos=0
@@ -47,18 +47,18 @@ def extract_template():
         method=h[4]; compressed=h[8]; name_len=h[10]; extra=h[11]; comment=h[12]; offset=h[16]
         name=directory[pos+46:pos+46+name_len].decode()
         if name.endswith('/android_debug.apk'):
-            print('Extraindo somente android_debug.apk do pacote oficial',flush=True)
+            print('Extracting only android_debug.apk from the official archive',flush=True)
             header=chunk(offset,offset+29)
             local=struct.unpack('<4s5H3I2H',header)
             data_start=offset+30+local[-2]+local[-1]
             packed=chunk(data_start,data_start+compressed-1)
             data=zlib.decompress(packed,-15) if method==8 else packed
-            if zlib.crc32(data) & 0xffffffff != h[7]: raise RuntimeError('CRC incorreto')
+            if zlib.crc32(data) & 0xffffffff != h[7]: raise RuntimeError('CRC mismatch')
             apk.write_bytes(data)
-            print('Template pronto',flush=True)
+            print('Template ready',flush=True)
             return
         pos+=46+name_len+extra+comment
-    raise RuntimeError('android_debug.apk não está no pacote')
+    raise RuntimeError('android_debug.apk is missing from the archive')
 
 if '--templates-only' in sys.argv:
     extract_template()
@@ -111,4 +111,4 @@ settings='[gd_resource type="EditorSettings" format=3]\n\n[resource]\n'
 settings+=f'export/android/android_sdk_path = "{sdk}"\nexport/android/java_sdk_path = "{jdk}"\nexport/android/debug_keystore = "{key}"\n'
 (config/'editor_settings-4.4.tres').write_text(settings)
 (config/'editor_settings-4.7.tres').write_text(settings)
-print('Android pronto. Execute ./tools/export_apk.sh',flush=True)
+print('Android tools ready. Run ./tools/export_apk.sh',flush=True)

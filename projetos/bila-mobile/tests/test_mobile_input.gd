@@ -53,7 +53,7 @@ func _run() -> void:
     root.add_child(game)
     await process_frame
     await process_frame
-    var start := _button("INICIAR")
+    var start := _button("START")
     check(start != null, "Main menu exposes Start button")
     print("INPUT CONFIG: emulate mouse=", Input.is_emulating_mouse_from_touch(), " viewport=", root.get_visible_rect(), " final=", root.get_final_transform())
     await _tap(start.get_global_rect().get_center())
@@ -66,8 +66,8 @@ func _run() -> void:
         return
     await _tap(game.front_end.name_input.get_global_rect().get_center())
     check(game.front_end.name_input.has_focus(), "Touch focuses registration field for Android keyboard")
-    game.front_end.name_input.text = "Jogador Touch"
-    await _tap(_button("SALVAR E JOGAR").get_global_rect().get_center())
+    game.front_end.name_input.text = "Touch Player"
+    await _tap(_button("SAVE & PLAY").get_global_rect().get_center())
     check(not game.front_end.is_open() and not paused, "Touch saves registration and starts game")
     check(not game.quest_active and game.current_action == game.Action.STRAIGHT, "Native game starts with no objective and straight movement")
     await _tap(game._world_to_screen(game.shooter.position))
@@ -114,7 +114,7 @@ func _run() -> void:
     await _tap(game.menu_button.get_global_transform_with_canvas() * (game.menu_button.size / 2))
     check(game.front_end.screen == "main", "Folded cards cannot intercept native Menu button")
     await process_frame
-    await _tap(_button("OPÇÕES").get_global_rect().get_center())
+    await _tap(_button("OPTIONS").get_global_rect().get_center())
     check(game.front_end.screen == "options", "Touch opens Options while gameplay is paused")
     var sliders: Array[HSlider] = []
     for child in game.front_end.panel.get_children():
@@ -138,12 +138,12 @@ func _run() -> void:
     var music_slider := sliders[1]
     await _tap(music_slider.get_global_rect().position + Vector2(music_slider.size.x * 0.25, music_slider.size.y * 0.5))
     check(game.music_volume_percent < 45 and game.volume_percent == effects_before, "Touch adjusts music volume without changing effects")
-    await _tap(_button("Música de fundo").get_global_rect().get_center())
+    await _tap(_button("Background music").get_global_rect().get_center())
     check(not game.music_enabled, "Touch can mute background music")
-    await _tap(_button("VOLTAR").get_global_rect().get_center())
+    await _tap(_button("BACK").get_global_rect().get_center())
     check(game.front_end.screen == "main", "Touch Back returns to main menu")
     var saved_hand: Array = game.hand_missions.duplicate()
-    await _tap(_button("COLEÇÃO DE CARTAS").get_global_rect().get_center())
+    await _tap(_button("CARD COLLECTION").get_global_rect().get_center())
     check(game.front_end.screen == "collection", "Native menu opens collection instead of deck builder")
     var scroll: ScrollContainer
     for child in game.front_end.panel.get_children():
@@ -151,12 +151,12 @@ func _run() -> void:
     var first_collection_card: Button = scroll.get_child(0).get_child(0)
     await _tap(first_collection_card.get_global_rect().get_center())
     check(game.front_end.screen == "card" and game.hand_missions == saved_hand, "Native collection inspection cannot select or replace hand cards")
-    await _tap(_button("VOLTAR À COLEÇÃO").get_global_rect().get_center())
-    await _tap(_button("VOLTAR").get_global_rect().get_center())
+    await _tap(_button("BACK TO COLLECTION").get_global_rect().get_center())
+    await _tap(_button("BACK").get_global_rect().get_center())
     check(game.front_end.screen == "main", "Native collection Back returns to main menu")
     DirAccess.remove_absolute(ProjectSettings.globalize_path(game.front_end.storage_path))
     paused = false
-    await _tap(_button("NOVA PARTIDA").get_global_rect().get_center())
+    await _tap(_button("NEW RUN").get_global_rect().get_center())
     check(game._is_destruction() and game.balls.size() == 32 and not game.front_end.is_open(), "Native menu starts Destruction mode")
     await _pull_card(game.card_buttons[0])
     await create_timer(0.85, true).timeout
@@ -169,7 +169,7 @@ func _run() -> void:
     await process_frame
     check(not game.aiming and game.shots == 8, "Native touch cannot spend a shot during marble rain")
     await _tap(game.menu_button.get_global_transform_with_canvas() * (game.menu_button.size / 2))
-    await _tap(_button("NOVA PARTIDA").get_global_rect().get_center())
+    await _tap(_button("NEW RUN").get_global_rect().get_center())
     check(game._is_destruction() and game.balls.size() == 32, "Native new game keeps sole Destruction mode")
     game.shots = 0
     game.goal = 10000
@@ -177,7 +177,7 @@ func _run() -> void:
     check(game.phase == game.Phase.LOST and game.overlay.visible, "Game over displays after failed run")
     var retry: Button
     for child in game.overlay.get_children():
-        if child is Button and child.text == "TENTAR NOVAMENTE": retry = child
+        if child is Button and child.text == "TRY AGAIN": retry = child
     await _tap(retry.get_global_transform_with_canvas() * (retry.size / 2))
     check(game.phase == game.Phase.AIMING and game.score == 0 and not game.overlay.visible, "Native game-over retry starts fresh hidden-card run")
     game.queue_free()

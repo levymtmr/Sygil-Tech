@@ -79,7 +79,7 @@ func _save_profile() -> void:
 func _apply_settings() -> void:
 	game.show_trajectory = show_trajectory
 	game.volume_percent = volume
-	game.sound_button.text = "EFEITOS: ON" if game.sound_enabled else "EFEITOS: OFF"
+	game.sound_button.text = "SOUND: ON" if game.sound_enabled else "SOUND: OFF"
 	game._apply_music_settings()
 	if is_instance_valid(game.audio):
 		game.audio.volume_db = -15.0 + linear_to_db(maxf(volume / 100.0, 0.0001)) if game.sound_enabled else -80.0
@@ -93,7 +93,7 @@ func set_volume(value: float, persist: bool = true) -> void:
 	volume = clampf(value, 0, 100)
 	_apply_settings()
 	if persist: _save_profile()
-	if is_instance_valid(volume_label): volume_label.text = "Volume dos efeitos: %d%%" % int(volume)
+	if is_instance_valid(volume_label): volume_label.text = "Effects volume: %d%%" % int(volume)
 
 func set_music(enabled: bool) -> void:
 	game.music_enabled = enabled
@@ -104,7 +104,7 @@ func set_music_volume(value: float, persist: bool = true) -> void:
 	game.music_volume_percent = clampf(value, 0, 100)
 	_apply_settings()
 	if persist: _save_profile()
-	if is_instance_valid(music_volume_label): music_volume_label.text = "Volume da música: %d%%" % int(game.music_volume_percent)
+	if is_instance_valid(music_volume_label): music_volume_label.text = "Music volume: %d%%" % int(game.music_volume_percent)
 
 func set_trajectory(enabled: bool) -> void:
 	show_trajectory = enabled
@@ -143,7 +143,7 @@ func _clear(next_screen: String) -> void:
 		dot.mouse_filter = Control.MOUSE_FILTER_IGNORE
 		panel.add_child(dot)
 	brand_footer = _label("GOOD BILA", 1210, 15, MUTED)
-	version_footer = _label("PILOTO 0.21.0  •  PERFIL LOCAL  •  OFFLINE", 1245, 12, MUTED)
+	version_footer = _label("PROTOTYPE 0.22.0  •  LOCAL PROFILE  •  OFFLINE", 1245, 12, MUTED)
 	reflow()
 
 func reflow() -> void:
@@ -193,31 +193,31 @@ func _marble(at: Vector2, size_px: float = 90.0, region: Rect2 = Rect2(662, 49, 
 func show_main() -> void:
 	_clear("main")
 	_label("GOOD BILA", 115, 76, CREAM, true, 105)
-	_label("QUINTAL DE LENDAS", 230, 23, MUTED, true)
+	_label("BACKYARD LEGENDS", 230, 23, MUTED, true)
 	_marble(Vector2(360, 336), 104)
 	_marble(Vector2(257, 348), 54, Rect2(35, 362.5, 244, 244))
 	_marble(Vector2(463, 348), 54, Rect2(35, 49, 244, 244))
-	_label("Olá, %s" % player_name if player_name != "" else "Seu quintal começa aqui", 408, 28, MINT, true)
-	_button("ALTERAR REGISTRO" if player_name != "" else "CRIAR REGISTRO", Rect2(200, 470, 320, 48), Color("65577b"), show_profile, 18)
+	_label("Hello, %s" % player_name if player_name != "" else "Your backyard starts here", 408, 28, MINT, true)
+	_button("EDIT PROFILE" if player_name != "" else "CREATE PROFILE", Rect2(200, 470, 320, 48), Color("65577b"), show_profile, 18)
 	var y := 560.0
 	if has_run:
-		_button("CONTINUAR", Rect2(120, y, 480, 70), MINT, resume_game, 27)
+		_button("CONTINUE", Rect2(120, y, 480, 70), MINT, resume_game, 27)
 		y += 82
-	_button("NOVA PARTIDA" if has_run else "INICIAR", Rect2(120, y, 480, 70), MINT, start_game, 27)
-	_button("COLEÇÃO DE CARTAS", Rect2(120, y + 86, 480, 70), Color("c499ef"), show_collection)
-	_button("OPÇÕES", Rect2(120, y + 172, 480, 70), Color("efab59"), show_options)
-	_button("SAIR", Rect2(120, y + 258, 480, 70), Color("9b7185"), show_exit)
-	_label("RECORDE • %d" % game.best, 1080, 19, MUTED)
+	_button("NEW RUN" if has_run else "START", Rect2(120, y, 480, 70), MINT, start_game, 27)
+	_button("CARD COLLECTION", Rect2(120, y + 86, 480, 70), Color("c499ef"), show_collection)
+	_button("OPTIONS", Rect2(120, y + 172, 480, 70), Color("efab59"), show_options)
+	_button("QUIT", Rect2(120, y + 258, 480, 70), Color("9b7185"), show_exit)
+	_label("BEST • %d" % game.best, 1080, 19, MUTED)
 
 func show_profile() -> void:
 	_clear("profile")
-	_label("SEU REGISTRO", 150, 43, CREAM, true, 75)
-	_label("Escolha como quer ser chamado no quintal.", 248, 24)
-	_label("O nome fica salvo apenas neste aparelho.", 302, 21, MUTED)
+	_label("YOUR PROFILE", 150, 43, CREAM, true, 75)
+	_label("Choose your name for the backyard.", 248, 24)
+	_label("Your name is stored only on this device.", 302, 21, MUTED)
 	name_input = LineEdit.new()
 	name_input.position = Vector2(100, 420)
 	name_input.size = Vector2(520, 80)
-	name_input.placeholder_text = "Seu nome ou apelido"
+	name_input.placeholder_text = "Your name or nickname"
 	name_input.max_length = 20
 	name_input.text = player_name
 	name_input.add_theme_font_override("font", FONT)
@@ -225,13 +225,13 @@ func show_profile() -> void:
 	name_input.add_theme_color_override("font_color", CREAM)
 	name_input.text_submitted.connect(func(_text: String): _submit_profile())
 	panel.add_child(name_input)
-	message_label = _label("De 2 a 20 caracteres.", 520, 19, MUTED)
-	_button("SALVAR E JOGAR" if continue_after_registration else "SALVAR REGISTRO", Rect2(120, 620, 480, 76), MINT, _submit_profile)
-	_button("VOLTAR", Rect2(200, 728, 320, 64), Color("65577b"), _back)
+	message_label = _label("Between 2 and 20 characters.", 520, 19, MUTED)
+	_button("SAVE & PLAY" if continue_after_registration else "SAVE PROFILE", Rect2(120, 620, 480, 76), MINT, _submit_profile)
+	_button("BACK", Rect2(200, 728, 320, 64), Color("65577b"), _back)
 
 func _submit_profile() -> void:
 	if not register_player(name_input.text):
-		message_label.text = "Digite um nome de 2 a 20 caracteres."
+		message_label.text = "Enter a name between 2 and 20 characters."
 		message_label.add_theme_color_override("font_color", Color("efab89"))
 		return
 	DisplayServer.virtual_keyboard_hide()
@@ -265,8 +265,8 @@ func show_deck() -> void:
 
 func show_collection() -> void:
 	_clear("collection")
-	_label("COLEÇÃO DE CARTAS", 80, 38, CREAM, true, 80)
-	_label("Três cartas desta coleção são sorteadas a cada nível.", 170, 22, MUTED)
+	_label("CARD COLLECTION", 80, 38, CREAM, true, 80)
+	_label("Three cards are drawn from this collection each level.", 170, 22, MUTED)
 	var scroll := ScrollContainer.new()
 	scroll.position = Vector2(62, 260)
 	scroll.size = Vector2(596, 740)
@@ -283,10 +283,10 @@ func show_collection() -> void:
 		card.mission_color = game.CARD_TARGETS[card_id]
 		card.movement_action = game.CARD_ACTIONS[card_id]
 		card.movement_name = game.CARD_NAMES[card.movement_action]
-		card.footer_caption = "VER CARTA"
+		card.footer_caption = "VIEW CARD"
 		card.pressed.connect(_show_card_info.bind(card_id))
 		grid.add_child(card)
-	_button("VOLTAR", Rect2(200, 1050, 320, 66), MINT, _back)
+	_button("BACK", Rect2(200, 1050, 320, 66), MINT, _back)
 
 func _show_card_info(card_id: int) -> void:
 	_clear("card")
@@ -298,13 +298,13 @@ func _show_card_info(card_id: int) -> void:
 	card.mission_color = game.CARD_TARGETS[card_id]
 	card.movement_action = action
 	card.movement_name = game.CARD_NAMES[action]
-	card.footer_caption = "NA COLEÇÃO"
+	card.footer_caption = "IN COLLECTION"
 	panel.add_child(card)
-	_label("OBJETIVO: %s" % game.COLOR_NAMES[card.mission_color], 520, 27, game.COLOR_TINTS[card.mission_color], true)
+	_label("OBJECTIVE: %s" % game.COLOR_NAMES[card.mission_color], 520, 27, game.COLOR_TINTS[card.mission_color], true)
 	_label(game.CARD_HELP[action], 610, 25, CREAM, false, 100)
-	_label("Pode aparecer em qualquer mão.
-A escolha continua às cegas, com as cartas viradas.", 770, 22, MUTED, false, 110)
-	_button("VOLTAR À COLEÇÃO", Rect2(140, 1020, 440, 66), MINT, show_collection, 23)
+	_label("Can appear in any hand.
+Cards stay face down until you draw them.", 770, 22, MUTED, false, 110)
+	_button("BACK TO COLLECTION", Rect2(140, 1020, 440, 66), MINT, show_collection, 23)
 
 func _toggle(caption: String, y: float, enabled: bool, callback: Callable) -> void:
 	var toggle := CheckButton.new()
@@ -320,20 +320,20 @@ func _toggle(caption: String, y: float, enabled: bool, callback: Callable) -> vo
 
 func show_options() -> void:
 	_clear("options")
-	_label("OPÇÕES", 90, 45, CREAM, true, 80)
-	_label("Suas preferências ficam salvas no aparelho.", 200, 22, MUTED)
-	_toggle("Efeitos sonoros", 290, game.sound_enabled, set_sound)
-	volume_label = _label("Volume dos efeitos: %d%%" % int(volume), 380, 23)
+	_label("OPTIONS", 90, 45, CREAM, true, 80)
+	_label("Your preferences are saved on this device.", 200, 22, MUTED)
+	_toggle("Sound effects", 290, game.sound_enabled, set_sound)
+	volume_label = _label("Effects volume: %d%%" % int(volume), 380, 23)
 	var slider := _volume_slider(450, volume)
 	slider.value_changed.connect(func(value: float): set_volume(value, false))
 	slider.drag_ended.connect(func(_changed: bool): _save_profile())
-	_toggle("Música de fundo", 560, game.music_enabled, set_music)
-	music_volume_label = _label("Volume da música: %d%%" % int(game.music_volume_percent), 650, 23)
+	_toggle("Background music", 560, game.music_enabled, set_music)
+	music_volume_label = _label("Music volume: %d%%" % int(game.music_volume_percent), 650, 23)
 	var music_slider := _volume_slider(720, game.music_volume_percent)
 	music_slider.value_changed.connect(func(value: float): set_music_volume(value, false))
 	music_slider.drag_ended.connect(func(_changed: bool): _save_profile())
-	_toggle("Mostrar trajetória da mira", 840, show_trajectory, set_trajectory)
-	_button("VOLTAR", Rect2(200, 1030, 320, 70), MINT, _back)
+	_toggle("Show aim trajectory", 840, show_trajectory, set_trajectory)
+	_button("BACK", Rect2(200, 1030, 320, 70), MINT, _back)
 
 func _volume_slider(y: float, value: float) -> HSlider:
 	var slider := HSlider.new()
@@ -348,12 +348,12 @@ func _volume_slider(y: float, value: float) -> HSlider:
 
 func show_exit() -> void:
 	_clear("exit")
-	_label("SAIR DO QUINTAL?", 350, 40, CREAM, true, 80)
-	_label("Seu nome, deck, opções e recorde ficam salvos.", 470, 23, MUTED, false, 80)
+	_label("LEAVE THE BACKYARD?", 350, 40, CREAM, true, 80)
+	_label("Your name, settings and best score are saved.", 470, 23, MUTED, false, 80)
 	if has_run:
-		_label("A partida em andamento não é salva.", 560, 22, Color("efab89"))
-	_button("SAIR DO JOGO", Rect2(140, 740, 440, 78), Color("efab59"), _quit_game)
-	_button("VOLTAR", Rect2(200, 850, 320, 66), MINT, _back)
+		_label("Your current run is not saved.", 560, 22, Color("efab89"))
+	_button("QUIT GAME", Rect2(140, 740, 440, 78), Color("efab59"), _quit_game)
+	_button("BACK", Rect2(200, 850, 320, 66), MINT, _back)
 
 func _quit_game() -> void:
 	_save_profile()

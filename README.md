@@ -1,104 +1,105 @@
 # Sygil Tech
 
-## Em destaque · Good Bila
+## Featured · Good Bila
 
-[![Good Bila — cartas na mão, caos no campo](docs/good-bila/images/capa.svg)](docs/good-bila/README.md)
+[![Good Bila — cards in hand, chaos on the field](docs/good-bila/images/cover.svg)](docs/good-bila/README.md)
 
-Piloto mobile em pixel art: mire, estoure bilas e use cartas para mudar cada jogada. **Destruction · 11 cartas · 9 efeitos · Android / Godot.**
+A pixel-art mobile prototype: aim, burst marbles, and use cards to change every shot. **Destruction · 11 cards · 9 effects · Android / Godot · English.**
 
-[**Conhecer o jogo e ver os prints →**](docs/good-bila/README.md) · [**Jogar o piloto Android →**](https://github.com/levymtmr/Sygil-Tech/releases/tag/good-bila-v0.21.0) · [**♥ Apoiar / propor investimento →**](docs/good-bila/APOIE.md)
+[**Meet the game and see screenshots →**](docs/good-bila/README.md) · [**Play the Android prototype →**](https://github.com/levymtmr/Sygil-Tech/releases/tag/good-bila-v0.22.0) · [**♥ Support / discuss investment →**](docs/good-bila/SUPPORT.md)
 
-[Como jogar](docs/good-bila/README.md#como-jogar) · [Estado do desenvolvimento](docs/good-bila/DESENVOLVIMENTO.md) · [Código do jogo](projetos/bila-mobile/)
+[How to play](docs/good-bila/README.md#how-to-play) · [Development status](docs/good-bila/DEVELOPMENT.md) · [Game source](projetos/bila-mobile/)
 
 ---
 
-Página institucional da Sygil Tech e portfólio de projetos. O projeto Lendas de Astera é um RPG tático para navegador, feito com TypeScript, Vite e Canvas, com spritesheets de pixel art.
+Sygil Tech's company website and project portfolio. Lendas de Astera is a browser-based tactical RPG built with TypeScript, Vite, Canvas, and pixel-art sprite sheets.
 
-## Jogar
+## Play
 
-[Site da Sygil Tech](https://levymtmr.github.io/Sygil-Tech/) · [Jogar Lendas de Astera](https://levymtmr.github.io/Sygil-Tech/projetos/astera/)
+[Sygil Tech website](https://levymtmr.github.io/Sygil-Tech/) · [Play Lendas de Astera](https://levymtmr.github.io/Sygil-Tech/projetos/astera/)
 
+1. Install a recent Node.js release.
+2. Install project dependencies with `npm install`.
+3. Start the development server with `npm run dev` and open the local URL printed in the terminal.
+4. Run `npm run build` to check the production build.
 
-1. Instale uma versão recente do Node.js.
-2. No diretório do projeto, instale as dependências com `npm install`.
-3. Inicie o servidor com `npm run dev` e abra o endereço local mostrado no terminal.
-4. Para verificar a compilação de produção, execute `npm run build`.
+## Lendas de Astera controls
 
-## Controles
+- **Exploration:** arrow keys or WASD, on-screen direction buttons, or tap/click a neighboring tile.
+- **Encounters:** approach a creature and choose its encounter action.
+- **Combat:** the action menu floats above Kael during his turn. Choosing an action collapses the menu; tap the character tile to reopen it. Click/tap tiles to move or choose targets in range. Each class has its own attack animations.
+- **Map:** click the minimap or press **M** to open the world map. Press **M** again to close it. Explored areas reveal gradually; unexplored areas remain covered by fog.
+- **HUD:** **I** opens inventory, **Q** opens equipment and character details, **L** opens the event log, and **Escape** closes the current panel. Panels are also available from the compact dock.
+- **Starting and classes:** choose Knight, Archer, or Mage before starting. The class selector stays available before the first victory. Classes have distinct attributes, abilities, equipment, and appearance.
+- **Skill tree:** level up to gain points and unlock skills in the equipment/character panel (**Q**). Choose a skill during combat, then a target tile; healing and defensive skills target your own character.
+- **Equipment and inventory:** drag items around the inventory grid or tap two slots to swap them. Equip or remove weapons, armor, and accessories. Attribute bonuses affect combat; potions can be used from inventory.
+- **Bestiary:** open it from the top button. Creatures you encounter reveal attributes and loot chances.
+- **Rewards:** victory shows experience, coins, new levels, and loot. Items enter the inventory.
+- **Mobile:** on-screen controls and large buttons; landscape orientation gives the board more space.
 
-- **Exploração:** setas ou WASD, botões direcionais na tela ou toque/clique numa casa vizinha.
-- **Encontros:** aproxime-se de uma criatura e use **Enfrentar criatura**.
-- **Batalha:** o menu de ações flutua sobre Kael durante o turno dele. Ao escolher uma ação, o menu se recolhe; toque no tile do personagem para reabri-lo. Clique/toque em casas para mover ou escolher um alvo no alcance; cada classe tem animações próprias de ataque.
-- **Mapa:** a miniatura no canto do mapa abre a cartografia; pressione **M** para abrir/fechar. As áreas exploradas são reveladas gradualmente; áreas desconhecidas permanecem sob névoa.
-- **HUD:** pressione **I** para mochila, **Q** para equipamentos e ficha do personagem, **L** para o registro de eventos; **Escape** fecha o painel aberto. Também é possível abrir os painéis pelo dock discreto na tela.
-- **Início e classes:** ao abrir o jogo, escolha Cavaleiro, Arqueiro ou Mago no menu inicial; o botão **Iniciar jornada** só é liberado após uma escolha explícita. Cada caminho tem atributos, equipamento inicial, aparência e habilidades diferentes. Durante a partida, o botão **Classe** permite trocar antes da primeira vitória.
-- **Árvore de habilidades:** suba de nível para receber pontos e desbloquear habilidades na ficha de equipamentos (**Q**). No combate, selecione a habilidade no menu sobre o personagem; habilidades de cura/defesa são usadas clicando no tile do personagem.
-- **Equipamentos e mochila:** a mochila é uma grade de slots; arraste itens para reorganizar ou toque em dois espaços para movê-los. Equipe ou remova arma, armadura e amuleto. Os bônus de ataque, defesa e vitalidade máxima afetam o combate; poções podem ser usadas na mochila.
-- **Bestiário:** abra pelo botão no topo. Monstros avistados ou enfrentados revelam seus atributos base e chances de saque.
-- **Recompensas:** ao vencer, o resumo mostra experiência, moedas, subida de nível e itens encontrados; os itens são adicionados à mochila.
-- **Celular:** controles na tela e botões grandes; a orientação paisagem oferece mais espaço para o tabuleiro.
+## RPG prototype features
 
-## O protótipo inclui
+Grid-based exploration with regions, creatures, and nearby encounters; smooth movement, stepping animations, slashes, arcane projectiles, and floating damage; enemies that move and attack; an on-demand interface; bestiary, rewards, experience, levels, potions, and increasing difficulty. There is no quest journal. Prototype progress lives in memory: reloading the page begins a new journey.
 
-Exploração em grade com regiões, criaturas visíveis e encontros próximos; deslocamentos suaves, passada animada, cortes, projéteis arcanos, impactos e dano flutuante no combate tático; inimigos que avançam e atacam; HUD minimalista com painéis sob demanda para inventário/equipamentos e registro de eventos, bestiário, recompensas, experiência, níveis, poções e escalada de dificuldade. Não há diário de viagem. O progresso deste protótipo existe apenas enquanto a página permanece aberta; recarregar reinicia a jornada.
+## Code organization
 
-## Organização do código
+`src/main.ts` loads styles and starts the application. Responsibilities are divided into:
 
-O `src/main.ts` carrega os estilos e inicia a aplicação. As responsabilidades ficam distribuídas em:
+- `src/app/`: startup and input events for movement, panels, inventory, base, and shop.
+- `src/features/`: gameplay features organized into `combat`, `world`, `character`, `inventory`, `base`, and `store`.
+- `src/rendering/`: board, characters, effects, and canvas animation rendering.
+- `src/ui/`: HTML structure, element access, and panel updates.
+- `src/data/`: classes, items, monsters, regions, and furniture catalogs. `catalogs.ts` maintains compatibility exports.
+- `src/game/`: typed shared state and rules independent of the interface.
+- `src/types.ts` and `src/types/`: game contracts and types.
+- `src/styles/`: styles organized by screen and component; `style.css` and `ux.css` define cascade order.
 
-- `src/app/`: inicialização e registro dos eventos de movimento, painéis, inventário e loja.
-- `src/features/`: funcionalidades do jogo, separadas em `combat`, `world`, `character`, `inventory`, `base` e `store`.
-- `src/rendering/`: desenho do tabuleiro, personagens, efeitos e animações do canvas.
-- `src/ui/`: estrutura HTML, acesso aos elementos, ícones e atualização dos painéis.
-- `src/data/`: catálogos de classes, itens, monstros, regiões e móveis. Edite os dados nesses módulos; `catalogs.ts` mantém os exports de compatibilidade.
-- `src/game/`: estado compartilhado tipado e regras independentes da interface.
-- `src/types.ts` e `src/types/`: contratos e tipos do jogo.
-- `src/styles/`: estilos divididos por tela e componente. `style.css` e `ux.css` definem a ordem de carregamento para preservar a cascata.
+Put new functionality in the relevant `features/` module, data in `data/`, and events in `app/`. Keep drawing in `rendering/` and rules in `game/`.
 
-Para adicionar uma funcionalidade, coloque sua lógica no domínio correspondente em `features/`, seus dados em `data/` e seus eventos em `app/`. Mantenha o desenho do canvas em `rendering/` e as regras de cálculo em `game/`.
+Validation: `npm run build` checks types and creates the production bundle. Use `npm run dev` for manual checks of menus, class selection, exploration, combat, inventory, base, shop, and workshop.
 
-Validação: `npm run build` verifica os tipos e gera a versão de produção. Para a verificação manual, use `npm run dev` e confira seleção de classe, exploração, combate, inventário, base, loja e oficina.
+Good Bila is a separate native Godot project in `projetos/bila-mobile/`; see its own README for execution and Android export.
 
-## Publicação no GitHub Pages
+## GitHub Pages deployment
 
-O workflow `.github/workflows/deploy-pages.yml` roda em todo push e nos pull requests para `main`. Ele instala as dependências com `npm ci`, executa `npm test` e verifica os tipos e o build com `npm run build`. Quando o push é na branch `main`, publica automaticamente `dist/` no GitHub Pages. Outras branches e pull requests fazem somente a validação. Também é possível publicar a `main` manualmente pela aba **Actions**.
+`.github/workflows/deploy-pages.yml` runs on pushes and pull requests. It installs dependencies with `npm ci`, runs `npm test`, checks types/build with `npm run build`, and validates pages. Pushes to `main` automatically deploy `dist/` to GitHub Pages; other branches and pull requests run validation only. Deployment can also be started from **Actions**.
 
-No repositório do GitHub, selecione **Settings → Pages → Source → GitHub Actions** antes da primeira publicação. A URL definitiva aparece no ambiente `github-pages` após a execução do workflow.
+Repository setup: choose **Settings → Pages → Source → GitHub Actions**. The final URL appears in the `github-pages` environment after deployment.
 
-O Vite gera caminhos relativos para que os arquivos do jogo carreguem dentro do endereço do repositório. Apenas o build estático é publicado; não é necessário manter um servidor local ligado.
+Vite uses relative paths so resources work under the repository URL. Only the static build is deployed; no local server needs to remain running. Browser-game progress stays in memory and resets when the page reloads.
 
-O progresso continua apenas na memória da página: trocar de dispositivo ou recarregar inicia uma nova jornada.
+Good Bila's Android APK is published separately through the **Good Bila · Android prototype** workflow and repository Releases.
 
-## Loja e oficina
+## Shop and workshop
 
-Os interiores usam as mesmas spritesheets de pixel art do mapa: balcões, prateleiras, bancadas, plantas, tapetes, lamparinas, produtos e personagens. Os recortes do atlas ficam em `src/data/spriteAtlas.ts` e são compartilhados entre Canvas e interface HTML. As telas e a decoração mantêm seleção por toque e suporte a arrastar produtos e móveis.
+Interiors use the same pixel-art sprite sheets as the map: counters, shelves, workbenches, plants, mats, and lights. Atlas regions are shared between Canvas and the interface through `src/data/spriteAtlas.ts`. Touch, mouse, and drag interactions are supported.
 
-## Site da empresa e projetos
+## Company website and projects
 
-A raiz (`index.html`) apresenta a Sygil Tech, seus serviços e projetos. O código institucional fica em `src/company/`, e os textos e contatos ficam em `src/company/content.ts`. O jogo mantém sua entrada em `src/main.ts` e passa a ser acessado por `projetos/astera/index.html`. O Vite gera as duas páginas no mesmo build, sem carregar os recursos do jogo na página institucional.
+The root `index.html` presents Sygil Tech, its services, and projects. Company code lives in `src/company/`, with copy and contact configuration in `src/company/content.ts`. The RPG keeps its own entry at `src/main.ts`, available through `projetos/astera/index.html`. Vite builds both pages without loading RPG resources on the company page.
 
 ## Memória do Saber
 
-Jogo da memória educativo em `projetos/memoria/`, para celular e computador. Tem temas de animais, frutas e números, níveis de 4, 6 ou 8 pares, curiosidades a cada acerto e jogadas sem limite de tempo. Funciona com toque, mouse e teclado (Tab e Enter/espaço). O progresso dura enquanto a página está aberta.
+An educational memory game in `projetos/memoria/` for mobile and desktop. Animal, fruit, and number themes; 4, 6, or 8 pairs; facts for each match; unlimited attempts and no time limit. Supports touch, mouse, and keyboard (Tab and Enter/space). Progress lasts only while the page remains open.
 
-O mesmo workflow do GitHub Pages publica o jogo em https://levymtmr.github.io/Sygil-Tech/projetos/memoria/ após o push na `main`.
+The Pages workflow publishes it at https://levymtmr.github.io/Sygil-Tech/projetos/memoria/.
 
 ## Retro Blocks
 
-Jogo de blocos com visual retrô de 16 bits em `projetos/retro-blocks/`. Complete linhas para marcar pontos; a velocidade aumenta a cada 10 linhas. Setas movem e giram, espaço solta, P pausa, Enter inicia ou pausa. No celular, use os botões na tela. Há prévia da próxima peça, efeitos sonoros opcionais e recorde salvo neste navegador. A partida pausa ao sair da janela; recarregar reinicia a partida. Publicação pelo mesmo workflow do GitHub Pages.
+A 16-bit-style block game in `projetos/retro-blocks/`. Complete lines to score; speed increases every ten lines. Arrow keys move and rotate, space drops, P pauses, and Enter starts or pauses. Mobile includes on-screen buttons. Features a next-piece preview, optional sound, and a browser-local best score. Leaving the window pauses play; reloading resets the run. Published through the same Pages workflow.
 
 ## Sygil Play
 
-Acesse `/play/` para escolher entre Lendas de Astera, Memória do Saber, Retro Blocks, Dots e Quebra-cabeça. O rodapé institucional tem um único link Play e todos os jogos permitem voltar à seleção.
+Visit `/play/` to choose Lendas de Astera, Memória do Saber, Retro Blocks, Dots, the picture puzzle, or Arena dos Quatro. The company footer provides a Play link, and all browser games link back to the selection.
 
-Dots: conecte pontos vizinhos da mesma cor com arraste ou toques e confirme a conexão. Circuitos de 4 ou mais pontos removem toda a cor; desfaça o último ponto voltando um passo. Partidas de 30 jogadas ou modo livre, recorde local, símbolos para distinguir cores.
+**Dots:** connect neighboring dots of the same color by dragging or tapping, then confirm. Loops of four or more dots remove every dot of that color. Backtrack one step to undo. Includes 30-move rounds or free play, local best score, and symbols that distinguish colors.
 
-Quebra-cabeça: troque duas peças por toque/clique para montar uma das três ilustrações originais. Dificuldades de 9, 16 e 25 peças, prévia e números opcionais, sem limite de tempo. Tab e Enter/espaço também selecionam peças e pontos. Recarregar reinicia as partidas.
+**Picture puzzle:** swap two tiles by tapping/clicking to assemble one of three original illustrations. Difficulty choices are 9, 16, or 25 tiles, with a full-image preview and optional numbers. Tab and Enter/space also select tiles and controls. Reloading begins a new game.
 
 ## Arena dos Quatro
 
-Protótipo local para quatro pessoas no mesmo dispositivo, disponível em `/projetos/arena/` e na seleção Sygil Play. Inicie com `npm run dev`. Cada jogador controla uma classe fixa: Guerreiro, Arqueiro, Mago ou Ladino.
+A local prototype for four players sharing one device, available at `/projetos/arena/` and through Sygil Play. Start locally with `npm run dev`. Each player controls a fixed class: Warrior, Archer, Mage, or Rogue.
 
-Cada turno tem 20 segundos, um movimento de até três casas e uma ação, em qualquer ordem. Selecione a ação e uma casa destacada. Habilidades possuem recarga de dois turnos próprios após o uso. Derrotar um adversário rende um ponto; ocupar sozinho as quatro casas centrais ao fim de uma rodada também. O primeiro a cinco pontos vence. Heróis derrotados renascem com vida cheia no próprio turno. A partida pode ser pausada e reiniciada; recarregar a página apaga o progresso.
+Each turn allows 20 seconds, one move of up to three tiles, and one action, in either order. Abilities have a cooldown of two personal turns. Defeating an opponent scores one point; being the sole occupant of the four central tiles at the end of a round also scores one point. The first player to five points wins. Defeated heroes respawn at full health on their next turn. The game can be paused/restarted; reloading clears the session.
 
-As regras ficam em `src/arena/engine.ts`, a interface em `src/arena/main.ts` e os testes em `tests/arena.test.mjs`. Não há conexão online nem adversários controlados pelo computador nesta versão. A duração de 10–15 minutos é uma meta a validar em partidas reais.
+Rules live in `src/arena/engine.ts`, the interface in `src/arena/main.ts`, and tests in `tests/arena.test.mjs`. This version has no network connection or computer-controlled opponents. A 10–15 minute match length is a target to validate through playtesting.

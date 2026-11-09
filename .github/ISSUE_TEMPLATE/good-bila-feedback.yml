@@ -1,23 +1,23 @@
-name: "Good Bila · feedback do piloto"
-description: "Relate um problema ou conte como foi jogar."
+name: "Good Bila · prototype feedback"
+description: "Report an issue or share your experience playing."
 title: "[Good Bila / feedback] "
 body:
   - type: input
-    id: versao
+    id: version
     attributes:
-      label: Versão do jogo
-      placeholder: "Ex.: 0.21.0"
+      label: Game version
+      placeholder: "For example, 0.22.0"
     validations:
       required: true
   - type: input
-    id: aparelho
+    id: device
     attributes:
-      label: Aparelho e sistema
-      placeholder: "Ex.: modelo do celular e versão do Android, ou Godot no computador"
+      label: Device and operating system
+      placeholder: "Phone model and Android version, or Godot on desktop"
   - type: textarea
-    id: relato
+    id: feedback
     attributes:
-      label: O que aconteceu ou o que você achou?
-      description: "Diga o que esperava, o que aconteceu e como reproduzir, se for um problema. Prints e vídeos ajudam."
+      label: What happened, or what did you think?
+      description: "Describe what you expected, what happened, and how to reproduce an issue. Screenshots and videos help."
     validations:
       required: true

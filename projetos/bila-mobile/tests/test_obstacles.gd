@@ -118,7 +118,7 @@ func _run() -> void:
     PhysicsServer2D.body_set_state(game.shooter.get_rid(), PhysicsServer2D.BODY_STATE_TRANSFORM, Transform2D(0, start))
     await wait_steps(2)
     game.current_action = game.Action.STRAIGHT
-    game._set_quest(0, "TESTE")
+    game._set_quest(0, "TEST")
     game._launch(Vector2(0, -65))
     await wait_steps(140)
     check(game.shooter.trapped and game.phase == game.Phase.AIMING and game.shots == 7, "Real game finishes trapped shot once and retains marble in hole")

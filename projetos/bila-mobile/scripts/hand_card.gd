@@ -7,14 +7,14 @@ const ATLAS = preload("res://assets/bilas-atlas.png")
 const INK = Color("292238")
 const PAPER = Color("fff0cf")
 const ACCENTS = [Color("e37270"), Color("6cb97e"), Color("6c9bd9"), Color("d3ae59"), Color("a67bce"), Color("58b5ae")]
-const COLORS = ["VERMELHA", "VERDE", "AZUL", "AMARELA", "ROXA", "TURQUESA"]
+const COLORS = ["RED", "GREEN", "BLUE", "YELLOW", "PURPLE", "TURQUOISE"]
 var mission_color: int = 0
 var movement_action: int = 0
-var movement_name: String = "LINHA RETA"
+var movement_name: String = "STRAIGHT"
 var face_down: bool = false
 var chosen: bool = false
-var footer_caption: String = "OBJETIVO + EFEITO"
-var selection_caption: String = "PREPARADA"
+var footer_caption: String = "OBJECTIVE + EFFECT"
+var selection_caption: String = "READY"
 var hovered: bool = false
 var pulling: bool = false
 var pull_start := Vector2.ZERO
@@ -83,7 +83,7 @@ func _draw_back() -> void:
 	draw_colored_polygon(PackedVector2Array([center + Vector2(0, -34), center + Vector2(28, 0), center + Vector2(0, 34), center + Vector2(-28, 0)]), Color("352746"))
 	_label("?", center.y + 14, 40, PAPER, true)
 	_label("GOOD BILA", 35, 15, Color("d2b58b"), true)
-	_label("PUXE PARA JOGAR", 186, 11, PAPER, true)
+	_label("PULL TO PLAY", 186, 11, PAPER, true)
 	if disabled: draw_rect(Rect2(Vector2.ZERO, size), Color(0.05, 0.03, 0.08, 0.12))
 
 func _draw() -> void:
@@ -102,7 +102,7 @@ func _draw() -> void:
 	frame.set_corner_radius_all(9)
 	draw_style_box(frame, Rect2(Vector2.ZERO, size))
 	draw_rect(Rect2(10, 10, size.x - 20, 30), accent)
-	_label("+60 POR BILA", 31, 16, Color("fff9ec"), true)
+	_label("+60 PER MARBLE", 31, 16, Color("fff9ec"), true)
 	var source := Rect2(35 + (mission_color % 4) * 313.5, 49 + (mission_color / 4) * 313.5, 244, 244)
 	draw_texture_rect_region(ATLAS, Rect2(55, 52, 66, 66), source)
 	EffectIcons.draw_target(self, Vector2(136, 82), 23, accent)
