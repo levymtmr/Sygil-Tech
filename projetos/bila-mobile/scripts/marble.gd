@@ -12,13 +12,11 @@ var shooter: bool = false
 var captured: bool = false
 var destructible: bool = false
 var hits_taken: int = 0
+var frost_remaining: float = 0.0
 var dropping: bool = false
 var drop_delay: float = 0.0
 var drop_start: float = 0.0
 var drop_height: float = 0.0
-const CURVE_TURN_RATE = 0.85
-const CURVE_DURATION = 0.9
-var curve_remaining: float = 0.0
 var hit_flash: float = 0.0
 var charge: float = 0.0
 signal terrain_hit(kind: String, at: Vector2)
@@ -108,6 +106,9 @@ func _physics_process(delta: float) -> void:
 	queue_redraw()
 
 func advance_visuals(delta: float) -> void:
+	if frost_remaining > 0:
+		frost_remaining = maxf(0, frost_remaining - delta)
+		queue_redraw()
 	if shooter: visual_clock += delta
 	if hit_flash > 0 or shooter:
 		hit_flash = maxf(0, hit_flash - delta)
@@ -143,10 +144,8 @@ func _ready() -> void:
 func _integrate_forces(state: PhysicsDirectBodyState2D) -> void:
 	_terrain_forces(state)
 	if trapped: return
-	if shooter and curve_remaining > 0.0:
-		var step := minf(state.step, curve_remaining)
-		state.linear_velocity = state.linear_velocity.rotated(CURVE_TURN_RATE * step)
-		curve_remaining = maxf(0.0, curve_remaining - state.step)
+	if frost_remaining > 0:
+		state.linear_velocity *= exp(-4.0 * state.step)
 
 func _draw() -> void:
 	draw_circle(Vector2(2, 5), radius + 1, Color(0.12, 0.06, 0.1, 0.35))
@@ -173,9 +172,9 @@ func _draw() -> void:
 					var slide := sin(visual_clock * (3 + charge * 5)) * 6
 					draw_line(Vector2(-12, 6 + slide), Vector2(8, -10 + slide), tint.lightened(0.65), 4)
 				1:
-					var angle := visual_clock * (2 + charge * 3)
-					draw_arc(Vector2(-1, 0), radius * 0.62, angle, angle + PI * 1.35, 24, tint.darkened(0.35), 5)
-					draw_arc(Vector2(-1, 0), radius * 0.45, angle + PI, angle + PI * 1.6, 16, tint.lightened(0.65), 3)
+					for i in range(3):
+						var crystal := Vector2(sin(i * 3 + visual_clock) * 11, cos(i * 4 + visual_clock) * 11)
+						draw_rect(Rect2(crystal - Vector2(2, 2), Vector2(4, 4)), Color("fff8ee"))
 				2:
 					draw_arc(Vector2(0, 3 + wobble * 2), radius * 0.65, 0.15, PI - 0.15, 16, tint.darkened(0.4), 4)
 				3:
@@ -193,7 +192,7 @@ func _draw() -> void:
 				6:
 					for i in range(2):
 						var phase := fmod(visual_clock * 0.8 + i * 0.5, 1)
-						draw_arc(Vector2.ZERO, radius + phase * 22, 0, TAU, 28, Color(tint, 1 - phase), 2)
+						draw_arc(Vector2.ZERO, radius + (1 - phase) * 22, 0, TAU, 28, Color(tint, 1 - phase), 2)
 				7:
 					draw_circle(Vector2.ZERO, 8 + sin(visual_clock * 9) * 3, tint.lightened(0.65))
 					for i in range(4):
@@ -202,10 +201,20 @@ func _draw() -> void:
 				8:
 					var angle := visual_clock * 4
 					draw_arc(Vector2.ZERO, radius - 7, angle, angle + PI, 7, tint.lightened(0.65), 4)
+				9:
+					var spark := sin(visual_clock * 19) * 5
+					draw_polyline(PackedVector2Array([Vector2(-5, -16), Vector2(5, -3), Vector2(-4, 3), Vector2(6, 15 + spark)]), Color("fff8e5"), 4)
+				10:
+					for i in range(2):
+						var wave := fmod(visual_clock + i * 0.5, 1)
+						draw_arc(Vector2.ZERO, radius + wave * 26, 0, TAU, 24, Color(tint, 1 - wave), 2)
 		draw_rect(Rect2(-11, -13, 8, 5), Color("fff9ed"))
 		draw_rect(Rect2(-14, -6, 4, 4), tint.lightened(0.7))
 	else:
 		draw_texture_rect_region(ATLAS, Rect2(Vector2.ONE * -extent, Vector2.ONE * extent * 2), source)
+	if frost_remaining > 0:
+		draw_circle(Vector2.ZERO, radius, Color(0.55, 0.85, 1, 0.3))
+		draw_arc(Vector2.ZERO, radius - 2, 0, TAU, 6, Color("d9f8ff"), 3)
 	if destructible and hits_taken == 1:
 		var crack := PackedVector2Array([Vector2(-6, -radius + 3), Vector2(2, -8), Vector2(-4, -1), Vector2(7, 8), Vector2(3, radius - 2)])
 		draw_polyline(crack, Color("302239"), 5)

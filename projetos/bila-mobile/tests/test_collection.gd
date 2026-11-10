@@ -22,7 +22,7 @@ func _run() -> void:
             frequency[card_id] = int(frequency.get(card_id, 0)) + 1
         valid = valid and unique.size() == 3
     check(valid, "500 hands contain three distinct valid cards from full collection")
-    check(frequency.size() == 11, "Every collection card including all new effects can appear")
+    check(frequency.size() == 13, "Every collection card including all new effects can appear")
     var balanced := true
     for count in frequency.values(): balanced = balanced and count > 65 and count < 210
     check(balanced, "Random dealing does not restrict collection to legacy starter cards")
@@ -34,7 +34,7 @@ func _run() -> void:
     var gallery_count := 0
     for child in game.front_end.panel.get_children():
         if child is ScrollContainer: gallery_count = child.get_child(0).get_child_count()
-    check(gallery_count == 11, "Gallery shows all eleven cards")
+    check(gallery_count == 13, "Gallery shows all thirteen cards")
     game.front_end._show_card_info(9)
     check(game.front_end.screen == "card" and game.hand_missions == hand, "Inspecting card details cannot modify current hand")
     game.front_end._back()

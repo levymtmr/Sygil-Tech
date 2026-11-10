@@ -1,6 +1,6 @@
 # Good Bila · development
 
-**Documented version:** 0.22.0 · **Status:** playable prototype · **Updated:** November 9, 2026.
+**Documented version:** 0.23.0 · **Status:** playable prototype · **Updated:** November 10, 2026.
 
 [Presentation and how to play](README.md) · [Support and partnerships](SUPPORT.md) · [Code and technical setup](../../projetos/bila-mobile/README.md)
 
@@ -9,8 +9,8 @@
 | Area | Current state |
 |---|---|
 | Game mode | Destruction, without a triangle, with cumulative score targets and level progression. |
-| Cards | An 11-card collection; three randomly drawn per level, without deck building. |
-| Physics | Two hits to destroy a target, chain collisions, and nine effects. |
+| Cards | A 13-card collection; three randomly drawn per level, without deck building. |
+| Physics | Two hits to destroy a target, chain collisions, and eleven effects. |
 | Field | An opening rain of 32–56 marbles, random layouts, and varied obstacles. |
 | Interface | Collapsible hand, power gauge, icons, colors, and state-specific animations. |
 | Run loop | Points, objectives, multiplier, limited shots, and a game over summary. |
@@ -20,7 +20,7 @@
 
 ## Validation
 
-Version 0.21.0 passed **192 checks in the current automated suite**, plus touch validation in a 432 × 960 window. The suite covers card dealing, profile migration, marble rain, effects, terrain, scoring, and retry. A sample of 500 hands confirmed that every card can appear, with no repeated card within one hand. Version 0.22.0 reruns this suite for the English-language interface.
+Version 0.23.0 passed **215 automated checks**, including touch input. The suite covers card dealing, profile migration, marble rain, terrain, scoring, retry, heavy damage, blast destruction and impulse, giant sweep width, frost, lightning chains, and repulsion. A sample of 500 hands confirmed that every card can appear, with no repeated card within one hand.
 
 Presentation screenshots come from the prototype running in Godot. This does not replace a test campaign across different physical devices. Earlier versions were tested on Android by the creator; wider device compatibility remains a priority.
 

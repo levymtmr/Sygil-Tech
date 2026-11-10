@@ -1,5 +1,12 @@
 # Recent changes · Good Bila
 
+## 0.23.0
+- Heavy destroys an intact target on direct impact while retaining shorter range.
+- Explosive destroys its core, cracks outer targets and scatters survivors.
+- Giant has a larger body, more mass and a wider damage sweep.
+- Replace Curve with Frost; add Lightning and Repulsor, with matching colors, animations and icons.
+- Expand the random collection to 13 cards and 11 effects.
+
 ## 0.22.0
 - English interface: menus, cards, objectives, gameplay, settings, and game over.
 - English showcase, support pages, issue forms, release notes, and screenshots.

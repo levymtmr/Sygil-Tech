@@ -1,4 +1,4 @@
-# Good Bila · prototype source 0.22.0
+# Good Bila · prototype source 0.23.0
 
 A 2D physics-and-cards marble game for Android, written in GDScript for **Godot 4.4.1**. The only game mode is Destruction: the first impact cracks a target and the second destroys it to award points. The interface and documentation are in English.
 

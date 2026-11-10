@@ -39,13 +39,15 @@ var camera: Camera2D
 const EffectIcons = preload("res://scripts/effect_icons.gd")
 const CARD_COLORS = EffectIcons.COLORS
 const HandCard = preload("res://scripts/hand_card.gd")
-const CARD_NAMES = ["STRAIGHT", "CURVE", "BOUNCING", "HEAVY", "GIANT", "PIERCING", "MAGNETIC", "EXPLOSIVE", "RICOCHET"]
-const CARD_HELP = ["Follows your aim", "Curves to the right", "Jumps over marbles while airborne", "More impact, shorter range", "Larger size and stronger impact", "Passes through and hits each target", "Pulls nearby marbles", "Area damage on the first impact", "Stronger rebounds and longer range"]
-enum Action { STRAIGHT, CURVE, BOUNCE, HEAVY, GIANT, PIERCING, MAGNET, EXPLOSIVE, RICOCHET }
-const CARD_ACTIONS = [Action.STRAIGHT, Action.CURVE, Action.BOUNCE, Action.HEAVY, Action.CURVE, Action.HEAVY, Action.GIANT, Action.PIERCING, Action.MAGNET, Action.EXPLOSIVE, Action.RICOCHET]
-const CARD_TARGETS = [0, 1, 2, 3, 4, 5, 0, 2, 1, 3, 4]
+const CARD_NAMES = ["STRAIGHT", "FROST", "BOUNCING", "HEAVY", "GIANT", "PIERCING", "MAGNETIC", "EXPLOSIVE", "RICOCHET", "LIGHTNING", "REPULSOR"]
+const CARD_HELP = ["Follows your aim", "Slows targets on impact", "Jumps over marbles while airborne", "Two damage on direct impact, shorter range", "Sweeps a wide path through nearby targets", "Passes through and hits each target", "Pulls nearby marbles", "Destroys the blast core and scatters nearby targets", "Stronger rebounds and longer range", "Chains one hit through up to four targets", "Pushes nearby marbles away while moving"]
+enum Action { STRAIGHT, FROST, BOUNCE, HEAVY, GIANT, PIERCING, MAGNET, EXPLOSIVE, RICOCHET, LIGHTNING, REPULSOR }
+const CARD_ACTIONS = [Action.STRAIGHT, Action.FROST, Action.BOUNCE, Action.HEAVY, Action.FROST, Action.HEAVY, Action.GIANT, Action.PIERCING, Action.MAGNET, Action.EXPLOSIVE, Action.RICOCHET, Action.LIGHTNING, Action.REPULSOR]
+const CARD_TARGETS = [0, 1, 2, 3, 4, 5, 0, 2, 1, 3, 4, 2, 5]
 var special_hits: Dictionary = {}
 var blast_used: bool = false
+var lightning_used: bool = false
+var lightning_arcs: Array[Dictionary] = []
 var last_shooter_position := Vector2.ZERO
 enum GameMode { CLASSIC, DESTRUCTION }
 var game_mode: GameMode = GameMode.DESTRUCTION
@@ -470,6 +472,7 @@ func _start_round() -> void:
 	shots = 8 + mini(4, int(stage / 3)) if _is_destruction() else 5
 	hand_expanded = true
 	damage_pairs.clear()
+	lightning_arcs.clear()
 	round_start_score = score
 	displayed_score = score
 	shot_wrong_color = false
@@ -616,6 +619,9 @@ func _confirm_roll() -> void:
 	_refresh_ui(true)
 
 func _advance_feedback(delta: float) -> void:
+	for i in range(lightning_arcs.size() - 1, -1, -1):
+		lightning_arcs[i].life -= delta
+		if lightning_arcs[i].life <= 0: lightning_arcs.remove_at(i)
 	empty_deck_notice = maxf(0, empty_deck_notice - delta)
 	focus_amount = move_toward(focus_amount, 1.0 if opening_focus else 0.0, delta * 4.0)
 	roll_flash = maxf(0, roll_flash - delta)
@@ -711,7 +717,7 @@ func _use_card(index: int) -> void:
 		_break_streak("OBJECTIVE ABANDONED")
 	_set_quest(color, "CARD OBJECTIVE")
 	_roll_action(CARD_ACTIONS[card_id])
-	shooter.set_size(40.0 if current_action == Action.GIANT else (18.0 if current_action == Action.PIERCING else 25.0))
+	shooter.set_size(56.0 if current_action == Action.GIANT else (18.0 if current_action == Action.PIERCING else 25.0))
 	_tone(500 + color * 70, 0.07)
 	_refresh_ui(true)
 	if is_instance_valid(card_tween): card_tween.kill()
@@ -733,8 +739,6 @@ func _aim_preview() -> PackedVector2Array:
 	var step := 1.0 / 60.0
 	var ignored: int = shooter.trap_index if shooter.trapped else shooter.ignored_hole
 	for i in range(96):
-		if _effective_action() == Action.CURVE and i * step < Marble.CURVE_DURATION:
-			velocity = velocity.rotated(Marble.CURVE_TURN_RATE * step)
 		velocity *= 1.0 - (0.75 if _effective_action() == Action.RICOCHET else (2.3 if _effective_action() == Action.HEAVY else 1.8)) * step
 		var flying: bool = _effective_action() == Action.BOUNCE and Marble.hop_height_at((i + 1) * step) > 12
 		for index in range(obstacles.size()):
@@ -862,19 +866,19 @@ func _launch(vector: Vector2) -> void:
 	shooter.sleeping = false
 	special_hits.clear()
 	blast_used = false
+	lightning_used = false
 	last_shooter_position = shooter.position
-	shooter.set_size(40.0 if active_action == Action.GIANT else (18.0 if active_action == Action.PIERCING else 25.0))
+	shooter.set_size(56.0 if active_action == Action.GIANT else (18.0 if active_action == Action.PIERCING else 25.0))
 	shooter.mass = 2.8 if active_action == Action.HEAVY else 1.25
 	shooter.linear_damp = 2.3 if active_action == Action.HEAVY else 1.8
-	if active_action == Action.GIANT: shooter.mass = 3.2
+	if active_action == Action.GIANT: shooter.mass = 6.0
 	if active_action == Action.RICOCHET: shooter.linear_damp = 0.75
-	shooter.physics_material_override.bounce = 0.98 if active_action == Action.RICOCHET else 0.72
+	shooter.physics_material_override.bounce = 0.98 if active_action == Action.RICOCHET else (0.25 if active_action == Action.GIANT else 0.72)
 	shooter.heavy = active_action == Action.HEAVY
 	shooter.start_hops(active_action == Action.BOUNCE)
 	if active_action == Action.PIERCING:
 		shooter.collision_layer = 0
 		shooter.collision_mask = 2
-	shooter.curve_remaining = Marble.CURVE_DURATION if active_action == Action.CURVE else 0.0
 	shooter.linear_velocity = _shot_velocity(vector, active_action)
 	motion_trail.clear()
 	trail_clock = 0
@@ -1006,9 +1010,8 @@ func _finish_shot() -> void:
 		ball.angular_velocity = 0
 	shooter.freeze = true
 	shooter.linear_velocity = Vector2.ZERO
-	shooter.curve_remaining = 0.0
 	shooter.start_hops(false)
-	shooter.set_size(40.0 if current_action == Action.GIANT else (18.0 if current_action == Action.PIERCING else 25.0))
+	shooter.set_size(56.0 if current_action == Action.GIANT else (18.0 if current_action == Action.PIERCING else 25.0))
 	shooter.physics_material_override.bounce = 0.72
 	shooter.heavy = false
 	shooter.mass = 1.25
@@ -1117,29 +1120,69 @@ func _save_best() -> void:
 	config.set_value("game", "best_destruction" if _is_destruction() else "best", best)
 	config.save("user://recorde.cfg")
 
-func _damage_target(ball: BilaMarble) -> void:
+func _damage_target(ball: BilaMarble, damage: int = 1) -> void:
 	if ball.shooter or ball.captured: return
-	ball.hits_taken += 1
+	ball.hits_taken += damage
 	ball.hit_flash = 0.18
 	ball.queue_redraw()
 	if ball.hits_taken >= 2: _capture(ball)
 	else: _burst(ball.position, COLOR_TINTS[ball.color_index], 8)
 
 func _advance_special(delta: float) -> void:
-	if active_action == Action.PIERCING:
+	if active_action in [Action.PIERCING, Action.GIANT]:
 		for ball in balls:
 			if ball.captured or special_hits.has(ball.get_instance_id()): continue
 			var closest := Geometry2D.get_closest_point_to_segment(ball.position, last_shooter_position, shooter.position)
-			if closest.distance_to(ball.position) <= ball.radius + shooter.radius:
+			if closest.distance_to(ball.position) <= ball.radius + shooter.radius + (18 if active_action == Action.GIANT else 0):
 				special_hits[ball.get_instance_id()] = true
 				_damage_target(ball)
-	elif active_action == Action.MAGNET and shooter.linear_velocity.length() > 15:
+	elif active_action in [Action.MAGNET, Action.REPULSOR] and shooter.linear_velocity.length() > 15:
 		for ball in balls:
 			if ball.captured or ball.trapped: continue
 			var offset := shooter.position - ball.position
 			if offset.length() > 30 and offset.length() < 190:
-				ball.linear_velocity += offset.normalized() * 450 * delta * (1 - offset.length() / 230)
+				ball.linear_velocity += offset.normalized() * (450 if active_action == Action.MAGNET else -600) * delta * (1 - offset.length() / 230)
 	last_shooter_position = shooter.position
+
+func _explode(at: Vector2) -> void:
+	blast_used = true
+	_pulse(at, CARD_COLORS[Action.EXPLOSIVE], 0.65, 290)
+	_pulse(at, Color("fff0cf"), 0.35, 150)
+	_burst(at, CARD_COLORS[Action.EXPLOSIVE], 70, 560)
+	camera_shake = maxf(camera_shake, 4.5)
+	_tone(100, 0.15)
+	for ball in balls:
+		if ball.captured: continue
+		var offset := ball.position - at
+		var distance := offset.length()
+		if distance < 260:
+			_damage_target(ball, 2 if distance <= 130 else 1)
+			if not ball.captured:
+				ball.apply_central_impulse(offset.normalized() * 750 * (1 - distance / 320))
+
+func _chain_lightning(primary: BilaMarble) -> void:
+	lightning_used = true
+	var visited: Array[BilaMarble] = [primary]
+	var origin := primary.position
+	for hop in range(3):
+		var next: BilaMarble = null
+		var nearest := 220.0
+		for ball in balls:
+			if ball.captured or ball in visited: continue
+			var distance := origin.distance_to(ball.position)
+			if distance < nearest:
+				nearest = distance
+				next = ball
+		if next == null: break
+		var points := PackedVector2Array([origin])
+		for step in range(1, 5):
+			points.append(origin.lerp(next.position, step / 5.0) + Vector2(fx_rng.randf_range(-10, 10), fx_rng.randf_range(-10, 10)))
+		points.append(next.position)
+		lightning_arcs.append({"points": points, "life": 0.35})
+		_damage_target(next)
+		visited.append(next)
+		origin = next.position
+	_tone(1000, 0.08)
 
 func _destruction_impact(first: BilaMarble, second: BilaMarble) -> void:
 	if first.captured or second.captured: return
@@ -1149,23 +1192,26 @@ func _destruction_impact(first: BilaMarble, second: BilaMarble) -> void:
 	var pair := "%d:%d" % ids
 	if clock_time - float(damage_pairs.get(pair, -100.0)) < 0.18: return
 	damage_pairs[pair] = clock_time
-	for ball in [first, second]: _damage_target(ball)
-	if active_action == Action.EXPLOSIVE and not blast_used and (first.shooter or second.shooter):
-		blast_used = true
-		var primary: BilaMarble = second if first.shooter else first
-		_pulse(shooter.position, CARD_COLORS[Action.EXPLOSIVE], 0.6, 170)
-		_burst(shooter.position, CARD_COLORS[Action.EXPLOSIVE], 45)
-		for ball in balls:
-			if ball == primary or ball.captured: continue
-			var offset := ball.position - shooter.position
-			if offset.length() < 160:
-				_damage_target(ball)
-				if not ball.captured: ball.apply_central_impulse(offset.normalized() * 180)
+	var direct := first.shooter or second.shooter
+	var target: BilaMarble = second if first.shooter else first
+	if direct and active_action == Action.EXPLOSIVE and not blast_used:
+		_explode(shooter.position)
+		return
+	if direct and active_action == Action.GIANT:
+		# The continuous wide sweep owns damage; body collisions only push.
+		return
+	for ball in [first, second]:
+		_damage_target(ball, 2 if direct and active_action == Action.HEAVY else 1)
+	if direct and active_action == Action.FROST and not target.captured:
+		target.frost_remaining = 2.4
+		target.linear_velocity *= 0.25
+		_burst(target.position, CARD_COLORS[Action.FROST], 12)
+	if direct and active_action == Action.LIGHTNING and not lightning_used:
+		_chain_lightning(target)
 
 func _collision(other: Node, ball: BilaMarble) -> void:
 	if phase != Phase.ROLLING: return
 	if _is_destruction() and other is BilaMarble: _destruction_impact(ball, other)
-	if ball.shooter: ball.curve_remaining = 0.0
 	if ball.linear_velocity.length() < 35: return
 	ball.hit_flash = 0.18
 	if other is BilaMarble:
@@ -1185,9 +1231,9 @@ func _floating(caption: String, at: Vector2, color: Color, important: bool = fal
 	floaters.append({"text": caption, "p": at + offset, "color": color, "life": 1.55, "duration": 1.55, "size": 42 if important else 30, "important": important, "points": false, "detail": ""})
 	while floaters.size() > 14: floaters.pop_front()
 
-func _burst(at: Vector2, color: Color, amount: int = 12) -> void:
+func _burst(at: Vector2, color: Color, amount: int = 12, speed: float = 190) -> void:
 	for i in range(amount):
-		particles.append({"p": at, "v": Vector2.from_angle(fx_rng.randf_range(0, TAU)) * fx_rng.randf_range(45, 190), "life": fx_rng.randf_range(0.25, 0.6), "color": color})
+		particles.append({"p": at, "v": Vector2.from_angle(fx_rng.randf_range(0, TAU)) * fx_rng.randf_range(45, speed), "life": fx_rng.randf_range(0.25, 0.6), "color": color})
 	while particles.size() > 200: particles.pop_front()
 
 func _setup_music() -> void:
@@ -1252,7 +1298,7 @@ func _take_screenshot() -> void:
 		front_end.start_game(GameMode.DESTRUCTION if "--preview-destruction" in args else GameMode.CLASSIC)
 		if "--preview-effect" in args:
 			var index := args.find("--preview-effect")
-			hand_missions[0] = CARD_ACTIONS.find(clampi(int(args[index + 1]), 0, 8))
+			hand_missions[0] = CARD_ACTIONS.find(clampi(int(args[index + 1]), 0, 10))
 			_refresh_ui()
 		if "--preview-roll" in args:
 			_advance_feedback(0.27)
@@ -1320,7 +1366,7 @@ func _take_screenshot() -> void:
 		var slot := 1
 		if "--preview-effect" in args:
 			var index := args.find("--preview-effect")
-			slot = hand_missions.find(CARD_ACTIONS.find(clampi(int(args[index + 1]), 0, 8)))
+			slot = hand_missions.find(CARD_ACTIONS.find(clampi(int(args[index + 1]), 0, 10)))
 		_use_card(slot)
 		_advance_feedback(1.0)
 		_confirm_roll()

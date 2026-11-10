@@ -147,6 +147,10 @@ func _draw_world() -> void:
 			for j in range(int(along / 8)):
 				var point := a.lerp(b, float(j) / (along / 8))
 				draw_rect(Rect2(point + Vector2(sin(j * 3) * 2, cos(j * 7) * 2), Vector2(2, 2)), Color("fff1cf"))
+	for arc in game.lightning_arcs:
+		var color := Color(1, 0.94, 0.55, clampf(arc.life * 4, 0, 1))
+		draw_polyline(arc.points, Color("443154"), 8, true)
+		draw_polyline(arc.points, color, 4, true)
 	var trail_color: Color = game.CARD_COLORS[game.active_action]
 	for i in range(1, game.motion_trail.size()):
 		var first: Dictionary = game.motion_trail[i - 1]

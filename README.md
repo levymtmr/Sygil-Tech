@@ -4,9 +4,9 @@
 
 [![Good Bila — cards in hand, chaos on the field](docs/good-bila/images/cover.svg)](docs/good-bila/README.md)
 
-A pixel-art mobile prototype: aim, burst marbles, and use cards to change every shot. **Destruction · 11 cards · 9 effects · Android / Godot · English.**
+A pixel-art mobile prototype: aim, burst marbles, and use cards to change every shot. **Destruction · 13 cards · 11 effects · Android / Godot · English.**
 
-[**Meet the game and see screenshots →**](docs/good-bila/README.md) · [**Play the Android prototype →**](https://github.com/levymtmr/Sygil-Tech/releases/tag/good-bila-v0.22.0) · [**♥ Support / discuss investment →**](docs/good-bila/SUPPORT.md)
+[**Meet the game and see screenshots →**](docs/good-bila/README.md) · [**Play the Android prototype →**](https://github.com/levymtmr/Sygil-Tech/releases/tag/good-bila-v0.23.0) · [**♥ Support / discuss investment →**](docs/good-bila/SUPPORT.md)
 
 [How to play](docs/good-bila/README.md#how-to-play) · [Development status](docs/good-bila/DEVELOPMENT.md) · [Game source](projetos/bila-mobile/)
 

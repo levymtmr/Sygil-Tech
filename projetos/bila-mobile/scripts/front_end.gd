@@ -143,7 +143,7 @@ func _clear(next_screen: String) -> void:
 		dot.mouse_filter = Control.MOUSE_FILTER_IGNORE
 		panel.add_child(dot)
 	brand_footer = _label("GOOD BILA", 1210, 15, MUTED)
-	version_footer = _label("PROTOTYPE 0.22.0  •  LOCAL PROFILE  •  OFFLINE", 1245, 12, MUTED)
+	version_footer = _label("PROTOTYPE 0.23.0  •  LOCAL PROFILE  •  OFFLINE", 1245, 12, MUTED)
 	reflow()
 
 func reflow() -> void:

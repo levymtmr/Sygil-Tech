@@ -8,7 +8,7 @@ In Good Bila, aiming is only part of the challenge. Every card changes both your
 
 [**Play the prototype**](#play-the-prototype) · [**How to play**](#how-to-play) · [**Cards and effects**](#cards-that-change-the-game) · [**Support / invest**](SUPPORT.md) · [**Development**](DEVELOPMENT.md)
 
-> **Status:** playable prototype **0.22.0**, in active development. Portrait Android gameplay and desktop execution through Godot. The screenshots below show the actual English-language prototype; field layouts change each level.
+> **Status:** playable prototype **0.23.0**, in active development. Portrait Android gameplay and desktop execution through Godot. The screenshots below show the actual English-language prototype; field layouts change each level.
 
 <table><tr><td align="center"><img src="images/gameplay.png" alt="Good Bila gameplay with scattered marbles and sand and pit obstacles" width="235"><br><strong>A field of possibilities</strong></td><td align="center"><img src="images/giant.png" alt="The Giant card increases the player marble's size, with a power gauge near the trajectory" width="235"><br><strong>One card changes the shot</strong></td><td align="center"><img src="images/game-over.png" alt="Game over screen showing score, target, and run statistics" width="235"><br><strong>One more run?</strong></td></tr></table>
 
@@ -26,7 +26,7 @@ The inspiration comes from traditional backyard marble games and the joy of find
 
 ### Android
 
-[**Download Good Bila 0.22.0 for Android**](https://github.com/levymtmr/Sygil-Tech/releases/download/good-bila-v0.22.0/good-bila-0.22.0.apk) · [Release page and installation notes](https://github.com/levymtmr/Sygil-Tech/releases/tag/good-bila-v0.22.0)
+[**Download Good Bila 0.23.0 for Android**](https://github.com/levymtmr/Sygil-Tech/releases/download/good-bila-v0.23.0/good-bila-0.23.0.apk) · [Release page and installation notes](https://github.com/levymtmr/Sygil-Tech/releases/tag/good-bila-v0.23.0)
 
 1. Download the APK and open it on your Android device.
 2. Allow installation from that source when Android asks.
@@ -55,19 +55,23 @@ The first level has **32 marbles and eight shots**. Target counts rise to 56, an
 
 ## Cards that change the game
 
-The collection has **11 cards and nine effects**. Some cards share an effect but request different colors.
+The collection has **13 cards and eleven effects**. Some cards share an effect but request different colors.
 
 | Effect | What changes |
 |---|---|
 | Straight | Follows your aiming direction. |
-| Curve | Bends to the right during the shot. |
+| Frost | Slows targets on impact, with a temporary ice coating. |
 | Bouncing | Makes three hops; while airborne, passes over marbles and obstacles. |
-| Heavy | More mass and impact, with shorter range. |
-| Giant | Increases the marble's size, collision area, and mass. |
+| Heavy | Deals two damage on a direct hit, destroying an intact target; shorter range. |
+| Giant | A much larger body and wide damage sweep hit targets on both sides of the path. |
 | Piercing | Passes through multiple targets and deals one hit to each per shot. |
 | Magnetic | Pulls nearby marbles while moving. |
-| Explosive | The first impact damages and pushes nearby targets. |
+| Explosive | The first impact destroys targets in its core, cracks outer targets, and scatters survivors. |
 | Ricochet | Makes better use of walls through stronger rebounds and lower drag. |
+| Lightning | Chains a hit through up to four targets, with visible electric arcs. |
+| Repulsor | Pushes nearby marbles outward while moving. |
+
+<img src="images/lightning.png" alt="Lightning effect with yellow player marble, matching trajectory and power gauge" width="235">
 
 Icons help identify the current state, and the marble itself changes color and animation. The collection lets you learn the possibilities; browsing it does not change your randomly drawn hand.
 
@@ -75,7 +79,7 @@ Icons help identify the current state, and the marble itself changes color and a
 
 ## Where the project stands
 
-**Playable now:** a complete run loop, random cards, nine physics effects, obstacles, multipliers, collection browser, game over summary, local profile and best score, original music, and touch/mouse controls.
+**Playable now:** a complete run loop, random cards, eleven physics effects, obstacles, multipliers, collection browser, game over summary, local profile and best score, original music, and touch/mouse controls.
 
 **Next priorities:** balance difficulty and effect combinations; test on more Android devices; improve readability, accessibility, and presentation; explore additional content based on player feedback.
 
